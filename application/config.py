@@ -1,0 +1,4 @@
+DEBUG = True
+
+SECRET_KEY = "!Jh#CKXjWCj5"
+
