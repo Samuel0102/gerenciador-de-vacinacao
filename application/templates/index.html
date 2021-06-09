@@ -1,20 +1,155 @@
 <!doctype html>
 <html lang="pt-br">
-  <head>
-    <title>Home</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  </head>
-  <body>
-      
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  </body>
+<head>
+  <title>Home</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap & CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="../static/ CSS/style.css">
+
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/33153a90f5.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+  <header>
+    <nav class="navbar navbar-expand-sm navbar-dark py-4" style="background-color:#00a896;">
+
+      <div class="container-fluid text-white">
+        <a class="navbar-brand" href="#">
+          <i class="fas fa-heartbeat display-4"></i>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#header_nav_menu" aria-controls="header_nav_menu" aria-expanded="false"> 
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="header_nav_menu">
+
+          <ul class="navbar-nav ml-auto text-white text-center">
+            <li class="nav-item">
+              <a class="nav-link border-right px-4 text-white" href="#">HOME</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link border-right px-4 text-white" href="#">VACINA</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link pr-4 px-4 text-white" href="#">VACINAÇÃO</a>
+            </li>
+            <li class="nav-item dropdown d-sm-none pl-4">
+
+              <a href="#" class="nav-link dropdown-toggle text-white" data-toggle="dropdown">
+                PERFIL
+              </a>
+
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">Meu Perfil</a>
+                <a class="dropdown-item" href="#">Minha Carteirinha</a>
+              </div>
+            </li>
+          </ul>
+
+          <i class="fas fa-user-circle display-4 d-none d-sm-block" style="padding-left:45px;"></i>
+
+        </div>
+
+      </div>
+    </nav>
+  </header>
+
+  <section>
+    <div class="container-fluid">
+      <div class="row align-items-md-center">
+
+        <div class="col-md-6 px-0">
+
+          <div class="jumbotron col-work">
+            <h1 class="display-4 pb-3" style="font-family: 'Arial Black'; color:#088392;">Sobre o site</h1>
+            <p class="lead">
+              This is a simple hero unit, a simple jumbotron-style component for calling extra attention
+              to featured content or information.Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            </p>
+            <hr class="my-4">
+            <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+          </div>
+
+        </div>
+
+        <div class="col-md-6 px-0">
+          <img src="../static/IMG/row-1.png" class="img-fluid">
+        </div>
+        
+      </div>
+    </div>
+
+  </section>
+
+  <section>
+    <div class="container-fluid" style="background-color: #D6FFF6;">
+      <div class="row align-items-start align-items-md-center ">
+
+        <div class="col-md-6 order-2 px-0">
+
+          <div class="jumbotron bg-transparent col-work">
+            <h1 class="display-4 pb-3" style="font-family: 'Arial Black'; color:#088392;">Sobre o projeto</h1>
+            <p class="lead">
+              This is a simple hero unit, a simple jumbotron-style component for calling extra attention
+              to featured content or information.Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            <hr class="my-4">
+            <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+          </div>
+
+        </div>
+
+        <div class="col-md-6 order-1 px-0">
+          <img src="../static/IMG/row-2.png" class="d-none d-md-inline img-fluid">
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <footer>
+    <div class="container-fluid py-4" style="background-color: #00A393;">
+
+      <div class="row text-white">
+
+        <div class="col-6 offset-3 text-center">
+          <span>
+            Maria Erbs, Samuel Pacheco & Thaís Junkes <br>
+            Todos os direitos reservados
+          </span>
+        </div>
+
+        <div class="col-3 d-flex justify-content-end align-items-center pr-md-5" style="font-size:30px;">
+          <i class="fas fa-envelope px-1"></i>
+          <i class="fab fa-facebook-f px-1"></i>
+          <i class="fab fa-instagram px-1"></i>
+        </div>
+      </div>
+
+    </div>
+
+  </footer>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+  </script>
+</body>
+
 </html>
