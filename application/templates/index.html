@@ -1,172 +1,203 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-br">
+  <head>
+    <title>Home</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
 
-<head>
-  <title>Home</title>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap & CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../static/ CSS/style.css" />
 
-  <!-- Bootstrap & CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" href="../static/ CSS/style.css">
+    <!-- Font Awesome -->
+    <script
+      src="https://kit.fontawesome.com/33153a90f5.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
 
-  <!-- Font Awesome -->
-  <script src="https://kit.fontawesome.com/33153a90f5.js" crossorigin="anonymous"></script>
+  <body>
+    <header>
+      <nav
+        class="navbar navbar-expand-sm navbar-dark py-4"
+        style="background-color: #00a896"
+      >
+        <div class="container-fluid text-white">
+          <a class="navbar-brand" href="#">
+            <i class="fas fa-heartbeat display-4"></i>
+          </a>
 
-</head>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#header_nav_menu"
+            aria-controls="header_nav_menu"
+            aria-expanded="false"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
 
-<body>
+          <div class="collapse navbar-collapse" id="header_nav_menu">
+            <ul class="navbar-nav ml-auto text-white text-center">
+              <li class="nav-item">
+                <a class="nav-link border-right px-4 text-white" href="#"
+                  >HOME</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link border-right px-4 text-white" href="#"
+                  >VACINA</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link px-4 text-white" href="#">VACINAÇÃO</a>
+              </li>
+              <li class="nav-item dropdown d-sm-none pl-3">
+                <a
+                  href="#"
+                  class="nav-link dropdown-toggle text-white"
+                  data-toggle="dropdown"
+                >
+                  PERFIL
+                </a>
 
-  <header>
-    <nav class="navbar navbar-expand-sm navbar-dark py-4" style="background-color:#00a896;">
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" href="#">Meu Perfil</a>
+                  <a class="dropdown-item" href="#">Minha Carteirinha</a>
+                </div>
+              </li>
+            </ul>
 
-      <div class="container-fluid text-white">
-        <a class="navbar-brand" href="#">
-          <i class="fas fa-heartbeat display-4"></i>
-        </a>
-
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#header_nav_menu"
-          aria-controls="header_nav_menu" aria-expanded="false">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="header_nav_menu">
-
-          <ul class="navbar-nav ml-auto text-white text-center">
-            <li class="nav-item">
-              <a class="nav-link border-right px-4 text-white" href="#">HOME</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link border-right px-4 text-white" href="#">VACINA</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link px-4 text-white" href="#">VACINAÇÃO</a>
-            </li>
-            <li class="nav-item dropdown d-sm-none pl-3">
-
-              <a href="#" class="nav-link dropdown-toggle text-white" data-toggle="dropdown">
-                PERFIL
-              </a>
-
-              <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Meu Perfil</a>
-                <a class="dropdown-item" href="#">Minha Carteirinha</a>
-              </div>
-            </li>
-          </ul>
-
-          <i class="fas fa-user-circle display-4 d-none d-sm-block" style="padding-left:35px;"></i>
-
+            <i
+              class="fas fa-user-circle display-4 d-none d-sm-block"
+              style="padding-left: 35px"
+            ></i>
+          </div>
         </div>
+      </nav>
+    </header>
 
-      </div>
-    </nav>
-  </header>
-
-
-  <main>
-    <section>
-      <div class="container-fluid">
-        <div class="row align-items-md-center">
-
-          <div class="col-md-6">
-
-            <div class="jumbotron bg-transparent col-work">
-              <h1 class="display-4 pb-3" style="font-family: 'Arial Black'; color:#088392;">Sobre o site</h1>
-              <p class="lead">
-                 O SUV é um sistema totalmente online, voltado para realização do armazenamento de dados de VACINAÇÃO
-                 de cidadãos brasileiros. Com apenas um cadastro, você pode guardar todas as vacinas já tomadas e as futuras.
-                 Caso seja um enfermeiro, poderá cadastrar uma vacina e também aplicá-la e adicionar a carteirinha do paciente.
-                 Vacina salva vidas! Não deixe de se vacinar!
-              </p>
-              <hr class="my-4">
-              <p>
-                O ato de vacinar é um ato de resistência, de evolução da ciência, venha para o SUV você também!
-              </p>
+    <main>
+      <section>
+        <div class="container-fluid">
+          <div class="row align-items-md-center">
+            <div class="col-md-6">
+              <div class="jumbotron bg-transparent col-work">
+                <h1
+                  class="display-4 pb-3"
+                  style="font-family: 'Arial Black'; color: #088392"
+                >
+                  Sobre o site
+                </h1>
+                <p class="lead">
+                  O SUV é um sistema totalmente online, voltado para realização
+                  do armazenamento de dados de VACINAÇÃO de cidadãos
+                  brasileiros. Com apenas um cadastro, você pode guardar todas
+                  as vacinas já tomadas e as futuras. Caso seja um enfermeiro,
+                  poderá cadastrar uma vacina e também aplicá-la e adicionar a
+                  carteirinha do paciente. Vacina salva vidas! Não deixe de se
+                  vacinar!
+                </p>
+                <hr class="my-4" />
+                <p>
+                  O ato de vacinar é um ato de resistência, de evolução da
+                  ciência, venha para o SUV você também!
+                </p>
+              </div>
             </div>
 
+            <div class="col-md-6 px-0">
+              <img src="../static/IMG/row-1.png" class="img-fluid" />
+            </div>
           </div>
-
-          <div class="col-md-6 px-0">
-            <img src="../static/IMG/row-1.png" class="img-fluid">
-          </div>
-
         </div>
-      </div>
+      </section>
 
-    </section>
-
-    <section>
-      <div class="container-fluid" style="background-color: #D6FFF6;">
-        <div class="row align-items-start align-items-md-center">
-
-          <div class="col-md-6 order-2">
-
-            <div class="jumbotron bg-transparent col-work pb-4 pb-sm-0">
-              <h1 class="display-4 pb-3" style="font-family: 'Arial Black'; color:#088392;">Sobre o projeto</h1>
-              <p class="lead">
-                O SUV surgiu de uma proposta pensada na matéria de projeto integrador de um curso técnico da equipe desenvolvedora
-                do sistema. Procurávamos algo que trouxesse valor social, ao mesmo tempo que agregasse conhecimentos aos realizadores.
-                Sendo assim, a escolha de um sistema que armazenasse vacinações foi um acerto, pois é uma experiência muito interessante.
-              </p>
-                <hr class="my-4">
+      <section>
+        <div class="container-fluid" style="background-color: #d6fff6">
+          <div class="row align-items-start align-items-md-center">
+            <div class="col-md-6 order-2">
+              <div class="jumbotron bg-transparent col-work pb-4 pb-sm-0">
+                <h1
+                  class="display-4 pb-3"
+                  style="font-family: 'Arial Black'; color: #088392"
+                >
+                  Sobre o projeto
+                </h1>
+                <p class="lead">
+                  O SUV surgiu de uma proposta pensada na matéria de projeto
+                  integrador de um curso técnico da equipe desenvolvedora do
+                  sistema. Procurávamos algo que trouxesse valor social, ao
+                  mesmo tempo que agregasse conhecimentos aos realizadores.
+                  Sendo assim, a escolha de um sistema que armazenasse
+                  vacinações foi um acerto, pois é uma experiência muito
+                  interessante.
+                </p>
+                <hr class="my-4" />
                 <p>
                   Urge nos dias atuais, uma plataforma governamental como o SUV.
                 </p>
+              </div>
             </div>
 
+            <div class="col-md-6 order-1 px-0">
+              <img
+                src="../static/IMG/row-2.png"
+                class="d-none d-md-inline img-fluid"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container-fluid py-4" style="background-color: #00a393">
+        <div class="row text-white align-items-center">
+          <div class="col-6 offset-0 offset-sm-3 text-center">
+            <span>
+              Maria Erbs, Samuel Pacheco & Thaís Junkes <br />
+              Todos os direitos reservados
+            </span>
           </div>
 
-          <div class="col-md-6 order-1 px-0">
-            <img src="../static/IMG/row-2.png" class="d-none d-md-inline img-fluid">
+          <div class="col-3 offset-3 offset-sm-0" style="font-size: 30px">
+            <div id="social_icons" class="d-flex justify-content-end">
+              <i class="fas fa-envelope px-1"></i>
+              <i class="fab fa-facebook-f px-1"></i>
+              <i class="fab fa-instagram px-1"></i>
+            </div>
           </div>
         </div>
       </div>
+    </footer>
 
-    </section>
-
-  </main>
-
-  <footer>
-    <div class="container-fluid py-4" style="background-color: #00A393;">
-
-      <div class="row text-white align-items-center">
-
-        <div class="col-6 offset-0 offset-sm-3 text-center">
-          <span>
-            Maria Erbs, Samuel Pacheco & Thaís Junkes <br>
-            Todos os direitos reservados
-          </span>
-        </div>
-
-        <div class="col-3 offset-3 offset-sm-0" style="font-size:30px;">
-
-          <div id="social_icons" class="d-flex justify-content-end">
-            <i class="fas fa-envelope px-1"></i>
-            <i class="fab fa-facebook-f px-1"></i>
-            <i class="fab fa-instagram px-1"></i>
-          </div>
-
-        </div>
-      </div>
-
-    </div>
-
-  </footer>
-
-  <!-- Optional JavaScript -->
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-  </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-  </script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-  </script>
-</body>
-
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
