@@ -18,6 +18,9 @@ Projeto de um sistema CRUD em Flask, para controlar vacinas e vacinações de ci
 | Funcionalidade | Situação |
 | ----------- | ----------- |
 | Cadastro de usuários pacientes e enfermeiros | :clock130: |
+| Possibilidade de exclusão dos cadastros de usuários| :clock130: |
+| Possibilidade de alteração dos dados de cadastro dos usuários| :clock130: |
+| Envio de pdf com vacinações ao usuário comum ao excluir a conta| :clock130: |
 | Cadastro de vacinas | :clock130: |
 | Cadastro de vacinação de usuários paciente | :clock130: |
 | Login de usuários | :clock130: |
