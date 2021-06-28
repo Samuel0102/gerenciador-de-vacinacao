@@ -43,7 +43,8 @@ O SUV surgiu como um projeto de construção de um ambiente em tese governamenta
 3.1 O acesso ao ambiente pode ser feito digitando na raíz o comando `. ambiente_virtual/bin/activate`, fazendo o ambiente ativar  
 3.1.1 Para desativar: `deactivate`
 4. Com todas as dependências instaladas, basta executar o script "run_server.py" que contém o inicializador do sistema e do servidor  
-4.1 Para execução é necessário, após instalar dependências e ambiente virtual, trocar o interpretador do python padrão para o interpretador "venv". No VSCODE, graças ao diretório ".vscode" é possível apenas clicando no canto inferior esquerdo, onde encontra-se a versão do python. Ao clicar, basta escolher o interpretador, na tela que aparecer no topo, "python 3.8.5 64 bits ('venv': venv)".
+4.1 Para execução é necessário, após instalar dependências e ambiente virtual, trocar o interpretador do python padrão para o interpretador "venv". No VSCODE, graças ao diretório ".vscode" é possível apenas clicando no canto inferior esquerdo, onde encontra-se a versão do python. Ao clicar, basta escolher o interpretador, na tela que aparecer no topo, "python 3.8.5 64 bits ('venv': venv)"  
+5. Com o servidor inicializado, basta digitar no navegador "localhost:5000"
 
 ## Documentações do sistema e outros arquivos
 :link: Documentos complementares  (https://drive.google.com/drive/folders/1hTEUSgIIJWC7scULy46f0FoNYEwpCQf8?usp=sharing)  
