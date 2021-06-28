@@ -34,12 +34,13 @@ Projeto de um sistema CRUD em Flask, para controlar vacinas e vacinações de ci
 
 ## Execução do sistema
 1. Baixe o zip do repositório
-2. Na pasta raíz "sistema_de_vacinacao", crie um ambiente virtual  
+2. Na pasta raíz "sistema_de_vacinacao-master", crie um ambiente virtual  
 2.1 A criação pode ser feita baixando a biblioteca "virtualenv" e executando na raíz o comando `virtualenv -p python ambiente_virtual`
 3. Dentro do ambiente virtual, execute o comando `pip install -r requeriments.txt` que fará a instalação de todas as dependências necessárias   
 3.1 O acesso ao ambiente pode ser feito digitando na raíz o comando `. ambiente_virtual/bin/activate`, fazendo o ambiente ativar  
 3.1.1 Para desativar: `deactivate`
-4. Com todas as dependências instaladas, basta executar o script "run_server.py" que contém o inicializador do sistema e do servidor
+4. Com todas as dependências instaladas, basta executar o script "run_server.py" que contém o inicializador do sistema e do servidor  
+4.1 Para execução é necessário, após instalar dependências e ambiente virtual, trocar o interpretador do python padrão para o interpretador "venv". No VSCODE, graças ao diretório ".vscode" é possível apenas clicando no canto inferior esquerdo, onde encontra-se a versão do python. Ao clicar, basta escolher o interpretador, na tela que aparecer no topo, "python 3.8.5 64 bits ('venv': venv)".
 
 ## Documentações do sistema e outros arquivos
 :link: Documentos complementares  (https://drive.google.com/drive/folders/1hTEUSgIIJWC7scULy46f0FoNYEwpCQf8?usp=sharing)  
