@@ -3,6 +3,9 @@ Projeto de um sistema CRUD em Flask, para controlar vacinas e vacinações de ci
 
 # Sobre o projeto
 
+## Introdução
+O SUV surgiu como um projeto de construção de um ambiente em tese governamental que fosse responsável por manter remotamente as vacinações de diversos cidadãos. Como uma forma de impedir que os dados, até então físicos, percam-se tão facilmente. Com base nisso, além deste, o SUV será uma forma do cidadão ver seu histórico de vacinas.
+
 ## Especificações
 *Autores*: Samuel Pacheco Ferreira, Maria Erbs Pereira e Thaís Letícia Junkes.      
 *Descrição*: Projeto de controle de vacinas e vacinações.  
