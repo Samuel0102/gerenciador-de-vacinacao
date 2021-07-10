@@ -1,0 +1,119 @@
+{% extends "base.html" %} 
+
+{% block title %} Cadastro de Usuário {% endblock title %} 
+
+{% block extracss %} 
+<link rel="stylesheet" href="../static/ CSS/registro_usuario.css">
+{% endblock extracss %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+        <aside class="col-md-5 d-flex" id="aside-img">
+            <img src="../static/IMG/user_img.png"
+                 class="img-fluid align-self-center">
+        </aside>
+
+        <section class="col-sm-12 col-md-7">
+            <div id="user-register">
+                <header class="text-center">
+                    <h1>Cadastro de Usuário</h1>
+                </header>
+                <div class="d-flex justify-content-around" id="user-icons">
+                    <i class="fas fa-user-md"></i>
+                    <i class="fas fa-user"></i>
+                </div>
+                <form>
+                    <div class="form-row justify-content-around">
+                        <div class="form-group col-md-5">
+                            <label for="user-name">Nome</label>
+                            <input  type="text"
+                                    name="user-name"
+                                    id="user-name"
+                                    class="form-control">
+                        </div>
+    
+                        <div class="form-group col-md-5">
+                            <label for="user-born">Data de Nascimento</label>
+                            <input  type="date"
+                                    name="user-born"
+                                    id="user-born"
+                                    class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-row justify-content-around">
+                        <div class="form-group col-md-5">
+                            <label for="user-cpf">CPF</label>
+                            <input  type="text"
+                                    name="user-cpf"
+                                    id="user-cpf"
+                                    class="form-control">
+                        </div>
+                        <div class="form-group col-md-5">
+                            <label for="user-coren">COREN</label>
+                            <input  type="text"
+                                    name="user-coren"
+                                    id="user-coren"
+                                    class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-row justify-content-around">
+                        <div class="form-group col-md-5">
+                            <label for="user-tel">Telefone</label>
+                            <input  type="tel"
+                                    name="user-tel"
+                                    id="user-tel"
+                                    class="form-control">
+                        </div>
+                        <div class="form-group col-md-5">
+                            <label for="input-sex">Sexo</label>
+                            <select id="input-sex" class="form-control">
+                              <option selected>Escolher...</option>
+                              <option>Masculino</option>
+                              <option>Feminino</option>
+                              <option>Outro</option>
+                            </select>
+                          </div>
+                    </div>
+
+                    <div class="form-row justify-content-center">
+                        <div class="form-group col-md-11">
+                            <label for="user-email">Email</label>
+                            <input  type="email"
+                                    name="user-email"
+                                    id="user-email"
+                                    class="form-control">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row justify-content-around">
+                        <div class="form-group col-md-5">
+                            <label for="user-password">Senha</label>
+                            <input  type="password"
+                                    name="user-password"
+                                    id="user-password"
+                                    class="form-control">
+                        </div>
+                        <div class="form-group col-md-5">
+                            <label for="user-confirmp">Confirme a senha</label>
+                            <input  type="password"
+                                    name="user-confirmp"
+                                    id="user-confirmp"
+                                    class="form-control">
+                        </div>
+                    </div>
+                </form>
+                <div class="button text-center">
+                    <button name="button"
+                            type="submit" 
+                            class="btn w-50 py-2">ENVIAR</button>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+{% endblock content %}
