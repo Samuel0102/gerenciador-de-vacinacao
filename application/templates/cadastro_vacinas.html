@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block title %} Cadastro de Vacinas {% endblock title %} 
+{% block extracss %}
+<link rel="stylesheet" href="../static/ CSS/cadastro_vacinas.css" />
+{% endblock extracss %}
+
+{% block content %}
+<section>
+  <div class="container-fluid">
+    <div class="row">
+      <div
+        class="col-4 d-flex align-items-center"
+        style="background-color: #d6fff6"
+      >
+        <div class="col-md-8 order-4 px-0">
+          <img src="../SUV/user_img.png" class="img-fluid" />
+        </div>
+      </div>
+      <div class="jumbotron bg-transparent col-work">
+        <h1 class="display-4 pb-3">Cadastro de Vacina</h1>
+        <br />
+        <br />
+        <br />
+        <div class="container form-group">
+          <form>
+            <div class="form-row justify-content-around">
+              <div class="form-group col-md-12">
+                <label for="user-name" class="form-label">Nome</label>
+                <input
+                  type="text"
+                  name="user-name"
+                  id="user-name"
+                  class="form-control"
+                />
+              </div>
+            </div>
+            <br />
+            <div class="form-row justify-content-around">
+              <div class="form-group col-md-12">
+                <label for="fabricante-vacina" class="form-label"
+                  >Fabricante</label
+                >
+                <input
+                  type="text"
+                  name="user-fabricante"
+                  id="user-fabricante"
+                  class="form-control"
+                />
+              </div>
+            </div>
+            <br />
+            <div class="form-row justify-content-around">
+              <div class="form-group col-md-12">
+                <label for="validade-vacina" class="form-label">Validade</label>
+                <input
+                  type="date"
+                  name="validade"
+                  id="validade"
+                  class="form-control"
+                />
+              </div>
+            </div>
+            <br />
+            <br />
+            <button type="submit" class="btn w-50 py-2 botao">CADASTRAR</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="col-8 d-flex justify-content-center"></div>
+    </div>
+  </div>
+</section>
+{% endblock content %}

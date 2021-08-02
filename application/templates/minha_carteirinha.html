@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block title %} Minha Carteirinha {% endblock title %} 
+{% block extracss %}
+<link rel="stylesheet" href="../static/ CSS/minha_carteirinha.css" />
+{% endblock extracss %}
+
+{% block content %}
+<div class="container-fluid">
+  <div class="row align-items-center">
+    <div class="col" id="space">
+      <div class="row">
+        <div class="col">
+          <h1 class="text-center" id="titulo">
+            <strong>Cadastro de Vacinação</strong>
+          </h1>
+        </div>
+      </div>
+
+      <div class="row">
+        <table class="table table-striped text-center">
+          <thead>
+            <tr class="th-deco">
+              <th scope="col">Vacina</th>
+              <th scope="col">Laboratório</th>
+              <th scope="col">Dose</th>
+              <th scope="col">Data</th>
+              <th scope="col">Próxima dose</th>
+              <th scope="col">Enfermeiro</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>BCG</td>
+              <td>Alphaclin</td>
+              <td>Única</td>
+              <td>28/10/2003</td>
+              <td>(x)</td>
+              <td>Eliane</td>
+            </tr>
+            <tr>
+              <td>Hepatite B</td>
+              <td>Butantan</td>
+              <td>1ª (Primeira)</td>
+              <td>28/10/2003</td>
+              <td>12/2003</td>
+              <td>Luiz</td>
+            </tr>
+            <tr>
+              <td>Hepatite B</td>
+              <td>Butantan</td>
+              <td>2ª (Segunda)</td>
+              <td>23/12/2003</td>
+              <td>05/2004</td>
+              <td>Luiz</td>
+            </tr>
+            <tr>
+              <td>Hepatite B</td>
+              <td>Butantan</td>
+              <td>3ª (Terceira)</td>
+              <td>18/05/2004</td>
+              <td>(x)</td>
+              <td>Luiz</td>
+            </tr>
+            <tr>
+              <td>Influenza (H1N1)</td>
+              <td>Butantan</td>
+              <td>1ª (Primeira)</td>
+              <td>16/07/2010</td>
+              <td>04/2013</td>
+              <td>Fabiana</td>
+            </tr>
+            <tr>
+              <td>Influenza (H1N1)</td>
+              <td>Sanofi</td>
+              <td>2ª (Segunda)</td>
+              <td>26/04/2013</td>
+              <td>(x)</td>
+              <td>Fabiana</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

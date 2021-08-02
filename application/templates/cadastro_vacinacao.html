@@ -1,272 +1,170 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-  <head>
-    <title>Cadastro de Vacinação - SUV</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
+{% extends "base.html" %}
+{% block title %} Cadastro de Vacinação {% endblock title %} 
+{% block extracss %}
+<link rel="stylesheet" href="../static/ CSS/cadastro_vacinacao.css" />
+{% endblock extracss %}
 
-    <!-- Bootstrap & CSS -->
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="../CSS/cadastro_vacinacao.css" />
-    <!-- Font Awesome -->
-    <script src="https://kit.fontawesome.com/b6c9383112.js"
-     crossorigin="anonymous">
-    </script>
-  </head>
+{% block content %}
+<div class="container-fluid">
+  <div class="row align-items-center">
+    <div class="col">
+      <h1 class="text-center" id="titulo">
+        <strong>Cadastro de Vacinação</strong>
+      </h1>
+    </div>
+  </div>
 
-  <body>
-    <header>
-      <nav
-        class="navbar navbar-expand-sm navbar-dark py-4"
-        style="background-color: #00a896"
-      >
-        <div class="container-fluid text-white">
-          <a class="navbar-brand" href="#">
-            <i class="fas fa-heartbeat display-4"></i>
-          </a>
+  <div class="row align-items-center">
+    <div class="col-3" id="quadrado">
+      <i class="fas fa-user fa-5x" id="user-icon"></i>
 
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#header_nav_menu"
-            aria-controls="header_nav_menu"
-            aria-expanded="false"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
+      <h4 class="info-quadrado text-center">Samuel Pacheco</h4>
 
-          <div class="collapse navbar-collapse" id="header_nav_menu">
-            <ul class="navbar-nav ml-auto text-white text-center">
-              <li class="nav-item">
-                <a class="nav-link border-right px-4 text-white" href="index.html"
-                  >HOME</a
-                >
-              </li>
-              <li class="nav-item">
-                <a class="nav-link border-right px-4 text-white" href="#"
-                  >VACINA</a
-                >
-              </li>
-              <li class="nav-item">
-                <a class="nav-link px-4 text-white" href="#">VACINAÇÃO</a>
-              </li>
-              <li class="nav-item dropdown d-sm-none pl-3">
-                <a
-                  href="#"
-                  class="nav-link dropdown-toggle text-white"
-                  data-toggle="dropdown"
-                >
-                  PERFIL
-                </a>
+      <h4 class="info-quadrado text-center">17 anos</h4>
 
-                <div class="dropdown-menu">
-                  <a class="dropdown-item" href="#">Meu Perfil</a>
-                  <a class="dropdown-item" href="#">Minha Carteirinha</a>
-                </div>
-              </li>
-            </ul>
+      <div class="mb-3 center">
+        <button type="submit" class="botao btn btn-sm" id="botao-sm">
+          <strong>VER VACINAS</strong>
+        </button>
+      </div>
+    </div>
 
-            <i
-              class="fas fa-user-circle display-4 d-none d-sm-block"
-              style="padding-left: 35px"
-            ></i>
+    <div class="col">
+      <div class="row">
+        <div class="col form-space1">
+          <div class="mb-3">
+            <label for="user-cpf" class="form form-label"
+              >CPF do Paciente</label
+            >
+            <input type="text" class="form-control borda" id="user-cpf" />
           </div>
-        </div>
-      </nav>
-    </header>
-
-    <div class="container-fluid">
-      <div class="row align-items-center">
-        <div class="col">
-            <h1 class="text-center" id="titulo">
-            <strong>Cadastro de Vacinação</strong></h1>
         </div>
       </div>
 
-      <div class="row align-items-center">
-        <div class="col-3" id="quadrado">
-          <i class="fas fa-user fa-5x" id="user-icon"></i>
-          
-          <h4 class="info-quadrado text-center">Samuel Pacheco</h4>
-          
-          <h4 class="info-quadrado text-center">17 anos</h4>
+      <div class="row">
+        <div class="col form-space1">
+          <div class="mb-3">
+            <label for="vacine-name" class="form form-label">Vacina</label>
+            <input type="text" class="form-control borda" id="vacine-name" />
+          </div>
+        </div>
+      </div>
 
-          <div class="mb-3 center">
-            <button type="submit" 
-                    class="botao btn btn-sm"
-                    id="botao-sm">
-                    <strong>VER VACINAS</strong>
+      <div class="row">
+        <div class="col form-space1" style="margin-bottom: 5%">
+          <div class="mb-3">
+            <label for="vacine-lab" class="form form-label">Laboratório</label>
+            <input type="text" class="form-control borda" id="vacine-lab" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-3" style="margin: 3% 0 0 20%">
+      <h5 id="radio-text">Dose</h5>
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="flexRadioDefault"
+          id="flexRadioDefault1"
+        />
+        <label class="form-check-label" for="flexRadioDefault1"> Única </label>
+      </div>
+
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="flexRadioDefault"
+          id="flexRadioDefault2"
+          checked
+        />
+        <label class="form-check-label" for="flexRadioDefault2">
+          1ª (Primeira)
+        </label>
+      </div>
+
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="flexRadioDefault"
+          id="flexRadioDefault2"
+          checked
+        />
+        <label class="form-check-label" for="flexRadioDefault2">
+          2ª (Segunda)
+        </label>
+      </div>
+
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="flexRadioDefault"
+          id="flexRadioDefault2"
+          checked
+        />
+        <label class="form-check-label" for="flexRadioDefault2">
+          3ª (Terceira)
+        </label>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="mb-3">
+            <button
+              type="submit"
+              class="botao btn btn-sm center"
+              id="botao-lg"
+              value="submit"
+            >
+              <strong>CADASTRAR</strong>
             </button>
           </div>
         </div>
-
-        <div class="col">
-          <div class="row"> 
-            <div class="col form-space1">
-              <div class="mb-3">
-                <label for="user-cpf" class="form form-label">CPF do Paciente</label>
-                <input type="text" 
-                       class="form-control borda" 
-                       id="user-cpf">
-              </div>
-            </div>
-          </div>
-
-          <div class="row"> 
-            <div class="col form-space1">
-              <div class="mb-3">
-                <label for="vacine-name" class="form form-label">Vacina</label>
-                <input type="text" 
-                       class="form-control borda" 
-                       id="vacine-name">
-              </div>
-            </div>
-          </div>
-
-          <div class="row"> 
-            <div class="col form-space1" style="margin-bottom: 5%;">
-              <div class="mb-3">
-                <label for="vacine-lab" class="form form-label">Laboratório</label>
-                <input type="text" 
-                       class="form-control borda" 
-                       id="vacine-lab">
-              </div>
-            </div>
-          </div>
-        </div>
+      </div>
     </div>
 
+    <div class="col">
       <div class="row">
-        <div class="col-3" style="margin: 3% 0 0 20%;">
-          <h5 id="radio-text">Dose</h5>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                <label class="form-check-label" for="flexRadioDefault1">
-                Única
-                </label>
-              </div>
-
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-                <label class="form-check-label" for="flexRadioDefault2">
-                  1ª (Primeira)
-                </label>
-              </div>
-
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-                <label class="form-check-label" for="flexRadioDefault2">
-                  2ª (Segunda)
-                </label>
-              </div>
-
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-                <label class="form-check-label" for="flexRadioDefault2">
-                  3ª (Terceira)
-                </label>
-              </div>
-              <div class="row">
-                <div class="col">
-                  <div class="mb-3">
-                    <button type="submit" 
-                            class="botao btn btn-sm center"
-                            id="botao-lg"
-                            value="submit">
-                            <strong>CADASTRAR</strong>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col">
-              <div class="row"> 
-                <div class="col form-space1">
-                  <div class="mb-3">
-                    <label for="vacine-date" class="form-label form">Data</label>
-                    <input type="date" 
-                           class="form-control borda" 
-                           id="vacine-date">
-                  </div>
-                </div>
-              </div>
-    
-              <div class="row"> 
-                <div class="col form-space1">
-                  <div class="mb-3">
-                    <label for="vacine-next-date" class="form-label form">Data da Próxima Dose</label>
-                    <input type="date" 
-                           class="form-control borda" 
-                           id="vacine-next-date">
-                  </div>
-                </div>
-              </div>
-    
-              <div class="row"> 
-                <div class="col form-space1" style="margin-bottom: 10%;">
-                  <div class="mb-3">
-                    <label for="nurse-name" class="form-label form">Nome do Enfermeiro(a)</label>
-                    <input type="text" 
-                           class="form-control borda" 
-                           id="nurse-name">
-                  </div>
-                </div>
-              </div>
-            </div>
-        </div>
-    </div>
-  
-  </div>
-
-    <footer>
-      <div class="container-fluid py-4" style="background-color: #00a393">
-        <div class="row text-white align-items-center">
-          <div class="col-6 offset-0 offset-sm-3 text-center">
-            <span>
-              Maria Erbs, Samuel Pacheco & Thaís Junkes <br/>
-              Todos os direitos reservados
-            </span>
-          </div>
-
-          <div class="col-3 offset-3 offset-sm-0" style="font-size: 30px">
-            <div id="social_icons" class="d-flex justify-content-end">
-              <i class="fas fa-envelope px-1"></i>
-              <i class="fab fa-facebook-f px-1"></i>
-              <i class="fab fa-instagram px-1"></i>
-            </div>
+        <div class="col form-space1">
+          <div class="mb-3">
+            <label for="vacine-date" class="form-label form">Data</label>
+            <input type="date" class="form-control borda" id="vacine-date" />
           </div>
         </div>
       </div>
-    </footer>
-  </div>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script
-      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-      crossorigin="anonymous"
-    ></script>
-  </body>
-</html>
+      <div class="row">
+        <div class="col form-space1">
+          <div class="mb-3">
+            <label for="vacine-next-date" class="form-label form"
+              >Data da Próxima Dose</label
+            >
+            <input
+              type="date"
+              class="form-control borda"
+              id="vacine-next-date"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col form-space1" style="margin-bottom: 10%">
+          <div class="mb-3">
+            <label for="nurse-name" class="form-label form"
+              >COREN</label
+            >
+            <input type="text" class="form-control borda" id="nurse-name" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

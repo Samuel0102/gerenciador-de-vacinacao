@@ -1,0 +1,41 @@
+
+h1{
+    color: #088392;
+    font-size: 3.2em;
+    font-weight: 800;
+    margin: 30px 0 60px 0;
+}
+ 
+#user-space{
+    width: 500px;
+    height: 265px;
+}
+ 
+.user-button{
+    width: 160px;
+    background-color: #00a896;
+    color: white; 
+    font-size: 11px; 
+    padding: 10px 25px 10px 25px; 
+    margin-top: 10px;
+    border:#00a896;
+    border-radius: 5px;
+}
+.caixa-azul{
+    background-color: #d6fff6;
+    border-radius: 4%; 
+    margin: 0 25% 5% 22%;
+}
+.user-estilo{
+    color: #028090; 
+    padding: 7%; 
+    display: flex;
+    justify-content: center;  
+    width: 100%;
+}
+h4{
+    font-size: 20px; 
+    color: #5b6561; 
+    font-weight: 400;
+}
+
