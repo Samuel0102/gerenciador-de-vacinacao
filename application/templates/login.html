@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %} Login {% endblock title %}
+
+{% block extracss %}
+<link rel="stylesheet" href="../static/ CSS/login.css" />
+{% endblock extracss %}
+
+{% block content %}
+<div class="container-fluid color">
+  <div class="row align-items-center center">
+    <div class="col" id="quadrado">
+      <h1 class="text-center" id="titulo"><strong>Login</strong></h1>
+
+      <div class="row">
+        <div class="col d-flex justify-content-center">
+          <figure class="figure position-relative">
+            <i class="fas fa-circle fa-5x" style="color: #dafff7"></i>
+          </figure>
+          <i class="fas fa-user-md fa-3x position-absolute user-icon"></i>
+        </div>
+
+        <div class="col d-flex justify-content-center">
+          <figure class="figure position-relative">
+            <i class="fas fa-circle fa-5x" style="color: #dafff7"></i>
+          </figure>
+          <i class="fas fa-user fa-3x position-absolute user-icon"></i>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <form>
+            <div class="mb-3">
+              <label for="user-coren" class="form-label col-form-label-lg"
+                >COREN</label
+              >
+              <input type="text" class="form-control borda" id="user-coren" />
+            </div>
+
+            <div class="mb-3">
+              <label for="user-senha" class="form-label col-form-label-lg"
+                >Senha</label
+              >
+              <input
+                type="password"
+                class="form-control borda"
+                id="user-senha"
+              />
+            </div>
+
+            <div class="mb-5 center">
+              <button type="submit" class="btn btn-lg botao">
+                <strong>ENVIAR</strong>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

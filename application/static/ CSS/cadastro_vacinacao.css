@@ -1,0 +1,104 @@
+html, body{
+    font-family: 'Barlow', sans-serif;
+}
+
+#titulo{
+    font-size: 55px; 
+    color: #088292; 
+    margin: 50px 0 50px 0;
+}
+
+#quadrado{
+    background-color: #d6fff6; 
+    border-radius: 4%; 
+    margin: 0 0% 3% 20%;
+}
+
+#user-icon{
+    color: #028090; 
+    padding: 7%; 
+    display: flex; 
+    justify-content: center;  
+    width: 100%;
+}
+
+.center{
+    display: flex; 
+    justify-content: center;  
+    width: 100%;
+}
+
+.info-quadrado{
+    font-size: 23px; 
+    color: #5b6561; 
+    font-weight: 400;
+}
+
+.botao{
+    background-color: #00a896; 
+    color: white;
+}
+
+.botao:hover{
+    background-color: white;
+    color: #00A896;
+    border: 1px solid #00A896;
+    transition: 0.5s;
+}
+
+#botao-sm{
+    font-size: 10px; 
+    padding: 10px 50px 10px 50px; 
+    margin-top: 10px;
+}
+
+#botao-lg{
+    font-size: 15px;                      
+    padding: 10px 50px 10px 50px;
+    margin: 19% 0 15% 0;
+}
+
+.form-space1{
+    margin: 0 35% 0 10%;
+}
+
+.form{
+    color: #5b6561;
+}
+
+.borda{
+    border-radius: 10px;
+}
+
+#radio-text{
+    font-weight: 400;
+    color: #5b6561;
+}
+
+input[type='radio']:after {
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    top: -2px;
+    left: -1px;
+    position: relative;
+    background-color:#d6fff6;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid white;
+}
+
+input[type='radio']:checked:after {
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    top: -2px;
+    left: -1px;
+    position: relative;
+    background-color: #00A896;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid white;
+}
