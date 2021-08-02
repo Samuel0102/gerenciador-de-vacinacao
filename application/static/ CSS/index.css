@@ -1,0 +1,42 @@
+h1.display-4 {
+  font-weight: 800;
+  color: #088392;
+}
+
+/* Até pequeno */
+@media (max-width: 576px) {
+  .col-work {
+    padding-bottom: 0;
+    margin-bottom: 16px;
+  }
+
+  .col-work h1 {
+    font-size: 30px;
+  }
+
+  .col-work p.lead {
+    font-size: 20px;
+  }
+}
+
+/* Médio */
+@media (min-width: 768px) and (max-width: 992px) {
+  .col-work h1 {
+    font-size: 50px;
+  }
+}
+
+/* Extra Large */
+@media (min-width: 1400px) {
+  .col-work h1 {
+    font-size: 75px;
+  }
+
+  .col-work p.lead {
+    font-size: 45px;
+  }
+
+  .col-work p.my-4 {
+    font-size: 40px;
+  }
+}

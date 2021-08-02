@@ -1,20 +1,16 @@
-{% extends "base.html" %} 
-
-{% block title %} Home {% endblock title %} 
+{% extends "base.html" %}
+ {% block title %} Home {% endblock title %} 
+{% block extracss %}
+<link rel="stylesheet" href="../static/ CSS/index.css" />
+{% endblock extracss %}
 
 {% block content %}
-
 <section>
   <div class="container-fluid">
     <div class="row align-items-md-center">
       <div class="col-md-6">
         <div class="jumbotron bg-transparent col-work">
-          <h1
-            class="display-4 pb-3"
-            style="font-family: 'Arial Black'; color: #088392"
-          >
-            Sobre o site
-          </h1>
+          <h1 class="display-4 pb-3">Sobre o site</h1>
           <p class="lead">
             O SUV é um sistema totalmente online, voltado para realização do
             armazenamento de dados de VACINAÇÃO de cidadãos brasileiros. Com
@@ -43,12 +39,7 @@
     <div class="row align-items-start align-items-md-center">
       <div class="col-md-6 order-2">
         <div class="jumbotron bg-transparent col-work pb-4 pb-sm-0">
-          <h1
-            class="display-4 pb-3"
-            style="font-family: 'Arial Black'; color: #088392"
-          >
-            Sobre o projeto
-          </h1>
+          <h1 class="display-4 pb-3">Sobre o projeto</h1>
           <p class="lead">
             O SUV surgiu de uma proposta pensada na matéria de projeto
             integrador de um curso técnico da equipe desenvolvedora do sistema.
@@ -71,5 +62,4 @@
     </div>
   </div>
 </section>
-
 {% endblock content %}
