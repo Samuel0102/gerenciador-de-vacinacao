@@ -1,170 +1,95 @@
 {% extends "base.html" %}
-{% block title %} Cadastro de Vacinação {% endblock title %} 
+{% block title %} Cadastro de Vacinação {% endblock title %}
 {% block extracss %}
 <link rel="stylesheet" href="../static/ CSS/cadastro_vacinacao.css" />
 {% endblock extracss %}
 
 {% block content %}
 <div class="container-fluid">
-  <div class="row align-items-center">
-    <div class="col">
-      <h1 class="text-center" id="titulo">
-        <strong>Cadastro de Vacinação</strong>
-      </h1>
+  <div class="row">
+    <div class="col-12">
+      <h1 class="text-center">Cadastro de Vacinação</h1>
     </div>
   </div>
 
-  <div class="row align-items-center">
-    <div class="col-3" id="quadrado">
-      <i class="fas fa-user fa-5x" id="user-icon"></i>
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-6 d-flex justify-content-end">
+      <div id="user-square">
+        <i class="fas fa-user fa" id="user-icon"></i>
 
-      <h4 class="info-quadrado text-center">Samuel Pacheco</h4>
+        <span class="info-square text-center d-block">Samuel Pacheco</span>
 
-      <h4 class="info-quadrado text-center">17 anos</h4>
+        <span class="info-square text-center d-block">17 anos</span>
 
-      <div class="mb-3 center">
-        <button type="submit" class="botao btn btn-sm" id="botao-sm">
-          <strong>VER VACINAS</strong>
-        </button>
+        <div class="button text-center">
+          <button name="button" type="submit" class="btn w-100 mt-3">
+           VER VACINAS
+          </button>
+        </div>
       </div>
     </div>
 
-    <div class="col">
-      <div class="row">
-        <div class="col form-space1">
-          <div class="mb-3">
-            <label for="user-cpf" class="form form-label"
-              >CPF do Paciente</label
-            >
-            <input type="text" class="form-control borda" id="user-cpf" />
-          </div>
+    <div class="col-12 col-md-6">
+      <div class="form-container">
+        <div class="mb-3">
+          <label for="user-cpf" class="form form-label">CPF do Paciente</label>
+          <input type="text" class="form-control" id="user-cpf" />
         </div>
-      </div>
 
-      <div class="row">
-        <div class="col form-space1">
-          <div class="mb-3">
-            <label for="vacine-name" class="form form-label">Vacina</label>
-            <input type="text" class="form-control borda" id="vacine-name" />
-          </div>
+        <div class="mb-3">
+          <label for="vacine-name" class="form form-label">Vacina</label>
+          <input type="text" class="form-control" id="vaccine-name" />
         </div>
-      </div>
 
-      <div class="row">
-        <div class="col form-space1" style="margin-bottom: 5%">
-          <div class="mb-3">
-            <label for="vacine-lab" class="form form-label">Laboratório</label>
-            <input type="text" class="form-control borda" id="vacine-lab" />
-          </div>
+        <div class="mb-3">
+          <label for="vacine-lab" class="form form-label">Laboratório</label>
+          <input type="text" class="form-control" id="vaccine-lab" />
         </div>
       </div>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-3" style="margin: 3% 0 0 20%">
-      <h5 id="radio-text">Dose</h5>
-      <div class="form-check">
-        <input
-          class="form-check-input"
-          type="radio"
-          name="flexRadioDefault"
-          id="flexRadioDefault1"
-        />
-        <label class="form-check-label" for="flexRadioDefault1"> Única </label>
-      </div>
+    <div class="col-12 col-md-6 d-md-flex justify-content-end">
+      <div class="form-container" id="second-form">
+        <div class="mb-3">
+          <label for="vacine-date" class="form-label form">Data</label>
+          <input type="date" class="form-control" id="vaccine-date" />
+        </div>
 
-      <div class="form-check">
-        <input
-          class="form-check-input"
-          type="radio"
-          name="flexRadioDefault"
-          id="flexRadioDefault2"
-          checked
-        />
-        <label class="form-check-label" for="flexRadioDefault2">
-          1ª (Primeira)
-        </label>
-      </div>
+        <div class="mb-3">
+          <label for="vacine-next-date" class="form-label form"
+            >Data da Próxima Dose</label
+          >
+          <input type="date" class="form-control" id="vaccine-next-date" />
+        </div>
 
-      <div class="form-check">
-        <input
-          class="form-check-input"
-          type="radio"
-          name="flexRadioDefault"
-          id="flexRadioDefault2"
-          checked
-        />
-        <label class="form-check-label" for="flexRadioDefault2">
-          2ª (Segunda)
-        </label>
-      </div>
-
-      <div class="form-check">
-        <input
-          class="form-check-input"
-          type="radio"
-          name="flexRadioDefault"
-          id="flexRadioDefault2"
-          checked
-        />
-        <label class="form-check-label" for="flexRadioDefault2">
-          3ª (Terceira)
-        </label>
-      </div>
-      <div class="row">
-        <div class="col">
-          <div class="mb-3">
-            <button
-              type="submit"
-              class="botao btn btn-sm center"
-              id="botao-lg"
-              value="submit"
-            >
-              <strong>CADASTRAR</strong>
-            </button>
-          </div>
+        <div class="mb-3">
+          <label for="nurse-coren" class="form-label form">COREN</label>
+          <input type="text" class="form-control" id="nurse-coren" />
         </div>
       </div>
     </div>
 
-    <div class="col">
-      <div class="row">
-        <div class="col form-space1">
-          <div class="mb-3">
-            <label for="vacine-date" class="form-label form">Data</label>
-            <input type="date" class="form-control borda" id="vacine-date" />
-          </div>
-        </div>
+    <div class="col-12 col-md-6">
+      <div class="form-group w-50">
+        <label for="inputState">Dose</label>
+        <select id="inputState" class="form-control">
+          <option selected>Dose...</option>
+          <option>Dose única</option>
+          <option>Primeira dose</option>
+          <option>Segunda dose</option>
+          <option>Terceira dose</option>
+        </select>
       </div>
 
-      <div class="row">
-        <div class="col form-space1">
-          <div class="mb-3">
-            <label for="vacine-next-date" class="form-label form"
-              >Data da Próxima Dose</label
-            >
-            <input
-              type="date"
-              class="form-control borda"
-              id="vacine-next-date"
-            />
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col form-space1" style="margin-bottom: 10%">
-          <div class="mb-3">
-            <label for="nurse-name" class="form-label form"
-              >COREN</label
-            >
-            <input type="text" class="form-control borda" id="nurse-name" />
-          </div>
-        </div>
+      <div class="button" id="bottom-button">
+        <button name="button" type="submit" class="btn w-100 py-2 mt-5">
+          ENVIAR
+        </button>
       </div>
     </div>
   </div>
-</div>
 
+</div>
 {% endblock content %}

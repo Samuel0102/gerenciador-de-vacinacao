@@ -1,104 +1,87 @@
-html, body{
-    font-family: 'Barlow', sans-serif;
-}
 
-#titulo{
-    font-size: 55px; 
-    color: #088292; 
-    margin: 50px 0 50px 0;
-}
-
-#quadrado{
+/* USER SQUARE */
+#user-square{
     background-color: #d6fff6; 
     border-radius: 4%; 
-    margin: 0 0% 3% 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
 #user-icon{
     color: #028090; 
-    padding: 7%; 
-    display: flex; 
-    justify-content: center;  
-    width: 100%;
+    padding: 4%; 
 }
 
-.center{
-    display: flex; 
-    justify-content: center;  
-    width: 100%;
-}
-
-.info-quadrado{
-    font-size: 23px; 
+.info-square{
     color: #5b6561; 
     font-weight: 400;
 }
+/* USER SQUARE */
 
-.botao{
-    background-color: #00a896; 
-    color: white;
+
+/* MEDIAS */
+
+@media (max-width: 1024px) {
+
+    .info-square{
+        font-size: 1.2em;
+    }
+
+    #user-square{
+        padding-top: 10px;
+        width: 100%;
+    }
+
+    #user-icon{
+        font-size: 2.7em;
+    }
+
+    .form-container{
+        width: 100%;
+    }
+
+    #user-square .button{
+        width: 65%;
+    }
+
+    #bottom-button{
+        width: 80%;
+        margin: 0 auto;
+    }
 }
 
-.botao:hover{
-    background-color: white;
-    color: #00A896;
-    border: 1px solid #00A896;
-    transition: 0.5s;
+@media (min-width: 1025px) {
+
+    .info-square{
+        font-size: 1.5em;
+    }
+
+    #user-icon{
+        font-size: 3.9em;
+    }
+
+    #user-square{
+        padding: 10px 90px;
+        width: 60%;
+    }
+
+    .form-container{
+        width: 65%;
+    }
+
+    #user-square .button{
+        width: 100%;
+    }
+
+    #second-form{
+        width: 60%;
+    }
+
+    #bottom-button{
+        width: 50%;
+    }
 }
 
-#botao-sm{
-    font-size: 10px; 
-    padding: 10px 50px 10px 50px; 
-    margin-top: 10px;
-}
 
-#botao-lg{
-    font-size: 15px;                      
-    padding: 10px 50px 10px 50px;
-    margin: 19% 0 15% 0;
-}
-
-.form-space1{
-    margin: 0 35% 0 10%;
-}
-
-.form{
-    color: #5b6561;
-}
-
-.borda{
-    border-radius: 10px;
-}
-
-#radio-text{
-    font-weight: 400;
-    color: #5b6561;
-}
-
-input[type='radio']:after {
-    width: 15px;
-    height: 15px;
-    border-radius: 15px;
-    top: -2px;
-    left: -1px;
-    position: relative;
-    background-color:#d6fff6;
-    content: '';
-    display: inline-block;
-    visibility: visible;
-    border: 2px solid white;
-}
-
-input[type='radio']:checked:after {
-    width: 15px;
-    height: 15px;
-    border-radius: 15px;
-    top: -2px;
-    left: -1px;
-    position: relative;
-    background-color: #00A896;
-    content: '';
-    display: inline-block;
-    visibility: visible;
-    border: 2px solid white;
-}

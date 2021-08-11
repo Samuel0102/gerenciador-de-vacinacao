@@ -5,70 +5,60 @@
 {% endblock extracss %}
 
 {% block content %}
-<section>
-  <div class="container-fluid">
-    <div class="row">
-      <div
-        class="col-4 d-flex align-items-center"
-        style="background-color: #d6fff6"
-      >
-        <div class="col-md-8 order-4 px-0">
-          <img src="../SUV/user_img.png" class="img-fluid" />
-        </div>
-      </div>
-      <div class="jumbotron bg-transparent col-work">
-        <h1 class="display-4 pb-3">Cadastro de Vacina</h1>
-        <br />
-        <br />
-        <br />
-        <div class="container form-group">
-          <form>
-            <div class="form-row justify-content-around">
-              <div class="form-group col-md-12">
-                <label for="user-name" class="form-label">Nome</label>
-                <input
-                  type="text"
-                  name="user-name"
-                  id="user-name"
-                  class="form-control"
-                />
-              </div>
-            </div>
-            <br />
-            <div class="form-row justify-content-around">
-              <div class="form-group col-md-12">
-                <label for="fabricante-vacina" class="form-label"
-                  >Fabricante</label
-                >
-                <input
-                  type="text"
-                  name="user-fabricante"
-                  id="user-fabricante"
-                  class="form-control"
-                />
-              </div>
-            </div>
-            <br />
-            <div class="form-row justify-content-around">
-              <div class="form-group col-md-12">
-                <label for="validade-vacina" class="form-label">Validade</label>
-                <input
-                  type="date"
-                  name="validade"
-                  id="validade"
-                  class="form-control"
-                />
-              </div>
-            </div>
-            <br />
-            <br />
-            <button type="submit" class="btn w-50 py-2 botao">CADASTRAR</button>
-          </form>
-        </div>
-      </div>
+<div class="container-fluid">
+  <div class="row">
 
-      <div class="col-8 d-flex justify-content-center"></div>
-    </div>
+    <aside class="col-md-4 d-flex" id="aside-img">
+      <img src="../static/IMG/user_img.png"
+           class="img-fluid align-self-center">
+    </aside>
+
+    <section class="col-sm-12 col-md-8">
+      <div id="vaccine-register">
+        <header class="text-center">
+            <h1>Cadastro de Vacina</h1>
+        </header>
+
+        <form class="d-flex flex-column align-items-center">
+          <div class="form-group col-md-9">
+            <label for="vaccine-name" class="form-label">Nome</label>
+            <input
+              type="text"
+              name="vaccine-name"
+              id="vaccine-name"
+              class="form-control"
+            />
+          </div>
+          <div class="form-group col-md-9">
+            <label for="vaccine-owner" class="form-label"
+              >Fabricante</label
+            >
+            <input
+              type="text"
+              name="vaccine-owner"
+              id="vaccine-owner"
+              class="form-control"
+            />
+          </div>
+          <div class="form-group col-md-9">
+            <label for="vaccine-end" class="form-label">Validade</label>
+            <input
+              type="date"
+              name="vaccine-end"
+              id="vaccine-end"
+              class="form-control"
+            />
+          </div>
+        </form>
+
+        <div class="button text-center">
+            <button name="button"
+                    type="submit" 
+                    class="btn w-50 py-2">ENVIAR</button>
+        </div>
+      </div>
+    </section>
+
   </div>
-</section>
+</div>
 {% endblock content %}
