@@ -1,14 +1,11 @@
 
-h1{
-    color: #088392;
-    font-size: 3.2em;
-    font-weight: 800;
-    margin: 30px 0 60px 0;
-}
- 
+
+/*  USER SPACE */
 #user-space{
-    width: 500px;
+    width: 300px;
     height: 265px;
+    background-color: #d6fff6;
+    border-radius: 4%;
 }
  
 .user-button{
@@ -21,11 +18,7 @@ h1{
     border:#00a896;
     border-radius: 5px;
 }
-.caixa-azul{
-    background-color: #d6fff6;
-    border-radius: 4%; 
-    margin: 0 25% 5% 22%;
-}
+
 .user-estilo{
     color: #028090; 
     padding: 7%; 
@@ -33,9 +26,35 @@ h1{
     justify-content: center;  
     width: 100%;
 }
+
 h4{
     font-size: 20px; 
     color: #5b6561; 
     font-weight: 400;
 }
+/* USER SPACE */
 
+/* MEDIAS */
+
+@media (max-width: 762px) {
+    #user-space{
+        margin: 0 auto;
+    }
+
+    form{
+        width: 100%;
+        margin-top: 35px;
+    }
+    
+}
+
+@media (min-width: 763px) {
+    #user-space{
+        margin: 0 100px 0 0;
+    }
+
+    form{
+        width: 90%;
+        margin-top: 0;
+    }
+}
