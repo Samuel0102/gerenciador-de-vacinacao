@@ -28,6 +28,7 @@ O SUV surgiu como um projeto de construção de um ambiente em tese governamenta
 | Cadastro de vacinação de usuários paciente | :clock130: |
 | Login de usuários | :clock130: |
 | Acesso dos usuários a seus dados pessoais | :clock130: |
+| Logout dos usuários | :clock130: |
 | Acesso dos usuários do tipo paciente a todas as vacinas já tomadas | :clock130: |
 
 :clock130: - Em desenvolvimento   :heavy_check_mark: - Finalizado
