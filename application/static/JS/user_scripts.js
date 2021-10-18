@@ -43,27 +43,32 @@ function registerNewUser(completeData){
         password: completeData[8]
     };
 
-    console.log(formattedUserData);
-
-    /* const userNotification = $("#user-notification");
+    const userNotification = $("#user-notification");
 
     $.ajax({
         type: "POST",
-        url: "register-user",
-        data: JSON.stringify(formattedData),
+        url: "/user-register",
+        data: JSON.stringify(formattedUserData),
         dataType: "json",
         contentType: "application/json",
         success: function(response){
-            switch(response){
+            userNotification.empty();
+            switch(response['result']){
                 case "CPF/COREN IN USE":
-                    UserNotification.text = "CPF/Coren já cadastrado!";
+                    userNotification.append("CPF/Coren já cadastrado!");
+                    userNotification.addClass("text-danger");
+                    userNotification.removeClass("text-success");
                     break;
                 case "USER REGISTERED":
-                    UserNotification.text = "Cadastro feito com Sucesso!";
+                    userNotification.append("Cadastro feito com sucesso!");
+                    userNotification.addClass("text-success");
+                    userNotification.removeClass("text-danger");
                     break;
                     
             }
+        },
+        error: function(){
+            alert("Houve uma falha no sistema, por favor recarregue a página!")
         }
-
-    }); */
+    });
 }
