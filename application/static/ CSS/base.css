@@ -47,5 +47,12 @@ input.form-control {
 form {
   margin-bottom: 40px;
 }
+
+.error{
+  color: red;
+  font-size: 12px;
+  padding-left: 12px;
+}
+
 /* FORMS */
 

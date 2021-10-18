@@ -4,6 +4,8 @@
 
 {% block extracss %} 
 <link rel="stylesheet" href="../static/ CSS/registro_usuario.css">
+<script src="../static/JS/view_scripts.js"></script>
+<script type="module" src="../static/JS/user_scripts.js"></script>
 {% endblock extracss %}
 
 {% block content %}
@@ -21,17 +23,17 @@
                     <h1>Cadastro de Usuário</h1>
                 </header>
                 <div class="d-flex justify-content-around" id="user-icons">
-                    <i class="fas fa-user-md"></i>
-                    <i class="fas fa-user"></i>
+                    <i class="fas fa-user-md" onclick="changeRegisterForm('nurse')"></i>
+                    <i class="fas fa-user" onclick="changeRegisterForm('pacient')"></i>
                 </div>
-                <form>
+                <form id="form">
                     <div class="form-row justify-content-around">
                         <div class="form-group col-md-5">
                             <label for="user-name">Nome</label>
                             <input  type="text"
                                     name="user-name"
                                     id="user-name"
-                                    class="form-control">
+                                    class="form-control" required>
                         </div>
     
                         <div class="form-group col-md-5">
@@ -39,24 +41,26 @@
                             <input  type="date"
                                     name="user-born"
                                     id="user-born"
-                                    class="form-control">
+                                    class="form-control" required>
+                            
                         </div>
+                    
                     </div>
 
                     <div class="form-row justify-content-around">
-                        <div class="form-group col-md-5">
+                        <div class="form-group col-md-5" id="user-cpf">
                             <label for="user-cpf">CPF</label>
                             <input  type="text"
                                     name="user-cpf"
-                                    id="user-cpf"
-                                    class="form-control">
+                                    class="form-control" required>
+                            <span class="error"></span>
                         </div>
-                        <div class="form-group col-md-5">
+                        <div class="form-group col-md-5" id="user-coren">
                             <label for="user-coren">COREN</label>
                             <input  type="text"
                                     name="user-coren"
-                                    id="user-coren"
-                                    class="form-control">
+                                    class="form-control" required>
+                            <span class="error"></span>
                         </div>
                     </div>
 
@@ -66,11 +70,12 @@
                             <input  type="tel"
                                     name="user-tel"
                                     id="user-tel"
-                                    class="form-control">
+                                    class="form-control" required>
+                            <span class="error"></span>
                         </div>
                         <div class="form-group col-md-5">
                             <label for="input-sex">Sexo</label>
-                            <select id="input-sex" class="form-control">
+                            <select id="input-sex" class="form-control" required>
                               <option selected>Escolher...</option>
                               <option>Masculino</option>
                               <option>Feminino</option>
@@ -85,8 +90,9 @@
                             <input  type="email"
                                     name="user-email"
                                     id="user-email"
-                                    class="form-control">
+                                    class="form-control" required>
                         </div>
+            
                     </div>
                     
                     <div class="form-row justify-content-around">
@@ -95,22 +101,26 @@
                             <input  type="password"
                                     name="user-password"
                                     id="user-password"
-                                    class="form-control">
+                                    class="form-control" required>
+                            <span class="error"></span>
                         </div>
                         <div class="form-group col-md-5">
                             <label for="user-confirmp">Confirme a senha</label>
                             <input  type="password"
                                     name="user-confirmp"
                                     id="user-confirmp"
-                                    class="form-control">
+                                    class="form-control" required>
+                            <span class="error"></span>
                         </div>
                     </div>
+                    <div class="button text-center">
+                        <button name="button"
+                                type="button" 
+                                class="btn w-50 py-2"
+                                id="submit-button">ENVIAR</button>
+                    </div>
                 </form>
-                <div class="button text-center">
-                    <button name="button"
-                            type="submit" 
-                            class="btn w-50 py-2">ENVIAR</button>
-                </div>
+                <span class="lead" style="color:lawngreen;" id="user-notification"></span>
             </div>
         </section>
     </div>
