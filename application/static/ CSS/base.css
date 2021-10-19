@@ -1,5 +1,10 @@
 @import url(https://fonts.googleapis.com/css2?family=Barlow:wght@400;800&display=swap);
 
+*{
+  padding: 0;
+  margin: 0;
+}
+
 html,
 body {
   font-family: "Barlow", sans-serif;
@@ -10,6 +15,12 @@ body {
   background-color: #d6fff6;
 }
 /* ASIDE */
+
+/* HEADER */
+.nav-item a:hover{
+  text-decoration: underline;
+}
+/* HEADER */
 
 /* TITLES */
 h1 {
@@ -26,6 +37,7 @@ h1 {
   font-size: .9em;
   background-color: #00a896;
   color: white;
+  border-radius: 5px;
 }
 
 .button button:hover {
@@ -53,5 +65,81 @@ form {
   font-size: 12px;
   padding-left: 12px;
 }
-
 /* FORMS */
+
+/* USER AREA */
+#user-area{
+  position: relative;
+}
+
+#register-login-buttons button{
+  border-radius: 20px;
+  padding: 5px 15px;
+  border: none;
+  background-color: #d6fff6;
+  margin-right: 10px;
+  transition: transform 0.5s;
+}
+
+#register-login-buttons button:hover{
+  transform: scale(1.1);
+}
+
+#register-login-buttons a{
+  text-decoration: none;
+}
+
+#dropdown-user{
+  position: absolute;
+  top: 75px;
+  right: 30px;
+  background-color: #d6fff6;
+  width: 200px;
+  height: 100px;
+  z-index: 3;
+  text-align: center;
+  display: none;
+}
+
+#dropdown-user ul{
+  list-style: none;
+  padding-top: 10px;
+}
+
+#dropdown-user:before {
+  content: "";
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  border-left: 10px solid transparent;
+  border-right: 10px solid #d6fff6;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid #d6fff6;
+  right: 0.5px;
+  top: -15px;
+}
+
+#dropdown-user a{
+  font-size: 17px;
+  padding: 10px 0;
+}
+
+/* MEDIAS */
+@media (max-width: 576px) {
+  #register-login-buttons{
+    margin-top: 20px;
+  }
+
+}
+
+@media (min-width: 576px) {
+
+  .nav-item a:nth-child(1){
+    border-right: 1px solid white;
+  }
+
+  .nav-item a:nth-child(2){
+    border-right: 1px solid white;
+  }
+
+}

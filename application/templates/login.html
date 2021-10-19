@@ -1,48 +1,55 @@
-{% extends "base.html" %} {% block title %} Login {% endblock title %} {% block
-extracss %}
+{% extends "base.html" %}
+{% block title %} Login {% endblock title %}
+{% block extracss %}
 <link rel="stylesheet" href="../static/ CSS/login.css" />
-{% endblock extracss %} {% block content %}
+<script type="module" src="../static/JS/user_scripts.js"></script>
+{% endblock extracss %}
+
+{% block content %}
 <div class="container-fluid color">
   <div class="row mt-5">
     <div class="col-12 d-flex justify-content-center align-items-center">
       <div id="login-square">
         <h1 class="text-center">Login</h1>
 
-        <div class="row mb-">
+        <div class="row">
           <div class="col-6 d-flex justify-content-center">
             <i class="fas fa-circle fa-5x" style="color: #dafff7"></i>
-            <i class="fas fa-user-md fa-3x position-absolute user-icon"></i>
+            <i class="fas fa-user-md fa-3x position-absolute user-icon" onclick="changeLoginForm('nurse')"></i>
           </div>
 
           <div class="col-6 d-flex justify-content-center">
             <i class="fas fa-circle fa-5x" style="color: #dafff7"></i>
-            <i class="fas fa-user fa-3x position-absolute user-icon"></i>
+            <i class="fas fa-user fa-3x position-absolute user-icon" onclick="changeLoginForm('pacient')"></i>
           </div>
         </div>
 
         <div class="row text-center">
           <div class="col">
             <form>
-              <div class="mb-3">
+              <div>
                 <label for="user-coren" class="form-label "
                   >COREN</label
                 >
-                <input type="text" class="form-control input-style" id="user-coren" />
+                <input type="text" class="form-control input-style" id="user-identifier" name="user-coren" />
+                <span class="error"></span>
               </div>
 
-              <div class="mb-3">
-                <label for="user-senha" class="form-label"
+              <div>
+                <label for="user-password" class="form-label"
                   >Senha</label
                 >
                 <input
                   type="password"
                   class="form-control input-style"
-                  id="user-senha"
+                  id="user-password"
                 />
+                <span class="error"></span>
               </div>
 
+              <span id="user-notification"></span>
               <div>
-                <button type="submit" class="btn btn-lg botao">
+                <button type="button" class="btn btn-lg botao mt-4" id="login-button">
                   <strong>ENVIAR</strong>
                 </button>
               </div>

@@ -5,7 +5,7 @@ body{
 
 /* LOGIN SQUARE */
 #login-square h1{
-    margin: 30px 0;
+    margin: 15px 0;
 }
 
 #login-square{
@@ -26,7 +26,7 @@ body{
 }
 
 .input-style{
-    padding: 23px;
+    padding: 20px;
 }
 
 .botao{
@@ -34,7 +34,6 @@ body{
     color: white;
     font-size: 13px; 
     padding: 15px 60px 15px 60px; 
-    margin-top: 30px;
 }
 
 .botao:hover{

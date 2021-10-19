@@ -2,7 +2,7 @@ from datetime import datetime
 from bcrypt import hashpw, gensalt
 from application import app
 from flask import render_template, request, jsonify
-from application.models.models import Enfermeiro, Paciente, Vacina, Vacinacao, db
+from application.models.models import Enfermeiro, Paciente, db
 
 @app.route("/user-register", methods=["POST", "GET"])
 def user_register():

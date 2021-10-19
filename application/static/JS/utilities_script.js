@@ -1,12 +1,12 @@
 function validateCPF(){
-    let userCPF = $("input[name='user-cpf']").val();
+    let userCPF = $("input[name='user-cpf']");
     const base = /^[0-9]{3}\.[0-9]{3}\.[0-9]{3}\-[0-9]{2}$/i;
-    const errorMSG = $(".error")[0];
+    const errorMSG = userCPF.next();
 
-    let formatTest = new RegExp(base).test(userCPF);
+    let formatTest = new RegExp(base).test(userCPF.val());
 
     if(formatTest){
-        userCPF = userCPF.replace(/[^0-9]/ig, "");
+        userCPF = userCPF.val().replace(/[^0-9]/ig, "");
 
         let validateDigits = function(){
             let counter = 11;
@@ -44,13 +44,13 @@ function validateCPF(){
         }
         
         if(validateDigits() && userCPF.split(userCPF[0]).length !== 12){
-            errorMSG.innerText = "";
+            errorMSG.text("");
             return true;
         }
 
     }
 
-    errorMSG.innerText = "CPF Inválido, siga o formato xxx.xxx.xxx-xx";
+    errorMSG.text("CPF Inválido, siga o formato xxx.xxx.xxx-xx");
     return false;
     
 }
@@ -58,35 +58,34 @@ function validateCPF(){
 function validatePassword(){
     let userPassword = $("#user-password");
     let passwordConfirm = $("#user-confirmp");
-    const errorMSG = $(".error");
+    let errorMSGPass = userPassword.next();
+    let errorMSGConfirm = passwordConfirm.next();
 
     if(userPassword.val().length >= 12){
         if(userPassword.val() !== passwordConfirm.val()){
-            errorMSG[4].innerText = "As senhas não são iguais!";
+            errorMSGConfirm.text("As senhas não são iguais!");
             return false;
         }else{
-            errorMSG[3].innerText = "";
-            errorMSG[4].innerText = "";
+            errorMSGPass.text("");
+            errorMSGConfirm.text("");
             return true;
-        }
-             
+        }        
     }
 
-    errorMSG[3].innerText = "Pelo menos 12 caracteres de senha!";
+    errorMSGPass.text("Pelo menos 12 caracteres de senha!");
     return false;
-
 
 }
 
 function validateCoren(){
-    let userCoren = $("input[name='user-coren']")
+    let userCoren = $("input[name='user-coren']");
 
     if(userCoren.prop("disabled")){
         return "NORMAL USER";
     }
 
     const base = /^coren-[a-z]{2}\s[0-9]{3}-(enf$|te$|obst$|par$)/i;
-    const errorMSG = $(".error")[1];
+    const errorMSG =  userCoren.next();
 
     let formatTest = new RegExp(base).test(userCoren.val());
 
@@ -104,31 +103,31 @@ function validateCoren(){
 
     if(formatTest){
         if(brasilStates.indexOf(userCoren.val().slice(6,8).toUpperCase()) !== -1){
-            errorMSG.innerText =  "";
+            errorMSG.text("");
             return true;
         }else{
-            errorMSG.innerText =  "UF não reconhecido!";
+            errorMSG.text("UF não encontrado!");
             return false;
         }
     }  
 
-    errorMSG.innerText = "COREN Inválido, siga o formato coren-uf xxx-categoria";
+    errorMSG.text("COREN Inválido, siga o formato coren-uf xxx-categoria");
     return false;
 }
 
 function validateTel(){
-    let userTel = $("#user-tel").val().replace(" ","")
+    let userTel = $("#user-tel");
     const base = /([0-9][0-9])9+([0-9]{4})-([0-9]{4})/i;
-    const errorMSG = $(".error")[2];
+    const errorMSG = userTel.next();
 
-    let formatTest = new RegExp(base).test(userTel);
+    let formatTest = new RegExp(base).test(userTel.val().replace(" ",""));
 
     if(formatTest){
-        errorMSG.innerText = "";
+        errorMSG.text("");
         return true;
     }
 
-    errorMSG.innerText = "Formato de telefone inválido, siga o formato ddd 9xxxx-xxxx";
+    errorMSG.text("Formato de telefone inválido, siga o formato ddd 9xxxx-xxxx");
     return false;
 }
 

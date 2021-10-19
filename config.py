@@ -5,3 +5,5 @@ path = path.abspath(path.dirname(__file__))
 
 SQLALCHEMY_DATABASE_URI = f'sqlite:////{path}/application/database/database.db'
 SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+SECRET_KEY = "ZsllARzUCKF9oB%^7$E%yVFBw"
