@@ -19,7 +19,7 @@
     border-radius: 5px;
 }
 
-.user-estilo{
+.user-style{
     color: #028090; 
     padding: 7%; 
     display: flex;
@@ -49,10 +49,6 @@ h4{
 }
 
 @media (min-width: 763px) {
-    #user-space{
-        margin: 0 100px 0 0;
-    }
-
     form{
         width: 90%;
         margin-top: 0;

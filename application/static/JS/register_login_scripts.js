@@ -1,19 +1,28 @@
+// Os scripts de Registro e Login são relacionados aos processos de login
+// e registro no sistema, bem como invocação de validação de dados
+
+// Chamada dos métodos validadores
 import {validateCoren, validateCPF, validatePassword, validateTel} from "./utilities_script.js";
     
 $("#register-button").click(function(){
-    getUserValidatedData();
+    getNewUserValidatedData();
 })
 
-function getUserValidatedData(){
+/*  Função para obter os dados do formulário totalmente validados
+    Somente gera um array de dados de usuário após todos os 4 dados
+    mais sensíveis(cpf, coren, tel e password) estiverem validados */
+function getNewUserValidatedData(){
     let userCPF = validateCPF();
     let userCoren = validateCoren();
     let userTel = validateTel();
     let userPassword = validatePassword();
+    // Obtém os outros dados
     let otherUserData= $(".form-control");
 
     let completeUserData = [];
 
-
+    // Verifica qual tipo de usuário será cadastrado,
+    // identificando o logo no começo do array
     if(userCoren === "NORMAL USER"){
         completeUserData.push("NORMAL USER");
         userCoren = true;
@@ -21,21 +30,32 @@ function getUserValidatedData(){
         completeUserData.push("SUPER USER");
     }
 
+    // Verifica se todos os 4 dados sensíveis são validos,
+    // se sim gera um array contendo todos os dados fornecidos
     if(userCPF && userCoren && userTel && userPassword){
         for(let i = 0; i < 8; i++){
             if(otherUserData[i].value === ""){
-                $("#user-notification").text("Alguns formulários estão vazios!");
-                return;
+
+                // Verifica se há algum campo vazio, se sim, interrompe na primeira
+                // ocorrência e alerta o usuário
+                if(!otherUserData.eq(i).prop("disabled")){
+                    $("#user-notification").text("Alguns formulários estão vazios!");
+                    return;
+                }
+                
             }
 
             completeUserData.push(otherUserData[i].value);
         }
 
+        // Após o laço, o array é mandado para uma função
+        // de registro através de conexão com o back-end
         registerNewUser(completeUserData);
     }
 
 }
 
+/*  Função para formatar o array em um objeto JS e enviar para o back-end */
 function registerNewUser(completeData){
     const formattedUserData = {
         type: completeData[0],
@@ -60,6 +80,9 @@ function registerNewUser(completeData){
         success: function(response){
             userNotification.empty();
             switch(response['result']){
+                /*  Verifica a resposta do servidor e notifica ao usuário
+                se houve sucesso no cadastro, ou se aquele CPF/COREN 
+                já estava registrado no banco */
                 case "CPF/COREN IN USE":
                     userNotification.text("CPF/Coren já cadastrado!");
                     userNotification.addClass("text-danger");
@@ -83,28 +106,34 @@ $("#login-button").click(function(){
     getLoginData();
 })
 
+/*  Função para verificar corretude do CPF/COREN
+    do formulário de LOGIN, gerando um pequeno objeto js
+    que é interpretado pelo back-end */
 function getLoginData(){
     let identifierInput = $("#user-identifier");
     let passwordInput = $("#user-password").val();
     let userType = "SUPER USER";
-    let test = validateCoren();
-    let loginData = {}
+    let testIdentifier = validateCoren();
 
+    // Verifica qual login o usuário escolheu para fazer,
+    // definindo qual validador será usado(CPF/COREN)
     if (identifierInput.attr("name") === "user-coren"){
-        if(test){
+        if(testIdentifier){
             identifierInput = identifierInput.val();
         }
 
     }else{
-        test = validateCPF();
-        if(test){
+        testIdentifier = validateCPF();
+        if(testIdentifier){
             identifierInput = identifierInput.val();
             userType = "NORMAL USER";
         }
     }
 
-    if(test){
-        loginData = {
+    // Verifica se o CPF/COREN passou no validador, para só
+    // então enviar para a função de login através de conexão com o back-end
+    if(testIdentifier){
+        let loginData = {
             type: userType,
             identifier: identifierInput,
             password: passwordInput
@@ -114,6 +143,9 @@ function getLoginData(){
     }
 }
 
+/*  Função para realizar login por meio de conexão com back-end 
+    envia o pequeno objeto json contendo dados do login e qual 
+    o tipo de usuário, a fim de facilitar busca no banco */
 function loggeUser(loginData){
     const userNotification = $("#user-notification");
     $.ajax({
@@ -124,6 +156,9 @@ function loggeUser(loginData){
         contentType: "application/json",
         success: function(response){
             switch(response["result"]){
+                /* Verifica se as informaçóes condizem com registro do banco,
+                se sim cria uma sessão local, guardando o tipo de usuário e
+                seu identificador na base de dados, além de notificar o usuário */
                 case "SUCCESS LOGIN":
                     localStorage.setItem("userType", loginData["type"]);
                     localStorage.setItem("userId", response["user-id"]);
@@ -134,7 +169,7 @@ function loggeUser(loginData){
 
                     setTimeout(function(){
                         window.location.href = "/";
-                    },8000);
+                    },4000);
                     break;
 
                 case "INCORRECT LOGIN":

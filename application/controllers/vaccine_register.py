@@ -4,4 +4,4 @@ from flask import render_template
 
 @app.route("/vaccine-register")
 def vaccine_register():
-    return render_template("cadastro_vacinas.html")
+    return render_template("vaccine_register.html")

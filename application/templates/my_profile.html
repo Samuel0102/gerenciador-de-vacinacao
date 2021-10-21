@@ -1,10 +1,10 @@
-{% extends "base.html" %}
-{% block title %} Meu Perfil {% endblock title %} 
+{% extends "base.html" %} {% block title %} Meu Perfil {% endblock title %} 
 {% block extracss %}
-<link rel="stylesheet" href="../static/ CSS/meu_perfil.css" />
+<link rel="stylesheet" href="../static/ CSS/my_profile.css" />
 {% endblock extracss %}
-
-
+{% block extrajs %} 
+<script src="../static/JS/account_scripts.js"></script>
+{% endblock extrajs %}
 {% block content %}
 <div class="container-fluid">
   <section class="row text-center">
@@ -12,13 +12,13 @@
   </section>
 
   <section class="row mb-5 align-items-center">
-    <div class="col-12 col-md-6 d-flex justify-content-end">
+    <div class="col-12 col-md-5 d-flex justify-content-end w-100">
       <div id="user-space" class="text-center">
-        <i class="fas fa-user fa-3x user-estilo"></i>
+        <i class="fas fa-user fa-3x user-style"></i>
 
         <div id="user-about">
-          <h4 class="d-block">Maria da Silva</h4>
-          <h4>17 Anos</h4>
+          <h4 class="d-block" id="username"></h4>
+          <h4 id="user-age"></h4>
         </div>
 
         <div id="user-actions">
@@ -33,29 +33,27 @@
       </div>
     </div>
 
-    <div class="col-12 col-md-6">
+    <div class="col-12 col-md-6 d-flex justify-content-center w-100">
       <form>
         <div class="form-row justify-content-around">
           <div class="form-group col-md-6">
-            <label for="user-name">Nome</label>
+            <label for="name">Nome</label>
             <input
               type="text"
-              name="user-name"
+              name="name"
               id="user-name"
               class="form-control"
-              value="Maria da Silva"
               readonly
             />
           </div>
 
           <div class="form-group col-md-6">
-            <label for="user-born">Data de Nascimento</label>
+            <label for="born">Data de Nascimento</label>
             <input
               type="date"
-              name="user-born"
+              name="born"
               id="user-born"
               class="form-control"
-              value="12/01/2004"
               readonly
             />
           </div>
@@ -63,24 +61,22 @@
 
         <div class="form-row justify-content-around">
           <div class="form-group col-md-6">
-            <label for="user-cpf">CPF</label>
+            <label for="CPF">CPF</label>
             <input
               type="text"
-              name="user-cpf"
+              name="CPF"
               id="user-cpf"
               class="form-control"
-              placeholder="123.233.445-65"
               readonly
             />
           </div>
           <div class="form-group col-md-6">
-            <label for="user-coren">COREN</label>
+            <label for="coren">COREN</label>
             <input
               type="text"
-              name="user-coren"
+              name="coren"
               id="user-coren"
               class="form-control"
-              placeholder="COREN-SC 176-TEC"
               readonly
             />
           </div>
@@ -88,20 +84,19 @@
 
         <div class="form-row justify-content-around">
           <div class="form-group col-md-6">
-            <label for="user-tel">Telefone</label>
+            <label for="tel">Telefone</label>
             <input
               type="tel"
-              name="user-tel"
+              name="tel"
               id="user-tel"
               class="form-control"
-              placeholder="(47)93456-3456"
               readonly
             />
           </div>
           <div class="form-group col-md-6">
-            <label for="input-sex">Sexo</label>
-            <select id="input-sex" class="form-control" readonly>
-              <option selected>Masculino</option>
+            <label for="sex">Sexo</label>
+            <select id="input-sex" name="sex" class="form-control" disabled>
+              <option>Masculino</option>
               <option>Feminino</option>
               <option>Outro</option>
             </select>
@@ -110,34 +105,15 @@
 
         <div class="form-row justify-content-center">
           <div class="form-group col-md-12">
-            <label for="user-email">Email</label>
+            <label for="email">Email</label>
             <input
               type="email"
-              name="user-email"
+              name="email"
               id="user-email"
               class="form-control"
-              placeholder="mariasilva@gmail.com"
               readonly
             />
           </div>
-        </div>
-
-        <div class="form-row justify-content-around">
-          <div class="form-group col-md-12">
-            <label for="user-password">Senha</label>
-            <input
-              type="password"
-              name="user-password"
-              id="user-password"
-              class="form-control"
-              value="maria123"
-              readonly
-            />
-            <small id="passwordHelpInline" class="text-muted">
-              Deve ter entre 8 e 20 caracteres.
-            </small>
-          </div>
-
         </div>
       </form>
     </div>

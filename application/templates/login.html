@@ -1,11 +1,8 @@
-{% extends "base.html" %}
-{% block title %} Login {% endblock title %}
-{% block extracss %}
+{% extends "base.html" %} {% block title %} Login {% endblock title %} {% block
+extracss %}
 <link rel="stylesheet" href="../static/ CSS/login.css" />
-<script type="module" src="../static/JS/user_scripts.js"></script>
-{% endblock extracss %}
-
-{% block content %}
+<script type="module" src="../static/JS/register_login_scripts.js"></script>
+{% endblock extracss %} {% block content %}
 <div class="container-fluid color">
   <div class="row mt-5">
     <div class="col-12 d-flex justify-content-center align-items-center">
@@ -15,12 +12,24 @@
         <div class="row">
           <div class="col-6 d-flex justify-content-center">
             <i class="fas fa-circle fa-5x" style="color: #dafff7"></i>
-            <i class="fas fa-user-md fa-3x position-absolute user-icon" onclick="changeLoginForm('nurse')"></i>
+            <i
+              class="fas fa-user-md fa-3x position-absolute user-icon"
+              onclick="changeLoginForm('nurse')"
+              data-toggle="tooltip"
+              data-placement="top"
+              title="Login como Enfermeiro"
+            ></i>
           </div>
 
           <div class="col-6 d-flex justify-content-center">
             <i class="fas fa-circle fa-5x" style="color: #dafff7"></i>
-            <i class="fas fa-user fa-3x position-absolute user-icon" onclick="changeLoginForm('pacient')"></i>
+            <i
+              class="fas fa-user fa-3x position-absolute user-icon"
+              onclick="changeLoginForm('pacient')"
+              data-toggle="tooltip"
+              data-placement="top"
+              title="Login como Paciente"
+            ></i>
           </div>
         </div>
 
@@ -28,17 +37,19 @@
           <div class="col">
             <form>
               <div>
-                <label for="user-coren" class="form-label "
-                  >COREN</label
-                >
-                <input type="text" class="form-control input-style" id="user-identifier" name="user-coren" />
+                <label for="user-coren" class="form-label">COREN</label>
+                <input
+                  type="text"
+                  class="form-control input-style"
+                  id="user-identifier"
+                  name="user-coren"
+                  placeholder="coren-UF xxx-categoria"
+                />
                 <span class="error"></span>
               </div>
 
               <div>
-                <label for="user-password" class="form-label"
-                  >Senha</label
-                >
+                <label for="user-password" class="form-label">Senha</label>
                 <input
                   type="password"
                   class="form-control input-style"
@@ -49,7 +60,11 @@
 
               <span id="user-notification"></span>
               <div>
-                <button type="button" class="btn btn-lg botao mt-4" id="login-button">
+                <button
+                  type="button"
+                  class="btn btn-lg button mt-4"
+                  id="login-button"
+                >
                   <strong>ENVIAR</strong>
                 </button>
               </div>

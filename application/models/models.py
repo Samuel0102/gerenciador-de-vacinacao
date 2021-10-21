@@ -4,148 +4,150 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy(app)
 
-class Vacina(db.Model):
-    #usado nas classes para definir nome nas tabelas do banco
-    __tablename__ = "vacinas"
+class Vaccine(db.Model):
+    #usado nas classes para definir name nas tabelas do banco
+    __tablename__ = "vaccines"
 
     id = db.Column(db.Integer, primary_key=True)
-    nome = db.Column(db.Text)
-    data_fabricacao = db.Column(db.DateTime)
-    fabricante = db.Column(db.Text)
+    name = db.Column(db.Text)
+    fabrication_date = db.Column(db.DateTime)
+    owner = db.Column(db.Text)
 
     def __repr__(self):
-        return f"<Vacina {self.nome}>"
+        return f"<Vaccine {self.name}>"
 
     #usado para não necessitar especificação do atributo na instanciação
-    def __init__(self, nome:str, data_fabricacao:date, fabricante:str):
-        self.nome = nome
-        self.data_fabricacao = data_fabricacao
-        self.fabricante = fabricante
+    def __init__(self, name:str, fabrication_date:date, owner:str):
+        self.name = name
+        self.fabrication_date = fabrication_date
+        self.owner = owner
 
     def json(self):
         return {
             "id": self.id,
-            "nome": self.nome,
-            "data_fabricacao": self.data_fabricacao,
-            "fabricante": self.fabricante
+            "name": self.name,
+            "fabrication_date": self.fabrication_date,
+            "owner": self.owner
         }
 
-class Paciente(db.Model):
-    __tablename__ = "pacientes"
+class Pacient(db.Model):
+    __tablename__ = "pacients"
 
     id = db.Column(db.Integer, primary_key=True)
-    nome = db.Column(db.Text)
-    data_nascimento = db.Column(db.DateTime)
+    name = db.Column(db.Text)
+    born = db.Column(db.DateTime)
     CPF = db.Column(db.Text, nullable=False, unique=True)
-    telefone = db.Column(db.Text)
+    tel = db.Column(db.Text)
     email = db.Column(db.Text)
-    sexo = db.Column(db.Text)
-    senha = db.Column(db.Text)
+    sex = db.Column(db.Text)
+    password = db.Column(db.Text)
     
     def __repr__(self):
-        return f"<Paciente {self.nome}"
+        return f"<Pacient {self.name}"
 
-    def __init__(self, nome:str, data_nascimento:date,
-                CPF:str, telefone:str, email:str, sexo:str, senha:str):
-        self.nome = nome
-        self.data_nascimento = data_nascimento
+    def __init__(self, name:str, born:date,
+                CPF:str, tel:str, email:str, sex:str, password:str):
+        self.name = name
+        self.born = born
         self.CPF = CPF
-        self.telefone = telefone
+        self.tel = tel
         self.email = email
-        self.sexo = sexo
-        self.senha = senha
+        self.sex = sex
+        self.password = password
 
     def json(self):
         return {
             "id": self.id,
-            "nome": self.nome,
-            "data_nascimento": self.data_nascimento,
+            "name": self.name,
+            "born": self.born,
             "CPF": self.CPF,
-            "telefone": self.telefone,
+            "tel": self.tel,
             "email": self.email,
-            "sexo": self.sexo,
-            "senha": self. senha
+            "sex": self.sex,
+            "password": self. password
         }
 
-class Enfermeiro(db.Model):
-    __tablename__ = "enfermeiros"
+class Nurse(db.Model):
+    __tablename__ = "nurses"
 
     id = db.Column(db.Integer, primary_key=True)
-    nome = db.Column(db.Text)
-    data_nascimento = db.Column(db.DateTime)
+    name = db.Column(db.Text)
+    born = db.Column(db.DateTime)
     CPF = db.Column(db.Text, nullable=False, unique=True)
     coren = db.Column(db.Text, nullable=False, unique=True)
-    telefone = db.Column(db.Text)
+    tel = db.Column(db.Text)
     email = db.Column(db.Text)
-    sexo = db.Column(db.Text)
-    senha = db.Column(db.Text)
+    sex = db.Column(db.Text)
+    password = db.Column(db.Text)
     
 
     def __repr__(self):
-        return f"<Enfermeiro {self.nome}"
+        return f"<Nurse {self.name}"
 
-    def __init__(self, nome:str, data_nascimento:date,
-                CPF:str, coren:str, telefone:str, email:str, sexo:str, senha:str):
-        self.nome = nome
-        self.data_nascimento = data_nascimento
+    def __init__(self, name:str, born:date,
+                CPF:str, coren:str, tel:str, email:str, sex:str, password:str):
+        self.name = name
+        self.born = born
         self.CPF = CPF
         self.coren = coren
-        self.telefone = telefone
+        self.tel = tel
         self.email = email
-        self.sexo = sexo
-        self.senha = senha
+        self.sex = sex
+        self.password = password
 
     def json(self):
         return {
             "id": self.id,
-            "nome": self.nome,
-            "data_nascimento": self.data_nascimento,
+            "name": self.name,
+            "born": self.born,
             "CPF": self.CPF,
             "coren": self.coren,
-            "telefone": self.telefone,
+            "tel": self.tel,
             "email": self.email,
-            "sexo": self.sexo,
-            "senha": self. senha
+            "sex": self.sex,
+            "password": self.password
         }
 
-
-class Vacinacao(db.Model):
-    __tablename__ = "vacinacoes"
+class Vaccination(db.Model):
+    __tablename__ = "vaccinations"
 
     id = db.Column(db.Integer, primary_key=True)
-    data = db.Column(db.DateTime)
-    data_proxima_dose = db.Column(db.DateTime)
+    date = db.Column(db.DateTime)
+    next_dose_date = db.Column(db.DateTime)
     dose = db.Column(db.Integer)
-    id_vacina = db.Column(db.Integer, db.ForeignKey(Vacina.id), nullable=False)
-    vacina = db.relationship("Vacina")
-    id_paciente = db.Column(db.Integer, db.ForeignKey(Paciente.id), nullable=False)
-    paciente = db.relationship("Paciente")
-    id_enfermeiro = db.Column(db.Integer, db.ForeignKey(Enfermeiro.id), nullable=False)
-    enfermeiro = db.relationship("Enfermeiro")
+    id_vaccine = db.Column(db.Integer, db.ForeignKey(Vaccine.id), nullable=False)
+    vaccine = db.relationship("Vaccine")
+    id_pacient = db.Column(db.Integer, db.ForeignKey(Pacient.id), nullable=False)
+    pacient = db.relationship("Pacient")
+    id_nurse = db.Column(db.Integer, db.ForeignKey(Nurse.id), nullable=False)
+    nurse = db.relationship("Nurse")
 
     def __repr__(self):
-        return "<Vacinacao de {self.paciente.nome}>"
+        return "<Vaccination of {self.pacient.name}>"
 
-    def __init__(self, data:date, data_proxima_dose:date,
-                 dose:int, vacina:Vacina, paciente:Paciente, enfermeiro: Enfermeiro):
-        self.data = data
-        self.data_proxima_dose = data_proxima_dose
+    def __init__(self, date:date, next_dose_date:date,
+                 dose:int, vaccine:Vaccine, pacient:Pacient, nurse: Nurse):
+        self.date = date
+        self.next_dose_date = next_dose_date
         self.dose = dose
-        self.vacina = vacina
-        self.paciente = paciente
-        self.enfermeiro = enfermeiro
+        self.vaccine = vaccine
+        self.pacient = pacient
+        self.nurse = nurse
 
     def json(self):
         return {
             "id": self.id,
-            "data": self.data,
-            "data_proxima_dose": self.data_proxima_dose,
+            "date": self.date,
+            "next_dose_date": self.next_dose_date,
             "dose": self.dose,
-            "id_vacina": self.id_vacina,
-            "vacina": self.vacina.json(),
-            "id_paciente": self.id_paciente,
-            "paciente": self.paciente.json(),
-            "id_enfermeiro": self.id_enfermeiro,
-            "enfermeiro": self.enfermeiro.json()
+            "id_vacina": self.id_vaccine,
+            "vaccine": self.vaccine.json(),
+            "id_paciente": self.id_pacient,
+            "pacient": self.pacient.json(),
+            "id_enfermeiro": self.id_nurse,
+            "nurse": self.nurse.json()
         }
 
+@app.cli.command('init-db')
+def init_db():
+  db.create_all()

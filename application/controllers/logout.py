@@ -4,6 +4,7 @@ from flask import session, redirect
 
 @app.route("/logout")
 def logout():
+    # apaga a sessão do back-end, igualmente ocorre no front-end
     session.clear()
 
     return redirect("/")
