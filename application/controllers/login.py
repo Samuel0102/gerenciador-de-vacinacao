@@ -26,8 +26,8 @@ def login():
             # verifica se as senhas são iguais, se sim, cria uma sessão no back-end,
             # que age junto com a do front-end
             if(hash_test):
-                session["user-type"] = user_data["type"]
-                session["user-id"] = user.id
+                session["user_type"] = user_data["type"]
+                session["user_id"] = user.id
                 
                 return jsonify({"result":"SUCCESS LOGIN", "user-id":user.id})
             else:

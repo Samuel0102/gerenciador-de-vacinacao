@@ -25,12 +25,12 @@ def user_register():
         # do JSON obtido, após instancia ou Nurse ou Pacient
         if(user_data["type"] == "SUPER USER"):
             new_user =  Nurse(user_data["name"], date,
-                                    user_data["cpf"], user_data["coren"], user_data["tel"],
-                                    user_data["email"], user_data["genre"], hashed_password)
+                                    user_data["CPF"], user_data["coren"], user_data["tel"],
+                                    user_data["email"], user_data["sex"], hashed_password)
         else:
             new_user =    Pacient(user_data["name"], date,
-                                    user_data["cpf"],user_data["tel"], user_data["email"],
-                                    user_data["genre"], hashed_password)
+                                    user_data["CPF"],user_data["tel"], user_data["email"],
+                                    user_data["sex"], hashed_password)
 
         # se o CPF/COREN fornecido não estiver registrado no banco,
         # realiza o cadastro, caso esteja barra o cadastro

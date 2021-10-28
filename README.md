@@ -21,8 +21,8 @@ O SUV surgiu como um projeto de construção de um ambiente em tese governamenta
 | Funcionalidade | Situação |
 | ----------- | ----------- |
 | Cadastro de usuários pacientes e enfermeiros | :heavy_check_mark: |
-| Possibilidade de exclusão dos cadastros de usuários| :clock130: |
-| Possibilidade de alteração dos dados de cadastro dos usuários| :clock130: |
+| Possibilidade de exclusão dos cadastros de usuários| :heavy_check_mark: |
+| Possibilidade de alteração dos dados de cadastro dos usuários| :heavy_check_mark: |
 | Envio de pdf com vacinações ao usuário comum ao excluir a conta| :clock130: |
 | Cadastro de vacinas | :clock130: |
 | Cadastro de vacinação de usuários paciente | :clock130: |

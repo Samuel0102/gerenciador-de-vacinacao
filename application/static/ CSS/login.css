@@ -2,7 +2,6 @@ body{
     background-color: #dafff7;;
 }
 
-
 /* LOGIN SQUARE */
 #login-square h1{
     margin: 15px 0;
@@ -27,20 +26,6 @@ body{
 
 .input-style{
     padding: 20px;
-}
-
-.button{
-    background-color: #00a896; 
-    color: white;
-    font-size: 13px; 
-    padding: 15px 60px 15px 60px; 
-}
-
-.button:hover{
-    background-color: #f0fffc;
-    color: #00A896;
-    border: 1px solid #00A896;
-    transition: 0.5s;
 }
 /* LOGIN SQUARE */
 

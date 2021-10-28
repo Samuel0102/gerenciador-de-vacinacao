@@ -13,12 +13,11 @@ def user_data(user_type, user_id):
         if(user_type == "SUPER USER"):
             user = Nurse.query.get(user_id)
             user_data = user.json()
-            user_data["type"] = "SUPER USER"
         else:
             user = Pacient.query.get(user_id)
-            user_data = user.json()
-            user_data["type"] = "NORMAL USER"
 
+        user_data = user.json()
+        
         # troca o separador "-" por "." a fim do 
         # formatador automático do JS não formatar de
         # forma errada a data

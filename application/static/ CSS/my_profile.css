@@ -7,17 +7,6 @@
     background-color: #d6fff6;
     border-radius: 4%;
 }
- 
-.user-button{
-    width: 160px;
-    background-color: #00a896;
-    color: white; 
-    font-size: 11px; 
-    padding: 10px 25px 10px 25px; 
-    margin-top: 10px;
-    border:#00a896;
-    border-radius: 5px;
-}
 
 .user-style{
     color: #028090; 
@@ -28,9 +17,17 @@
 }
 
 h4{
-    font-size: 20px; 
+    font-size: 15px; 
     color: #5b6561; 
     font-weight: 400;
+}
+
+#alter-data, #del-data{
+    font-size: 11px;
+}
+
+#update-button{
+    font-size: 16px;
 }
 /* USER SPACE */
 

@@ -5,7 +5,7 @@ extracss %}
 {% endblock extracss %} {% block content %}
 <div class="container-fluid color">
   <div class="row mt-5">
-    <div class="col-12 d-flex justify-content-center align-items-center">
+    <div class="col-12 d-flex justify-content-center align-items-center mb-5">
       <div id="login-square">
         <h1 class="text-center">Login</h1>
 
@@ -33,16 +33,16 @@ extracss %}
           </div>
         </div>
 
-        <div class="row text-center">
+        <div class="row text-center mt-4">
           <div class="col">
             <form>
               <div>
-                <label for="user-coren" class="form-label">COREN</label>
+                <label for="coren" class="form-label">COREN</label>
                 <input
                   type="text"
                   class="form-control input-style"
                   id="user-identifier"
-                  name="user-coren"
+                  name="coren"
                   placeholder="coren-UF xxx-categoria"
                 />
                 <span class="error"></span>
@@ -59,13 +59,13 @@ extracss %}
               </div>
 
               <span id="user-notification"></span>
-              <div>
+              <div class="button">
                 <button
                   type="button"
-                  class="btn btn-lg button mt-4"
+                  class="btn w-50 py-2 mt-4"
                   id="login-button"
                 >
-                  <strong>ENVIAR</strong>
+                  <strong>LOGAR</strong>
                 </button>
               </div>
             </form>

@@ -52,8 +52,12 @@ h1 {
 /* BUTTONS */
 
 /* FORMS*/
-input.form-control {
-  border-radius: 20px;
+input.form-control{
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid #088392;
+  border-radius: 0;
 }
 
 form {
@@ -94,6 +98,7 @@ form {
   top: 75px;
   right: 30px;
   background-color: #d6fff6;
+  border-radius: 2px;
   width: 200px;
   height: 100px;
   z-index: 3;
@@ -114,7 +119,7 @@ form {
   border-left: 10px solid transparent;
   border-right: 10px solid #d6fff6;
   border-top: 10px solid transparent;
-  border-bottom: 10px solid #d6fff6;
+  border-bottom: 10px solid#d6fff6;
   right: 0.5px;
   top: -15px;
 }
@@ -122,6 +127,7 @@ form {
 #dropdown-user a{
   font-size: 17px;
   padding: 10px 0;
+  color: #088392;
 }
 
 /* MEDIAS */

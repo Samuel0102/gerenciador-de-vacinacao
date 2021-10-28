@@ -1,11 +1,9 @@
-{% extends "base.html" %} {% block title %} Meu Perfil {% endblock title %} 
-{% block extracss %}
+{% extends "base.html" %} {% block title %} Meu Perfil {% endblock title %} {%
+block extracss %}
 <link rel="stylesheet" href="../static/ CSS/my_profile.css" />
-{% endblock extracss %}
-{% block extrajs %} 
-<script src="../static/JS/account_scripts.js"></script>
-{% endblock extrajs %}
-{% block content %}
+{% endblock extracss %} {% block extrajs %}
+<script type="module" src="../static/JS/account_scripts.js"></script>
+{% endblock extrajs %} {% block content %}
 <div class="container-fluid">
   <section class="row text-center">
     <h1 class="col-12 my-5">Meu Perfil</h1>
@@ -21,18 +19,94 @@
           <h4 id="user-age"></h4>
         </div>
 
-        <div id="user-actions">
-          <button type="button" name="alter-data" class="user-button">
-            ALTERAR DADOS
-          </button>
-          <br />
-          <button type="button" name="del-data" class="user-button mt-2">
-            EXCLUIR CONTA
-          </button>
+        <div id="user-actions" class="mt-3">
+          <div class="button m-0">
+            <button
+              type="button"
+              class="btn w-50 py-2"
+              id="alter-data"
+              data-toggle="modal"
+              data-target="#modal-account"
+            >
+              ALTERAR DADOS
+            </button>
+          </div>
+          <div class="button m-0">
+            <button
+              type="button"
+              class="btn w-50 py-2 mt-2"
+              id="del-data"
+              data-toggle="modal"
+              data-target="#modal-account"
+            >
+              EXCLUIR CONTA
+            </button>
+          </div>
         </div>
       </div>
     </div>
 
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="modal-account"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modal-title"></h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <h5>Atenção!</h5>
+            <p>
+              Este é um procedimento de alto risco e necessita da confirmação da
+              sua senha. Digite-a e após clicar em "Confirmar & Continuar" a
+              ação de Exclusão/Alteração será
+              <strong class="text-danger"> PERMANENTE</strong> e
+              <strong class="text-danger"> IRREVERSÍVEL</strong>, faça por sua
+              conta e risco!
+            </p>
+            <label for="modal-confirmp">Senha:</label>
+            <input
+              type="password"
+              id="modal-confirmp"
+              name="modal-confirmp"
+              class="d-block"
+            />
+            <small id="message"></small>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Cancelar
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              id="confirm-button"
+            >
+              Confirmar & Continuar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--  -->
     <div class="col-12 col-md-6 d-flex justify-content-center w-100">
       <form>
         <div class="form-row justify-content-around">
@@ -41,10 +115,11 @@
             <input
               type="text"
               name="name"
-              id="user-name"
-              class="form-control"
-              readonly
+              id="name"
+              class="border form-control"
+              disabled
             />
+            <span class="error"></span>
           </div>
 
           <div class="form-group col-md-6">
@@ -53,9 +128,10 @@
               type="date"
               name="born"
               id="user-born"
-              class="form-control"
-              readonly
+              class="border form-control"
+              disabled
             />
+            <span class="error"></span>
           </div>
         </div>
 
@@ -65,9 +141,9 @@
             <input
               type="text"
               name="CPF"
-              id="user-cpf"
-              class="form-control"
-              readonly
+              id="CPF"
+              class="border form-control"
+              disabled
             />
           </div>
           <div class="form-group col-md-6">
@@ -75,9 +151,9 @@
             <input
               type="text"
               name="coren"
-              id="user-coren"
-              class="form-control"
-              readonly
+              id="coren" 
+              class="border form-control"
+              disabled
             />
           </div>
         </div>
@@ -88,18 +164,20 @@
             <input
               type="tel"
               name="tel"
-              id="user-tel"
-              class="form-control"
-              readonly
+              id="tel"
+              class="border form-control"
+              disabled
             />
+            <span class="error"></span>
           </div>
           <div class="form-group col-md-6">
             <label for="sex">Sexo</label>
-            <select id="input-sex" name="sex" class="form-control" disabled>
-              <option>Masculino</option>
-              <option>Feminino</option>
-              <option>Outro</option>
+            <select id="input-sex" name="sex" class="border form-control" disabled>
+              <option>MASCULINO</option>
+              <option>FEMININO</option>
+              <option>OUTRO</option>
             </select>
+            <span class="error"></span>
           </div>
         </div>
 
@@ -110,10 +188,15 @@
               type="email"
               name="email"
               id="user-email"
-              class="form-control"
-              readonly
+              class="border form-control"
+              disabled
             />
+            <span class="error"></span>
           </div>
+        </div>
+
+        <div class="button text-center mt-5" id="update-button" style="display:none;">
+          <button type="button" class="btn w-50 py-2">Atualizar Dados</button>
         </div>
       </form>
     </div>

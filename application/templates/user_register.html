@@ -40,31 +40,34 @@ title %} {% block extracss %}
               <label for="user-name">Nome</label>
               <input
                 type="text"
-                name="user-name"
-                id="user-name"
+                name="name"
+                id="name"
                 class="form-control"
                 placeholder=""
                 required
               />
+              <span class="error"></span>
             </div>
             <div class="form-group col-md-5">
               <label for="user-born">Data de Nascimento</label>
               <input
                 type="date"
-                name="user-born"
-                id="user-born"
+                name="born"
+                id="born"
                 class="form-control"
                 required
               />
+              <span class="error"></span>
             </div>
           </div>
 
           <div class="form-row justify-content-around">
             <div class="form-group col-md-5" id="user-cpf">
-              <label for="user-cpf">CPF</label>
+              <label for="CPF">CPF</label>
               <input
                 type="text"
-                name="user-cpf"
+                name="CPF"
+                id="CPF"
                 class="form-control"
                 placeholder="XXX.XXX.XXX-XX"
                 required
@@ -72,10 +75,11 @@ title %} {% block extracss %}
               <span class="error"></span>
             </div>
             <div class="form-group col-md-5" id="user-coren">
-              <label for="user-coren">COREN</label>
+              <label for="coren">COREN</label>
               <input
                 type="text"
-                name="user-coren"
+                name="coren"
+                id="coren"
                 class="form-control"
                 placeholder="coren-UF xxx-categoria"
                 required
@@ -86,11 +90,11 @@ title %} {% block extracss %}
 
           <div class="form-row justify-content-around">
             <div class="form-group col-md-5">
-              <label for="user-tel">Telefone</label>
+              <label for="tel">Telefone</label>
               <input
                 type="tel"
-                name="user-tel"
-                id="user-tel"
+                name="tel"
+                id="tel"
                 class="form-control"
                 placeholder="XX 9xxxx-xxxx"
                 required
@@ -98,13 +102,14 @@ title %} {% block extracss %}
               <span class="error"></span>
             </div>
             <div class="form-group col-md-5">
-              <label for="input-sex">Sexo</label>
-              <select id="input-sex" class="form-control" required>
+              <label for=sex">Sexo</label>
+              <select id="sex" name="sex" class="border form-control" required>
                 <option selected>Escolher...</option>
                 <option>Masculino</option>
                 <option>Feminino</option>
                 <option>Outro</option>
               </select>
+              <span class="error"></span>
             </div>
           </div>
 
@@ -113,33 +118,34 @@ title %} {% block extracss %}
               <label for="user-email">Email</label>
               <input
                 type="email"
-                name="user-email"
-                id="user-email"
+                name="email"
+                id="email"
                 class="form-control"
                 placeholder="...@plataforma"
                 required
               />
+              <span class="error"></span>
             </div>
           </div>
 
           <div class="form-row justify-content-around">
             <div class="form-group col-md-5">
-              <label for="user-password">Senha</label>
+              <label for="password">Senha</label>
               <input
                 type="password"
-                name="user-password"
-                id="user-password"
+                name="password"
+                id="password"
                 class="form-control"
                 required
               />
               <span class="error"></span>
             </div>
             <div class="form-group col-md-5">
-              <label for="user-confirmp">Confirme a senha</label>
+              <label for="confirmp">Confirme a senha</label>
               <input
                 type="password"
-                name="user-confirmp"
-                id="user-confirmp"
+                name="confirmp"
+                id="confirmp"
                 class="form-control"
                 required
               />

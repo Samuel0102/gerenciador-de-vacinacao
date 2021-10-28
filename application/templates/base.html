@@ -24,10 +24,10 @@
       crossorigin="anonymous"
     ></script>
     <script
-    src="https://code.jquery.com/jquery-3.6.0.js"
-    integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-    crossorigin="anonymous"
-  ></script>
+      src="https://code.jquery.com/jquery-3.6.0.js"
+      integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+      crossorigin="anonymous"
+    ></script>
     <script src="../static/JS/view_scripts.js"></script>
     {% block extrajs %} {% endblock extrajs %}
   </head>
@@ -55,16 +55,19 @@
           </button>
 
           <div class="collapse navbar-collapse" id="header-nav-menu">
-            <ul class="navbar-nav ml-auto text-white text-center align-items-center">
+            <ul
+              class="
+                navbar-nav
+                ml-auto
+                text-white text-center
+                align-items-center
+              "
+            >
               <li class="nav-item">
-                <a class="nav-link px-4 text-white" href="/"
-                  >HOME</a
-                >
+                <a class="nav-link px-4 text-white" href="/">HOME</a>
               </li>
               <li class="nav-item" id="vaccine-item">
-                <a
-                  class="nav-link px-4 text-white"
-                  href="/vaccine-register"
+                <a class="nav-link px-4 text-white" href="/vaccine-register"
                   >VACINA</a
                 >
               </li>
@@ -85,7 +88,9 @@
                 <div class="dropdown-menu">
                   <a class="dropdown-item" href="/my-profile">Meu Perfil</a>
                   <a class="dropdown-item" href="/my-card">Minha Carteirinha</a>
-                  <a class="dropdown-item" href="/logout" onclick="logoutUser()">Sair</a>
+                  <a class="dropdown-item" href="/logout" onclick="logoutUser()"
+                    >Sair</a
+                  >
                 </div>
               </li>
 
@@ -103,7 +108,7 @@
               <i
                 class="fas fa-user-circle display-4 d-none d-sm-block"
                 style="padding-left: 35px"
-                id = "header-user-icon"
+                id="header-user-icon"
                 onclick="showUserDropdown()"
               ></i>
               <div id="dropdown-user">
@@ -114,9 +119,6 @@
                 </ul>
               </div>
             </div>
-
-
-
           </div>
         </div>
       </nav>
@@ -124,7 +126,7 @@
 
     <main>{% block content %} {% endblock content %}</main>
 
-    <footer class="mt-5">
+    <footer>
       <div class="container-fluid py-4" style="background-color: #00a393">
         <div class="row text-white align-items-center">
           <div class="col-6 offset-0 offset-sm-3 text-center">
