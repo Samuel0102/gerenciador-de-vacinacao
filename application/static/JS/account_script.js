@@ -1,32 +1,29 @@
 /*  Os Scripts de Conta são responsáveis por controlar os processos
     de alteração, exclusão e apresentação dos dados dos usuários logados */
 
-
 import { getUserValidatedData } from "./utilities_script.js";
 
 getUserAccountData();
 changeMyProfileForm();
 
 // "Event Listeners" para chamar as funções necessárias
-$("#confirm-button").click(function () {
-  checkModalPassword();
-});
+$("#confirm-button").click(checkModalPassword);
+
 $("#alter-data").click(function () {
   changeModalStructure("update");
 });
 $("#del-data").click(function () {
   changeModalStructure("delete");
 });
-$("#update-button").click(function () {
-  updateAccountData();
-});
+
+$("#update-button").click(updateAccountData);
 
 /*  Função para obter dados a respeito do usuário logado
     a partir de conexão com back-end */
 function getUserAccountData() {
   // Obtém dados do usuário logado atual, através da sessão local
   let userType = localStorage.getItem("userType");
-  let userIdentifier = localStorage.getItem("userId");
+  let userIdentifier = localStorage.getItem("userCpf");
 
   // Constrói URL como especificado na route
   let url = "/user-data/" + userType + "/" + userIdentifier;
@@ -124,7 +121,6 @@ function deleteAccount() {
   });
 }
 
-
 /*  Função para atualizar os dados anteriormente cadastrados. Funciona somente
     sob fornecimento e verificação da senha do usuário */
 function updateAccountData() {
@@ -137,6 +133,8 @@ function updateAccountData() {
   if (formattedUserData === undefined) {
     return;
   }
+
+  formattedUserData.id = parseInt(localStorage["userId"]);
 
   $.ajax({
     type: "PUT",

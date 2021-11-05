@@ -2,7 +2,7 @@
 block extracss %}
 <link rel="stylesheet" href="../static/ CSS/my_profile.css" />
 {% endblock extracss %} {% block extrajs %}
-<script type="module" src="../static/JS/account_scripts.js"></script>
+<script type="module" src="../static/JS/account_script.js"></script>
 {% endblock extrajs %} {% block content %}
 <div class="container-fluid">
   <section class="row text-center">
@@ -116,7 +116,7 @@ block extracss %}
               type="text"
               name="name"
               id="name"
-              class="border form-control"
+              class="border form-control enable-input"
               disabled
             />
             <span class="error"></span>
@@ -128,7 +128,7 @@ block extracss %}
               type="date"
               name="born"
               id="user-born"
-              class="border form-control"
+              class="border form-control enable-input"
               disabled
             />
             <span class="error"></span>
@@ -165,14 +165,14 @@ block extracss %}
               type="tel"
               name="tel"
               id="tel"
-              class="border form-control"
+              class="border form-control enable-input"
               disabled
             />
             <span class="error"></span>
           </div>
           <div class="form-group col-md-6">
             <label for="sex">Sexo</label>
-            <select id="input-sex" name="sex" class="border form-control" disabled>
+            <select id="input-sex" name="sex" class="border form-control enable-input" disabled>
               <option>MASCULINO</option>
               <option>FEMININO</option>
               <option>OUTRO</option>
@@ -188,7 +188,7 @@ block extracss %}
               type="email"
               name="email"
               id="user-email"
-              class="border form-control"
+              class="border form-control enable-input"
               disabled
             />
             <span class="error"></span>

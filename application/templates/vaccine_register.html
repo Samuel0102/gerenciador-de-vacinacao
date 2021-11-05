@@ -1,5 +1,11 @@
-{% extends "base.html" %} {% block title %} Cadastro de Vacinas {% endblock
-title %} {% block extracss %} {% endblock extracss %} {% block content %}
+{% extends "base.html" %}
+{% block title %} Cadastro de Vacinas {% endblock title %} 
+{% block extracss %} {% endblock extracss %}
+{% block extrajs %}
+<script type="module" src="../static/JS/vaccine_script.js"></script>
+{% endblock extrajs %}
+
+{% block content %}
 <div class="container-fluid">
   <div class="row">
     <aside class="col-md-4 d-flex" id="aside-img">
@@ -17,36 +23,51 @@ title %} {% block extracss %} {% endblock extracss %} {% block content %}
 
         <form class="d-flex flex-column align-items-center">
           <div class="form-group col-md-9">
-            <label for="vaccine-name" class="form-label">Nome</label>
+            <label for="name" class="form-label">Nome</label>
             <input
               type="text"
-              name="vaccine-name"
-              id="vaccine-name"
-              class="form-control"
+              name="name"
+              id="name"
+              class="form-control enable-input"
             />
+            <span class="error"></span>
           </div>
           <div class="form-group col-md-9">
-            <label for="vaccine-owner" class="form-label">Fabricante</label>
+            <label for="owner" class="form-label">Fabricante</label>
             <input
               type="text"
-              name="vaccine-owner"
-              id="vaccine-owner"
-              class="form-control"
+              name="owner"
+              id="owner"
+              class="form-control enable-input"
             />
+            <span class="error"></span>
           </div>
           <div class="form-group col-md-9">
-            <label for="vaccine-end" class="form-label">Validade</label>
+            <label for="fabrication" class="form-label"
+              >Fabricação</label
+            >
             <input
               type="date"
-              name="vaccine-end"
-              id="vaccine-end"
-              class="form-control"
+              name="fabrication"
+              id="fabrication"
+              class="form-control enable-input"
             />
+            <span class="error"></span>
           </div>
         </form>
 
+        <span
+          class="lead d-flex justify-content-center mb-4"
+          id="user-notification"
+        ></span>
+
         <div class="button text-center">
-          <button name="button" type="submit" class="btn w-50 py-2">
+          <button
+            name="button"
+            id="register-vaccine"
+            type="submit"
+            class="btn w-50 py-2"
+          >
             ENVIAR
           </button>
         </div>

@@ -34,8 +34,8 @@ function validateCPF() {
         resultSecondDigit += parseInt(userCPF[i]) * counter;
       }
 
-      resultFirstDigit = ((resultFirstDigit * 10) % 11);
-      resultSecondDigit = ((resultSecondDigit * 10) % 11);
+      resultFirstDigit = (resultFirstDigit * 10) % 11;
+      resultSecondDigit = (resultSecondDigit * 10) % 11;
 
       if (resultFirstDigit === 10) {
         resultFirstDigit = 0;
@@ -93,21 +93,21 @@ function validatePassword() {
     userPassword.removeClass("border-danger");
     userPassword.addClass("border-success");
     errorMSGPass.text("");
-  }else{
+  } else {
     userPassword.addClass("border-danger");
     errorMSGPass.text("Pelo menos 12 caracteres de senha!");
   }
 
-  if (userPassword.val() === passwordConfirm.val()){
+  if (userPassword.val() === passwordConfirm.val()) {
     passwordConfirm.removeClass("border-danger");
     passwordConfirm.addClass("border-success");
     errorMSGConfirm.text("");
-  }else{
+  } else {
     passwordConfirm.addClass("border-danger");
     errorMSGConfirm.text("As senhas não são iguais!");
   }
- 
-  if(errorMSGConfirm.text() === "" && errorMSGPass.text() === ""){
+
+  if (errorMSGConfirm.text() === "" && errorMSGPass.text() === "") {
     return true;
   }
 
@@ -124,7 +124,7 @@ function validateCoren() {
 
   let formatTest = new RegExp(base).test(userCoren.val());
 
-  if(userCoren.prop("disabled")){
+  if (userCoren.prop("disabled")) {
     return true;
   }
 
@@ -202,62 +202,88 @@ function validateTel() {
   return false;
 }
 
+function checkPacientCpf() {
+  $("#pacient-name").text("---");
+  $("#pacient-age").text("---");
+
+  if (validateCPF()) {
+    let url = "/user-data/NORMAL USER/" + $("#CPF").val();
+
+    $.get(url, function (response) {
+      let test = response["result"] === "USER NOT FOUND";
+      if (test) {
+        $("#CPF").next().text("Paciente não existe!");
+        $("#CPF").addClass("border-danger");
+      } else {
+        let pacientAge =
+          new Date().getFullYear() -
+          parseInt(response["result"]["born"].slice(0, 5));
+        $("#pacient-name").text(response["result"]["name"]);
+        $("#pacient-age").text(pacientAge + " Anos");
+      }
+    });
+  }
+}
+
+function checkVaccine() {
+  $("#vaccine-name").next().text("");
+
+  if ($("#vaccine-name").val() === "") {
+    $("#vaccine-name").next().text("Vacina não existe!");
+    $("#vaccine-name").addClass("border-danger");
+    return;
+  }
+
+  let url = "/check-vaccine/" + $("#vaccine-name").val().toUpperCase();
+  $.get(url, function (response) {
+    let test = response["result"] !== "VACCINE NOT FOUND";
+    if (test) {
+      $("#vaccine-name").addClass("border-success");
+      $("#vaccine-name").removeClass("border-danger");
+    } else {
+      $("#vaccine-name").next().text("Vacina não existe!");
+      $("#vaccine-name").addClass("border-danger");
+    }
+  });
+
+}
+
 /*  Função para validar dados relativos a usuários passados em inputs */
 function getUserValidatedData() {
   // Obtém todos os inputs, com base na classe .form-control do bootstrap,
   // Define o Objeto dos dados e um contador para validação
-  let inputData = $(".form-control");
-  let completeUserData = {};
-  let validCounter = 0;
+  let inputData = $(".enable-input");
+  let userData = {};
+  let isAllFill = verifyFormFields();
 
-  // Laço percorre todos os inputs
-  for (let i = 0; i < inputData.length; i++) {
-    let input = inputData.eq(i);
-   
-    // Verifica se o input é vazio ou se o select não foi modificado
-    if(input.val() === "" || input.val() === "Escolher..."){
-      input.next().text("Campo Obrigatório!");
-      input.addClass("border-danger");
-      continue;
-
-    }else{
-      // Verifica se o input é coren, cpf, password, tel ou confirmp a fim
-      // de impedir ele de entrar no contador de inputs preenchidos, visto que possuem
-      // seu próprio validador
-      if(["CPF","coren","password","confirmp", "tel"].indexOf(input.attr("name")) === -1){
-        input.next().text("");
-        input.removeClass("border-danger");
-        input.addClass("border-success");
-        validCounter++;
-      }
-      // Utilizando o atributo name do input gera uma propriedade no objeto
-      completeUserData[input.attr("name")] = input.val().toUpperCase();
-    }
-
+  if (isAllFill) {
+    // Laço percorre todos os inputs
+    inputData.each(function (index, element) {
+      userData[$(element).attr("name")] = $(element).val().toUpperCase();
+    });
   }
 
   // Verifica se o usuário a cadastrar/alterar é do tipo Normal ou Super
-  if(completeUserData.coren === undefined || completeUserData.coren === "UNDEFINED"){
-    completeUserData.type = "NORMAL USER";
-  }else{
-    completeUserData.type = "SUPER USER";
+  if (
+    userData.coren === undefined
+  ) {
+    userData.type = "NORMAL USER";
+  } else {
+    userData.type = "SUPER USER";
   }
 
-  // Verifica se o processo é de alteração de dados, se for retorna id da
-  // sessão local, para facilitar busca no banco
-  if(localStorage["userId"] !== undefined){
-    completeUserData.id = parseInt(localStorage["userId"]);
-  }
-
-  let dataTest = [validateCoren(), validateCPF(), validatePassword(), validateTel()];
+  let dataTest = [
+    validateCoren(),
+    validateCPF(),
+    validatePassword(),
+    validateTel(),
+  ];
 
   // Com base no contador de inputs preenchidos e na validação de cpf, coren
   // e password retorna o objeto para as funções que chamarem esta função
-  if(validCounter >= 4 && dataTest.every(teste => teste)){
-    delete completeUserData.confirmp;
-    return completeUserData;
+  if (dataTest.every((teste) => teste)) {
+    return userData;
   }
-
 }
 
 /*  Função para verificar corretude do CPF/COREN
@@ -296,11 +322,66 @@ function getLoginData() {
   }
 }
 
+function verifyFormFields() {
+  let inputs = $(".enable-input");
+  let validCounter = 0;
+
+  inputs.each(function (index, element){
+    if($(element).val() === "" || $(element).val() === "selected"){
+      $(element).next().text("Campo obrigatório!");
+      $(element).addClass("border-danger");
+    }else{
+      $(element).next().text("");
+      $(element).addClass("border-success");
+      $(element).removeClass("border-danger");
+      validCounter++;
+    }
+  });
+
+  return validCounter === inputs.length;
+}
+
+function getVaccineValidatedData() {
+  let vaccineData = {};
+  const isAllFill = verifyFormFields();
+
+  if (isAllFill) {
+    $(".enable-input").each(function (index, element) {
+      vaccineData[$(element).attr("name")] = $(element).val().toUpperCase();
+    });
+
+    return vaccineData;
+  }
+}
+
+function getVaccinationValidatedData() {
+  let vaccinationData = {};
+  const isAllFill = verifyFormFields();
+
+  if (isAllFill) {
+    $(".enable-input").each(function (index, element) {
+      vaccinationData[$(element).attr("name")] = $(element).val().toUpperCase();
+    });
+  }else{
+    return;
+  }
+
+  checkPacientCpf();
+  checkVaccine();
+
+  let dataTest = [$("#CPF").hasClass("border-success"), $("#vaccine-name").hasClass("border-success")];
+
+  if (dataTest.every((teste) => teste)) {
+    return vaccinationData;
+  }
+}
+
 export {
   validateCPF,
-  validateCoren,
-  validateTel,
-  validatePassword,
+  checkPacientCpf,
+  checkVaccine,
   getUserValidatedData,
   getLoginData,
+  getVaccineValidatedData,
+  getVaccinationValidatedData,
 };

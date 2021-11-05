@@ -76,21 +76,20 @@ form {
   position: relative;
 }
 
-#register-login-buttons button{
-  border-radius: 20px;
-  padding: 5px 15px;
-  border: none;
-  background-color: #d6fff6;
-  margin-right: 10px;
-  transition: transform 0.5s;
-}
-
 #register-login-buttons button:hover{
   transform: scale(1.1);
 }
 
 #register-login-buttons a{
   text-decoration: none;
+  border: none;
+  color: white;
+  padding-right: 20px;
+  text-transform: uppercase;
+}
+
+#register-login-buttons a:hover{
+  text-decoration: underline;
 }
 
 #dropdown-user{
@@ -100,7 +99,6 @@ form {
   background-color: #d6fff6;
   border-radius: 2px;
   width: 200px;
-  height: 100px;
   z-index: 3;
   text-align: center;
   display: none;

@@ -16,12 +16,11 @@ function registerNewUser() {
   let formattedUserData = getUserValidatedData();
 
   // Verifica se os dados estão certos e passaram na validação
-  if(formattedUserData === undefined){
+  if(formattedUserData.length === 1){
     return;
   }
 
   const userNotification = $("#user-notification");
-
   $.ajax({
     type: "POST",
     url: "/user-register",
@@ -37,7 +36,6 @@ function registerNewUser() {
         case "CPF/COREN IN USE":
           userNotification.text("CPF/Coren já cadastrado!");
           userNotification.addClass("text-danger");
-          userNotification.removeClass("text-success");
           break;
         case "USER REGISTERED":
           userNotification.text("Cadastro feito com sucesso!");
@@ -81,6 +79,9 @@ function loggeUser() {
         case "SUCCESS LOGIN":
           localStorage.setItem("userType", loginData["type"]);
           localStorage.setItem("userId", response["user-id"]);
+          localStorage.setItem("userCpf", response["user-cpf"]);
+          localStorage.setItem("user-coren", response["user-coren"])
+
 
           userNotification.text(
             "Login realizado com sucesso, redirecionando..."

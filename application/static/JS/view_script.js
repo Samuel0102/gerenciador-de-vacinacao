@@ -16,13 +16,14 @@ function changeRegisterForm(type) {
       cpfArea.removeClass("col-md-5");
       cpfArea.addClass("col-md-11");
       corenInput.prop("disabled", true);
-      corenInput.val("");
+      corenInput.removeClass("enable-input");
       break;
     case "nurse":
       corenArea.show();
       cpfArea.removeClass("col-md-11");
       cpfArea.addClass("col-md-5");
       corenInput.prop("disabled", false);
+      corenInput.addClass("enable-input");
       break;
   }
 }
@@ -103,6 +104,10 @@ function showUserDropdown() {
     userDropdown.show("slow");
   } else {
     userDropdown.hide("slow");
+  }
+
+  if(localStorage.getItem("userType") === "SUPER USER"){
+    $("#only-normal-user").hide();
   }
 }
 

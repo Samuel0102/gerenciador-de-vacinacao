@@ -28,7 +28,7 @@
       integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
       crossorigin="anonymous"
     ></script>
-    <script src="../static/JS/view_scripts.js"></script>
+    <script src="../static/JS/view_script.js"></script>
     {% block extrajs %} {% endblock extrajs %}
   </head>
 
@@ -66,10 +66,15 @@
               <li class="nav-item">
                 <a class="nav-link px-4 text-white" href="/">HOME</a>
               </li>
-              <li class="nav-item" id="vaccine-item">
-                <a class="nav-link px-4 text-white" href="/vaccine-register"
+              <li class="nav-item dropdown" id="vaccine-item">
+                <a class="nav-link px-4 text-white dropdown-toggle" href="#" data-toggle="dropdown"
                   >VACINA</a
                 >
+
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" href="/vaccines">Vacinas</a>
+                  <a class="dropdown-item" href="/vaccine-register">Cadastrar Vacina</a>
+                </div>
               </li>
               <li class="nav-item" id="vaccination-item">
                 <a class="nav-link px-4 text-white" href="/vaccination-register"
@@ -95,12 +100,8 @@
               </li>
 
               <li class="nav-item ml-4" id="register-login-buttons">
-                <button class="bg bg-white">
-                  <a href="/login">Login</a>
-                </button>
-                <button class="bg bg-white">
-                  <a href="/user-register">Cadastrar</a>
-                </button>
+                <a href="/login">Login</a>
+                <a href="/user-register">Cadastrar</a>
               </li>
             </ul>
 
@@ -114,7 +115,7 @@
               <div id="dropdown-user">
                 <ul>
                   <li><a href="/my-profile">Meu Perfil</a></li>
-                  <li><a href="/my-card">Minha Carteirinha</a></li>
+                  <li><a id="only-normal-user" href="/my-card">Minha Carteirinha</a></li>
                   <li><a href="/logout" onclick="logoutUser()">Sair</a></li>
                 </ul>
               </div>
