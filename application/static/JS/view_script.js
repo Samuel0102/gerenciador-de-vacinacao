@@ -1,27 +1,30 @@
 // Os Scripts de VIEW são responsáveis pelo dinanismo do front-end,
 // relacionados a exibição ou não de elementos
 
+$(document).ready(changeHeaderNav, changeMyProfileForm);
+
+$(".register-icon").click((ev) => changeRegisterForm(ev.target));
+$(".login-icon").click((ev) => changeLoginForm(ev.target));
+
+$("#header-user-icon").click(showUserDropdown);
+$(".logout-option").click(logoutUser);
+
 /*  Função para modificar o formulário de registro,
     se o usuário escolher cadastro como paciente,
     o campo coren será desabilitado */
 function changeRegisterForm(type) {
   let corenArea = $("#user-coren");
-  let cpfArea = $("#user-cpf");
   let corenInput = $("input[name='coren']");
 
   // Bloco switch pra controlar a visualização do campo coren
-  switch (type) {
-    case "pacient":
+  switch (type.getAttribute("id")) {
+    case "icon-pacient":
       corenArea.hide();
-      cpfArea.removeClass("col-md-5");
-      cpfArea.addClass("col-md-11");
       corenInput.prop("disabled", true);
       corenInput.removeClass("enable-input");
       break;
-    case "nurse":
+    default:
       corenArea.show();
-      cpfArea.removeClass("col-md-11");
-      cpfArea.addClass("col-md-5");
       corenInput.prop("disabled", false);
       corenInput.addClass("enable-input");
       break;
@@ -31,20 +34,20 @@ function changeRegisterForm(type) {
 /*  Função para modificar o formulário de login
     alterando o label e o valor do placeholder */
 function changeLoginForm(type) {
-  let identifierLabel = $(".form-label")[0];
-  let identifierInput = $(".form-control")[0];
+  let identifierLabel = $(".form-label").eq(0);
+  let identifierInput = $(".form-control").eq(0);
 
   // Bloco switch para manipular elemento label e atributo placeholder
-  switch (type) {
-    case "pacient":
-      identifierLabel.innerText = "CPF";
-      identifierInput.setAttribute("name", "CPF");
-      identifierInput.setAttribute("placeholder", "XXX.XXX.XXX-XX");
+  switch (type.getAttribute("id")) {
+    case "icon-pacient":
+      identifierLabel.text("CPF");
+      identifierInput.attr("name", "CPF");
+      identifierInput.attr("placeholder", "XXX.XXX.XXX-XX");
       break;
-    case "nurse":
-      identifierLabel.innerText = "COREN";
-      identifierInput.setAttribute("name", "coren");
-      identifierInput.setAttribute("placeholder", "coren-UF xxx-categoria");
+    default:
+      identifierLabel.text("COREN");
+      identifierInput.attr("name", "coren");
+      identifierInput.attr("placeholder", "coren-UF xxx-categoria");
       break;
   }
 }
@@ -100,39 +103,62 @@ function changeUserArea() {
 function showUserDropdown() {
   let userDropdown = $("#dropdown-user");
 
-  if (userDropdown.css("display") === "none") {
+  if (
+    userDropdown.css("display") === "none" &&
+    $("#header-user-icon").attr("class") != ""
+  ) {
     userDropdown.show("slow");
   } else {
     userDropdown.hide("slow");
   }
 
-  if(localStorage.getItem("userType") === "SUPER USER"){
-    $("#only-normal-user").hide();
+  if (localStorage["userType"] === "SUPER USER") {
+    $(".only-normal-user").each((index, element) => $(element).hide());
   }
 }
 
 /*  Função para modificar a estrutura do Modal de ou alteração
     ou exclusão da conta */
-function changeModalStructure(action) {
+function changeModalStructure(action, title, message = "") {
   let modalTitle = $("#modal-title");
-  let message = $("#message");
-  let modal = $(".modal-dialog")[0];
+  let modalMessage = $("#message");
+  let modal = $(".modal-dialog");
+
+  const modalTextDefault = `Este é um procedimento de alto risco e necessita da confirmação da
+    sua senha. Digite-a e após clicar em "Confirmar & Continuar" a
+    ação de Exclusão/Alteração será
+    <strong class="text-danger"> PERMANENTE</strong> e
+    <strong class="text-danger"> IRREVERSÍVEL</strong>, faça por sua
+    conta e risco!*`;
+
+  modalTitle.text(title);
+  modalMessage.text(message);
+  $("#modal-body-text").html(modalTextDefault);
+  $("#modal-input").show();
 
   switch (action) {
-    case "delete":
-      modalTitle.text("Confirmação de Exclusão de Conta");
-      message.text(
-        "OBS - Após o processo de exclusão, seus dados de vacinação serão enviados por email"
-      );
-      modal.setAttribute("id","modal-delete");
+    case "delete-confirm":
+      const modalTextAlert = `Verifique se o email ${$(
+        "input[name='email']"
+      ).val()} é válido e clique em 'Confirmar & Continuar'*`;
+      $("#modal-body-text").text(modalTextAlert);
+      $("#modal-input").hide();
       break;
-    case "update":
-      modalTitle.text("Confirmação de Alteração de Conta");
-      message.text("");
-      modal.setAttribute("id","modal-update");
+    default:
+      modal.attr("id", `modal-${action}`);
       break;
   }
+}
 
+function changeMyProfileForm() {
+  let corenField = $("input[name='coren']").parent();
+  let cpfField = $("input[name='CPF']").parent();
+
+  if (localStorage["userType"] === "NORMAL USER") {
+    corenField.hide();
+    cpfField.removeClass("col-md-6");
+    cpfField.addClass("col-md-12");
+  }
 }
 
 /*  Função para deslogar usuários logados

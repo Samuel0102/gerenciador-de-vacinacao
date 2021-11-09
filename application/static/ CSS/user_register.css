@@ -1,20 +1,19 @@
 
 /* ICONS */
-#user-icons i {
-  background: #d6fff6;
-  padding: 12px 14px;
-  border-radius: 100%;
-  color: #028090;
-  font-size: 3.5em;
-}
-
-#user-icons i:hover {
-  background-color: #028090;
-  color: #d6fff6;
-  cursor: pointer;
-}
-
 #user-icons {
   margin-bottom: 50px;
 }
 /* ICONS */
+
+/* FORM*/
+form{
+  padding: 0 40px;
+}
+/* FORM */
+
+/* MEDIAS */
+@media (max-width: 576px) {
+  form {
+    padding: 0 10px;
+  }
+}

@@ -1,7 +1,7 @@
 import { getVaccinationValidatedData, checkPacientCpf, checkVaccine } from "./utilities_script.js";
 
 $(document).ready(function(){
-  $("#coren").val(localStorage["user-coren"]);
+  $("#coren").val(localStorage["userCoren"]);
 })
 
 $("#CPF").focusout(checkPacientCpf);
@@ -12,11 +12,12 @@ $("#register-vaccination").click(registerNewVaccination);
 
 $("#dose").change(disableNextDoseDate);
 
+$("#pacient-vaccinations").click(function(){getVaccinations("pacient")});
 
 function registerNewVaccination(){
   const vaccinationData = getVaccinationValidatedData();
   const userNotification = $("#user-notification");
-  
+
   if(vaccinationData === undefined){
     return;
   }
@@ -29,9 +30,12 @@ function registerNewVaccination(){
     contentType: "application/json",
     success: function(response){
       if(response["result"] === "VACCINATION REGISTERED"){
-        console.log("s");
+        userNotification.text("Vacinação cadastrada com sucesso!");
+        userNotification.addClass("text-success");
+        userNotification.removeClass("text-danger");
       }else{
-        console.log("b");
+        userNotification.text("Houve erro no cadastro de vacinação, verifique os dados!");
+        userNotification.addClass("text-danger");
       }
     },
     error: function(){
@@ -41,7 +45,36 @@ function registerNewVaccination(){
 
 }
 
+function getVaccinations(type){
+  let cpf = localStorage["userCpf"];
 
+  if(type === "pacient"){
+    cpf = $("#CPF").val();
+  }
+
+  $.get("/list-vaccinations/" + cpf, function(response){
+      showVaccinations(response);
+  });
+}
+
+function showVaccinations(vaccinations){
+  let vaccinationsTableBody = $("#vaccinations-table-body"); 
+
+  vaccinations.forEach(function(element){
+    let tableRow = "<tr>";
+
+    for(let attribute in element){
+      if(element[attribute] === "0001.01.01"){
+        element[attribute] = "(x)";
+      }
+
+      tableRow += `<td>${element[attribute]}</td>`;
+    }
+
+    vaccinationsTableBody.append(tableRow + "</tr>");
+
+  });
+}
 
 function disableNextDoseDate(){
   let nextDoseInput= $("#next-date");
@@ -56,3 +89,7 @@ function disableNextDoseDate(){
     nextDoseInput.addClass("enable-input");
   }
 }
+
+export {
+  getVaccinations
+};

@@ -214,12 +214,14 @@ function checkPacientCpf() {
       if (test) {
         $("#CPF").next().text("Paciente não existe!");
         $("#CPF").addClass("border-danger");
+        $("#pacient-vaccinations").prop("disabled", true);
       } else {
         let pacientAge =
           new Date().getFullYear() -
           parseInt(response["result"]["born"].slice(0, 5));
         $("#pacient-name").text(response["result"]["name"]);
         $("#pacient-age").text(pacientAge + " Anos");
+        $("#pacient-vaccinations").prop("disabled", false);
       }
     });
   }
@@ -245,7 +247,6 @@ function checkVaccine() {
       $("#vaccine-name").addClass("border-danger");
     }
   });
-
 }
 
 /*  Função para validar dados relativos a usuários passados em inputs */
@@ -263,15 +264,6 @@ function getUserValidatedData() {
     });
   }
 
-  // Verifica se o usuário a cadastrar/alterar é do tipo Normal ou Super
-  if (
-    userData.coren === undefined
-  ) {
-    userData.type = "NORMAL USER";
-  } else {
-    userData.type = "SUPER USER";
-  }
-
   let dataTest = [
     validateCoren(),
     validateCPF(),
@@ -281,9 +273,11 @@ function getUserValidatedData() {
 
   // Com base no contador de inputs preenchidos e na validação de cpf, coren
   // e password retorna o objeto para as funções que chamarem esta função
-  if (dataTest.every((teste) => teste)) {
+  if (dataTest.every((teste) => teste) && isAllFill) {
     return userData;
   }
+
+  return;
 }
 
 /*  Função para verificar corretude do CPF/COREN
@@ -319,6 +313,8 @@ function getLoginData() {
     };
 
     return loginData;
+  } else {
+    return;
   }
 }
 
@@ -326,11 +322,11 @@ function verifyFormFields() {
   let inputs = $(".enable-input");
   let validCounter = 0;
 
-  inputs.each(function (index, element){
-    if($(element).val() === "" || $(element).val() === "selected"){
+  inputs.each(function (index, element) {
+    if ($(element).val() === "" || $(element).val() === "selected") {
       $(element).next().text("Campo obrigatório!");
       $(element).addClass("border-danger");
-    }else{
+    } else {
       $(element).next().text("");
       $(element).addClass("border-success");
       $(element).removeClass("border-danger");
@@ -349,9 +345,11 @@ function getVaccineValidatedData() {
     $(".enable-input").each(function (index, element) {
       vaccineData[$(element).attr("name")] = $(element).val().toUpperCase();
     });
-
-    return vaccineData;
+  } else {
+    return;
   }
+
+  return vaccineData;
 }
 
 function getVaccinationValidatedData() {
@@ -362,14 +360,17 @@ function getVaccinationValidatedData() {
     $(".enable-input").each(function (index, element) {
       vaccinationData[$(element).attr("name")] = $(element).val().toUpperCase();
     });
-  }else{
+  } else {
     return;
   }
 
   checkPacientCpf();
   checkVaccine();
 
-  let dataTest = [$("#CPF").hasClass("border-success"), $("#vaccine-name").hasClass("border-success")];
+  let dataTest = [
+    $("#CPF").hasClass("border-success"),
+    $("#vaccine-name").hasClass("border-success"),
+  ];
 
   if (dataTest.every((teste) => teste)) {
     return vaccinationData;

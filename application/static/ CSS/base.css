@@ -23,7 +23,7 @@ body {
 /* HEADER */
 
 /* TITLES */
-h1 {
+h1, h2 {
   color: #088392;
   font-size: 3.2em;
   font-weight: 800;
@@ -40,7 +40,7 @@ h1 {
   border-radius: 5px;
 }
 
-.button button:hover {
+.button button:not(:disabled):hover {
   background-color: white;
   color: #00a896;
   border: 1px solid #00a896;
@@ -57,6 +57,7 @@ input.form-control{
   border-left: none;
   border-right: none;
   border-bottom: 1px solid #088392;
+  background-color: transparent;
   border-radius: 0;
 }
 
@@ -68,6 +69,10 @@ form {
   color: red;
   font-size: 12px;
   padding-left: 12px;
+}
+
+*:disabled, input:read-only{
+  cursor: not-allowed;
 }
 /* FORMS */
 
@@ -127,6 +132,22 @@ form {
   padding: 10px 0;
   color: #088392;
 }
+
+/* ICONS */
+.login-icon, .register-icon{
+  background: #d6fff6;
+  padding: 12px 14px;
+  border-radius: 100%;
+  color: #028090;
+  font-size: 3.5em;
+}
+
+.login-icon:hover, .register-icon:hover {
+  background-color: #028090;
+  color: #d6fff6;
+  cursor: pointer;
+}
+
 
 /* MEDIAS */
 @media (max-width: 576px) {

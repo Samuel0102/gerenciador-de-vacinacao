@@ -6,7 +6,7 @@
     margin-bottom: 16px;
   }
 
-  .col-work h1 {
+  h1, h2 {
     font-size: 30px;
   }
 
@@ -17,14 +17,14 @@
 
 /* Médio */
 @media (min-width: 768px) and (max-width: 992px) {
-  .col-work h1 {
+  h1, h2 {
     font-size: 50px;
   }
 }
 
 /* Extra Large */
 @media (min-width: 1400px) {
-  .col-work h1 {
+  h1, h2 {
     font-size: 75px;
   }
 

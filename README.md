@@ -23,13 +23,13 @@ O SUV surgiu como um projeto de construção de um ambiente em tese governamenta
 | Cadastro de usuários pacientes e enfermeiros | :heavy_check_mark: |
 | Possibilidade de exclusão dos cadastros de usuários| :heavy_check_mark: |
 | Possibilidade de alteração dos dados de cadastro dos usuários| :heavy_check_mark: |
-| Envio de pdf com vacinações ao usuário comum ao excluir a conta| :clock130: |
+| Envio de pdf com vacinações ao usuário comum ao excluir a conta| :heavy_check_mark: |
 | Cadastro de vacinas | :heavy_check_mark: |
 | Cadastro de vacinação de usuários paciente | :heavy_check_mark: |
 | Login de usuários | :heavy_check_mark: |
 | Acesso dos usuários a seus dados pessoais | :heavy_check_mark: |
 | Logout dos usuários | :heavy_check_mark: |
-| Acesso dos usuários do tipo paciente a todas as vacinas já tomadas | :clock130: |
+| Acesso dos usuários do tipo paciente a todas as vacinas já tomadas | :heavy_check_mark: |
 
 :clock130: - Em desenvolvimento   :heavy_check_mark: - Finalizado
 

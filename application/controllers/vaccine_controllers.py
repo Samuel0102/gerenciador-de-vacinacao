@@ -3,6 +3,7 @@ from application import app
 from application.models.models import Vaccine, db
 from flask import render_template, session, redirect, request, jsonify
 
+
 @app.route("/vaccine-register", methods=["POST", "GET"])
 def vaccine_register():
     if request.method == "POST":
@@ -12,15 +13,16 @@ def vaccine_register():
             data = vaccine_data["fabrication"]
             fabrication_date = datetime.strptime(data, '%Y-%m-%d').date()
 
-            vaccine = Vaccine(vaccine_data["name"], fabrication_date, vaccine_data["owner"])
-            
+            vaccine = Vaccine(
+                vaccine_data["name"], fabrication_date, vaccine_data["owner"])
+
             db.session.add(vaccine)
             db.session.commit()
 
-            return jsonify({"result":"VACCINE REGISTERED"})
-        
+            return jsonify({"result": "VACCINE REGISTERED"})
+
         else:
-            return jsonify({"result":"VACCINE IN USE"})
+            return jsonify({"result": "VACCINE IN USE"})
 
     # verifica qual tipo de usuário esta logado, se for um Pacient
     # barra sua entrada na paǵina de cadastro de vacina
@@ -29,13 +31,12 @@ def vaccine_register():
     else:
         return redirect("/")
 
+
 @app.route("/check-vaccine/<vaccine_name>")
 def vaccines(vaccine_name):
 
     vaccine = Vaccine.query.filter_by(name=vaccine_name).first()
     if(vaccine != None):
-        return jsonify({"result":"VACCINE FOUND", "vaccine_id":vaccine.id})
+        return jsonify({"result": "VACCINE FOUND", "vaccine_id": vaccine.id})
     else:
-        return jsonify({"result":"VACCINE NOT FOUND"})
-
-    
+        return jsonify({"result": "VACCINE NOT FOUND"})

@@ -10,10 +10,11 @@ changeMyProfileForm();
 $("#confirm-button").click(checkModalPassword);
 
 $("#alter-data").click(function () {
-  changeModalStructure("update");
+  changeModalStructure("update", "Confirmação de Atualização");
 });
 $("#del-data").click(function () {
-  changeModalStructure("delete");
+  let message = "*Seus dados de vacinação serão enviados por email, após exclusão!";
+  changeModalStructure("delete", "Confirmação de Exclusão", message);
 });
 
 $("#update-button").click(updateAccountData);
@@ -74,24 +75,16 @@ function showUserAccountData(userData) {
   $("#user-age").text(userAge.toString() + " Anos");
 }
 
-/* Altera o formulário de listagem dos dados para não aparecer o campo coren */
-function changeMyProfileForm() {
-  let corenField = $("input[name='coren']").parent();
-  let cpfField = $("input[name='CPF']").parent();
-
-  if (localStorage["userType"] === "NORMAL USER") {
-    corenField.hide();
-    cpfField.removeClass("col-md-6");
-    cpfField.addClass("col-md-12");
-  }
-}
-
 /*  Função para exclusão da conta dos usuários, ativada somente
     sob fornecimento e verificação da senha do usuário */
 function deleteAccount() {
   // Obtém dados da sessão local
   let userId = localStorage["userId"];
   let userType = localStorage["userType"];
+  
+  if($(".modal-dialog").attr("id") === "modal-update"){
+    return;
+  }
 
   let userData = {
     type: userType,
@@ -108,12 +101,13 @@ function deleteAccount() {
     dataType: "json",
     contentType: "application/json",
     success: function (response) {
-      if (response["result"] === "USER DELETED") {
-        // Alerta o usuário da exclusão e o redireciona
-        alert("Sua conta foi deletada! Você será redirecionado...");
-        window.location.href = "/";
-        localStorage.clear();
+      switch(response["result"]){
+        case "USER DELETED":
+          localStorage.clear();
+          location.href = "/";
+          break;
       }
+
     },
     error: function () {
       alert("Houve um erro no sistema, por favor recarregue a página!");
@@ -124,7 +118,7 @@ function deleteAccount() {
 /*  Função para atualizar os dados anteriormente cadastrados. Funciona somente
     sob fornecimento e verificação da senha do usuário */
 function updateAccountData() {
-  // Obtém os dados preenchidos nos formulários pela função 
+  // Obtém os dados preenchidos nos formulários pela função
   // showUserAccountData()
   let formattedUserData = getUserValidatedData();
 
@@ -135,6 +129,7 @@ function updateAccountData() {
   }
 
   formattedUserData.id = parseInt(localStorage["userId"]);
+  formattedUserData.type = localStorage["userType"];
 
   $.ajax({
     type: "PUT",
@@ -143,14 +138,13 @@ function updateAccountData() {
     dataType: "json",
     contentType: "application/json",
     success: function () {
-      window.location.reload();
+      location.reload();
     },
     error: function () {
       alert("Houve um erro no sistema, por favor recarregue a página!");
     },
   });
 }
-
 
 /*  Função para verificar se a senha fornecida no modal de Alteração/Exclusão
     condiz com a senha fornecida no cadastro e salva no servidor */
@@ -159,7 +153,7 @@ function checkModalPassword() {
   // e o tipo de Modal
   let modalPassword = $("#modal-confirmp").val();
   let message = $("#message");
-  let modalType = $(".modal-dialog")[0].getAttribute("id");
+  let modalType = $(".modal-dialog").attr("id");
 
   let userData = {
     type: localStorage["userType"],
@@ -194,9 +188,10 @@ function checkModalPassword() {
           });
         } else {
           // se o modal for delete, chama a função deleteAccount()
-          deleteAccount();
+          let message = "*Se o e-mail não for encontrado, seu PDF será perdido!"
+          changeModalStructure("delete-confirm", "Aviso de Exclusão", message);
+          $("#confirm-button").click(deleteAccount);
         }
-        message.text("");
       } else {
         // se a senha não condizer avisa ao usuário
         message.text("Senha incorreta!");

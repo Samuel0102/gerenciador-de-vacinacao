@@ -16,10 +16,10 @@ function registerNewUser() {
   let formattedUserData = getUserValidatedData();
 
   // Verifica se os dados estão certos e passaram na validação
-  if(formattedUserData.length === 1){
+  if(formattedUserData === undefined){
     return;
   }
-
+  
   const userNotification = $("#user-notification");
   $.ajax({
     type: "POST",
@@ -41,6 +41,10 @@ function registerNewUser() {
           userNotification.text("Cadastro feito com sucesso!");
           userNotification.addClass("text-success");
           userNotification.removeClass("text-danger");
+
+          setTimeout(function () {
+            location.href = "/login";
+          }, 6000);
           break;
       }
     },
@@ -80,8 +84,9 @@ function loggeUser() {
           localStorage.setItem("userType", loginData["type"]);
           localStorage.setItem("userId", response["user-id"]);
           localStorage.setItem("userCpf", response["user-cpf"]);
-          localStorage.setItem("user-coren", response["user-coren"])
-
+          if(localStorage["userType"] === "SUPER USER"){
+            localStorage.setItem("userCoren", response["user-coren"])
+          }
 
           userNotification.text(
             "Login realizado com sucesso, redirecionando..."
@@ -90,7 +95,7 @@ function loggeUser() {
           userNotification.removeClass("text-danger");
 
           setTimeout(function () {
-            window.location.href = "/";
+            location.href = "/";
           }, 4000);
           break;
 

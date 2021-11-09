@@ -1,10 +1,13 @@
-{% extends "base.html" %} {% block title %} Cadastro de Usuário {% endblock
-title %} {% block extracss %}
+{% extends "base.html" %}
+{% block title %} Cadastro de Usuário {% endblock title %}
+{% block extracss %}
 <link rel="stylesheet" href="../static/ CSS/user_register.css" />
+{% endblock extracss %}
+{% block extrajs %}
 <script type="module" src="../static/JS/register_login_script.js"></script>
-{% endblock extracss %} {% block content %}
+{% endblock extrajs %}
 
-<div class="container-fluid">
+{% block content %}
   <div class="row">
     <aside class="col-md-5 d-flex" id="aside-img">
       <img
@@ -20,24 +23,24 @@ title %} {% block extracss %}
         </header>
         <div class="d-flex justify-content-around" id="user-icons">
           <i
-            class="fas fa-user-md"
-            onclick="changeRegisterForm('nurse')"
+            class="fas fa-user-md register-icon"
+            id="icon-nurse"
             data-toggle="tooltip"
             data-placement="top"
             title="Cadastro como Enfermeiro"
           ></i>
           <i
-            class="fas fa-user"
-            onclick="changeRegisterForm('pacient')"
+            class="fas fa-user register-icon"
+            id="icon-pacient"
             data-toggle="tooltip"
             data-placement="top"
             title="Cadastro como Paciente"
           ></i>
         </div>
-        <form id="form">
-          <div class="form-row justify-content-around">
-            <div class="form-group col-md-5">
-              <label for="user-name">Nome</label>
+        <form>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="name">Nome</label>
               <input
                 type="text"
                 name="name"
@@ -48,7 +51,7 @@ title %} {% block extracss %}
               />
               <span class="error"></span>
             </div>
-            <div class="form-group col-md-5">
+            <div class="form-group col-md-6">
               <label for="born">Data de Nascimento</label>
               <input
                 type="date"
@@ -61,8 +64,8 @@ title %} {% block extracss %}
             </div>
           </div>
 
-          <div class="form-row justify-content-around">
-            <div class="form-group col-md-5" id="user-cpf">
+          <div class="form-row">
+            <div class="form-group col" id="user-cpf">
               <label for="CPF">CPF</label>
               <input
                 type="text"
@@ -74,7 +77,7 @@ title %} {% block extracss %}
               />
               <span class="error"></span>
             </div>
-            <div class="form-group col-md-5" id="user-coren">
+            <div class="form-group col-md-6" id="user-coren">
               <label for="coren">COREN</label>
               <input
                 type="text"
@@ -88,8 +91,8 @@ title %} {% block extracss %}
             </div>
           </div>
 
-          <div class="form-row justify-content-around">
-            <div class="form-group col-md-5">
+          <div class="form-row">
+            <div class="form-group col-md-6">
               <label for="tel">Telefone</label>
               <input
                 type="tel"
@@ -101,8 +104,8 @@ title %} {% block extracss %}
               />
               <span class="error"></span>
             </div>
-            <div class="form-group col-md-5">
-              <label for=sex">Sexo</label>
+            <div class="form-group col-md-6">
+              <label for="sex">Sexo</label>
               <select id="sex" name="sex" class="border form-control enable-input" required>
                 <option value="selected">Escolher...</option>
                 <option value="Masculino">Masculino</option>
@@ -114,8 +117,8 @@ title %} {% block extracss %}
           </div>
 
           <div class="form-row justify-content-center">
-            <div class="form-group col-md-11">
-              <label for="user-email">Email</label>
+            <div class="form-group col-md-12">
+              <label for="email">Email</label>
               <input
                 type="email"
                 name="email"
@@ -128,8 +131,8 @@ title %} {% block extracss %}
             </div>
           </div>
 
-          <div class="form-row justify-content-around">
-            <div class="form-group col-md-5">
+          <div class="form-row">
+            <div class="form-group col-md-6">
               <label for="password">Senha</label>
               <input
                 type="password"
@@ -140,7 +143,7 @@ title %} {% block extracss %}
               />
               <span class="error"></span>
             </div>
-            <div class="form-group col-md-5">
+            <div class="form-group col-md-6">
               <label for="confirmp">Confirme a senha</label>
               <input
                 type="password"
@@ -171,6 +174,4 @@ title %} {% block extracss %}
       </div>
     </section>
   </div>
-</div>
-
 {% endblock content %}

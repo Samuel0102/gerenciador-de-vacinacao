@@ -1,83 +1,34 @@
 {% extends "base.html" %} {% block title %} Minha Carteirinha {% endblock title
 %} {% block extracss %}
 <link rel="stylesheet" href="../static/ CSS/my_card.css" />
-{% endblock extracss %} {% block content %}
-<div class="container-fluid">
-  <div class="row align-items-center mb-5">
-    <div class="col-12" id="space">
-      <div class="row mt-5">
-        <div class="col">
-          <h1 class="text-center">VACINAÇÕES</h1>
-        </div>
-      </div>
+{% endblock extracss %} {% block extrajs %}
+<script type="module" src="../static/JS/my_card_script.js"></script>
+{% endblock extrajs %} {% block content %}
 
-      <div class="row justify-content-center">
-        <div class="table-responsive-md">
-          <table class="table table-striped text-center">
-            <thead>
-              <tr class="th-deco">
-                <th scope="col">Vacina</th>
-                <th scope="col">Laboratório</th>
-                <th scope="col">Dose</th>
-                <th scope="col">Data</th>
-                <th scope="col">Próxima dose</th>
-                <th scope="col">Enfermeiro</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>BCG</td>
-                <td>Alphaclin</td>
-                <td>Única</td>
-                <td>28/10/2003</td>
-                <td>(x)</td>
-                <td>Eliane</td>
-              </tr>
-              <tr>
-                <td>Hepatite B</td>
-                <td>Butantan</td>
-                <td>1ª (Primeira)</td>
-                <td>28/10/2003</td>
-                <td>12/2003</td>
-                <td>Luiz</td>
-              </tr>
-              <tr>
-                <td>Hepatite B</td>
-                <td>Butantan</td>
-                <td>2ª (Segunda)</td>
-                <td>23/12/2003</td>
-                <td>05/2004</td>
-                <td>Luiz</td>
-              </tr>
-              <tr>
-                <td>Hepatite B</td>
-                <td>Butantan</td>
-                <td>3ª (Terceira)</td>
-                <td>18/05/2004</td>
-                <td>(x)</td>
-                <td>Luiz</td>
-              </tr>
-              <tr>
-                <td>Influenza (H1N1)</td>
-                <td>Butantan</td>
-                <td>1ª (Primeira)</td>
-                <td>16/07/2010</td>
-                <td>04/2013</td>
-                <td>Fabiana</td>
-              </tr>
-              <tr>
-                <td>Influenza (H1N1)</td>
-                <td>Sanofi</td>
-                <td>2ª (Segunda)</td>
-                <td>26/04/2013</td>
-                <td>(x)</td>
-                <td>Fabiana</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+<section class="row align-items-center justify-content-center mt-5">
+  <div class="col-12">
+        <h1 class="text-center">MINHAS VACINAÇÕES</h1>
+  </div>
+</section>
+
+<section class="row align-items-center justify-content-center mb-5">
+  <div class="col-12">
+    <div class="table-responsive-md">
+      <table class="table table-striped text-center">
+        <thead>
+          <tr class="th-deco">
+            <th scope="col">Data</th>
+            <th scope="col">Dose</th>
+            <th scope="col">Próxima Dose</th>
+            <th scope="col">Enfermeiro</th>
+            <th scope="col">Vacina</th>
+            <th scope="col">Laboratório</th>
+          </tr>
+        </thead>
+        <tbody id="vaccinations-table-body"></tbody>
+      </table>
     </div>
   </div>
-</div>
+</section>
+
 {% endblock content %}

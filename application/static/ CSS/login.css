@@ -9,24 +9,9 @@ body{
 
 #login-square{
     background-color: #f0fffc; 
-    padding: 0 50px;
-    height: 500px;
     border-radius: 4%;
 }
 
-.user-icon{
-    color: #028090;
-    padding-top: 15px;
-}
-
-.user-icon:hover{
-    color: rgb(97, 173, 166);
-    transition: 0.5s;
-}
-
-.input-style{
-    padding: 20px;
-}
 /* LOGIN SQUARE */
 
 
@@ -35,12 +20,14 @@ body{
 @media (max-width: 768px) {
     #login-square{
         width: 100%;
+        padding: 0 30px;
     }
 }
 
 @media (min-width: 768px) {
     #login-square{
         width: 70%;
+        padding: 0 50px;
     }
 }
 

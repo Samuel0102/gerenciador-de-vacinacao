@@ -1,29 +1,80 @@
 {% extends "base.html" %} {% block title %} Cadastro de Vacinação {% endblock
 title %} {% block extracss %}
 <link rel="stylesheet" href="../static/ CSS/vaccination_register.css" />
-{% endblock extracss %}
-{% block extrajs %}
+{% endblock extracss %} {% block extrajs %}
 <script type="module" src="../static/JS/vaccination_script.js"></script>
-{% endblock extrajs %}
-{% block content %}
-<div class="container-fluid">
-  <div class="row">
+{% endblock extrajs %} {% block content %}
+
+  <section class="row">
     <div class="col-12">
       <h1 class="text-center">Cadastro de Vacinação</h1>
     </div>
+  </section>
+
+  <div
+    class="modal fade"
+    id="modal-vaccinations"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modal-title">Vacinações</h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body table-responsive">
+          <table class="table table-sm table-striped p-5 text-center">
+            <thead>
+              <tr>
+                <th scope="col">Data</th>
+                <th scope="col">Dose</th>
+                <th scope="col">Próxima Dose</th>
+                <th scope="col">Enfermeiro</th>
+                <th scope="col">Vacina</th>
+                <th scope="col">Laboratório</th>
+              </tr>
+            </thead>
+            <tbody id="vaccinations-table-body">
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="row">
+  <section class="row">
     <div class="col-12 col-md-6 d-flex justify-content-end align-items-center">
       <div id="user-square">
         <i class="fas fa-user fa" id="user-icon"></i>
 
-        <span class="info-square text-center d-block" id="pacient-name">---</span>
+        <span class="info-square text-center d-block" id="pacient-name"
+          >---</span
+        >
 
-        <span class="info-square text-center d-block" id="pacient-age">---</span>
+        <span class="info-square text-center d-block" id="pacient-age"
+          >---</span
+        >
 
         <div class="button text-center mb-3">
-          <button name="button" type="submit" class="btn w-100 mt-3">
+          <button
+            name="button"
+            type="submit"
+            id="pacient-vaccinations"
+            class="btn w-100 mt-3"
+            data-toggle="modal"
+            data-target="#modal-vaccinations"
+            disabled
+          >
             VER VACINAS
           </button>
         </div>
@@ -34,13 +85,23 @@ title %} {% block extracss %}
       <div class="form-container">
         <div>
           <label for="CPF" class="form form-label">CPF do Paciente</label>
-          <input type="text" class="form-control enable-input" id="CPF" name="CPF" />
+          <input
+            type="text"
+            class="form-control enable-input"
+            id="CPF"
+            name="CPF"
+          />
           <span class="error"></span>
         </div>
-        
+
         <div>
           <label for="vaccine-name" class="form form-label">Vacina</label>
-          <input type="text" class="form-control enable-input" id="vaccine-name" name="vaccine-name" />
+          <input
+            type="text"
+            class="form-control enable-input"
+            id="vaccine-name"
+            name="vaccine-name"
+          />
           <span class="error"></span>
         </div>
 
@@ -51,27 +112,36 @@ title %} {% block extracss %}
           <option value="primeira-dose">Primeira dose</option>
           <option value="segunda-dose">Segunda dose</option>
           <option value="terceira-dose">Terceira dose</option>
+          <option value=dose-reforço">Dose de Reforço</option>
         </select>
         <span class="error"></span>
-
       </div>
     </div>
-  </div>
+  </section>
 
-  <div class="row mb-5">
+  <section class="row mb-5">
     <div class="col-12 col-md-6 d-md-flex justify-content-end">
       <div class="form-container" id="second-form">
-
         <div>
-          <label for="next-date" class="form-label form"
-            >Data da Próxima Dose</label>
-          <input type="date" class="form-control enable-input" id="next-date" name="next-date" />
+          <label for="date" class="form-label form">Data</label>
+          <input
+            type="date"
+            class="form-control enable-input"
+            id="date"
+            name="date"
+          />
           <span class="error"></span>
         </div>
 
         <div>
           <label for="coren" class="form-label form">COREN</label>
-          <input type="text" class="form-control enable-input" id="coren" name="coren" readonly />
+          <input
+            type="text"
+            class="form-control enable-input"
+            id="coren"
+            name="coren"
+            readonly
+          />
           <span class="error"></span>
         </div>
       </div>
@@ -79,21 +149,35 @@ title %} {% block extracss %}
 
     <div class="col-12 col-md-6">
       <div class="form-container">
-        
         <div>
-          <label for="date" class="form-label form">Data</label>
-          <input type="date" class="form-control enable-input" id="date" name="date" />
+          <label for="next-date" class="form-label form"
+            >Data da Próxima Dose</label
+          >
+          <input
+            type="date"
+            class="form-control enable-input"
+            id="next-date"
+            name="next-date"
+          />
           <span class="error"></span>
         </div>
 
+        <div class="text-center">
+          <span id="user-notification"></span>
+        </div>
+
         <div class="button text-center" id="bottom-button">
-          <button name="button" type="submit" class="btn w-75 py-2 mt-2" id="register-vaccination">
+          <button
+            name="button"
+            type="submit"
+            class="btn w-75 py-2 mt-2"
+            id="register-vaccination"
+          >
             ENVIAR
           </button>
         </div>
       </div>
-
     </div>
-  </div>
-</div>
+  </section>
+
 {% endblock content %}

@@ -148,6 +148,4 @@ class Vaccination(db.Model):
             "nurse": self.nurse.json()
         }
 
-@app.cli.command('init-db')
-def init_db():
-  db.create_all()
+

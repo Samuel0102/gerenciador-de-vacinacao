@@ -1,79 +1,72 @@
 {% extends "base.html" %} {% block title %} Login {% endblock title %} {% block
 extracss %}
 <link rel="stylesheet" href="../static/ CSS/login.css" />
+{% endblock extracss %} {% block extrajs %}
 <script type="module" src="../static/JS/register_login_script.js"></script>
-{% endblock extracss %} {% block content %}
-<div class="container-fluid color">
-  <div class="row mt-5">
-    <div class="col-12 d-flex justify-content-center align-items-center mb-5">
-      <div id="login-square">
-        <h1 class="text-center">Login</h1>
+{% endblock extrajs %} {% block content %}
 
-        <div class="row">
-          <div class="col-6 d-flex justify-content-center">
-            <i class="fas fa-circle fa-5x" style="color: #dafff7"></i>
-            <i
-              class="fas fa-user-md fa-3x position-absolute user-icon"
-              onclick="changeLoginForm('nurse')"
-              data-toggle="tooltip"
-              data-placement="top"
-              title="Login como Enfermeiro"
-            ></i>
-          </div>
+<section class="row mt-5">
+  <div class="col-12 d-flex justify-content-center align-items-center mb-5">
+    <div id="login-square">
+      <h1 class="text-center">Login</h1>
 
-          <div class="col-6 d-flex justify-content-center">
-            <i class="fas fa-circle fa-5x" style="color: #dafff7"></i>
-            <i
-              class="fas fa-user fa-3x position-absolute user-icon"
-              onclick="changeLoginForm('pacient')"
-              data-toggle="tooltip"
-              data-placement="top"
-              title="Login como Paciente"
-            ></i>
-          </div>
-        </div>
+      <div class="row justify-content-around">
+          <i
+            class="fas fa-user-md login-icon"
+            id="icon-nurse"
+            data-toggle="tooltip"
+            data-placement="top"
+            title="Cadastro como Enfermeiro"
+          ></i>
+          <i
+            class="fas fa-user login-icon"
+            id="icon-pacient"
+            data-toggle="tooltip"
+            data-placement="top"
+            title="Cadastro como Paciente"
+          ></i>
+      </div>
 
-        <div class="row text-center mt-4">
-          <div class="col">
-            <form>
-              <div>
-                <label for="coren" class="form-label">COREN</label>
-                <input
-                  type="text"
-                  class="form-control input-style"
-                  id="user-identifier"
-                  name="coren"
-                  placeholder="coren-UF xxx-categoria"
-                />
-                <span class="error"></span>
-              </div>
+      <div class="row text-center mt-4">
+        <div class="col">
+          <form>
+            <div>
+              <label for="user-identifier" class="form-label">COREN</label>
+              <input
+                type="text"
+                class="form-control input-style"
+                id="user-identifier"
+                name="coren"
+                placeholder="coren-UF xxx-categoria"
+              />
+              <span class="error"></span>
+            </div>
 
-              <div>
-                <label for="user-password" class="form-label">Senha</label>
-                <input
-                  type="password"
-                  class="form-control input-style"
-                  id="user-password"
-                />
-                <span class="error"></span>
-              </div>
+            <div>
+              <label for="user-password" class="form-label">Senha</label>
+              <input
+                type="password"
+                class="form-control input-style"
+                id="user-password"
+              />
+              <span class="error"></span>
+            </div>
 
-              <span id="user-notification"></span>
-              <div class="button">
-                <button
-                  type="button"
-                  class="btn w-50 py-2 mt-4"
-                  id="login-button"
-                >
-                  <strong>LOGAR</strong>
-                </button>
-              </div>
-            </form>
-          </div>
+            <span id="user-notification"></span>
+            <div class="button">
+              <button
+                type="button"
+                class="btn w-50 py-2 mt-4"
+                id="login-button"
+              >
+                <strong>LOGAR</strong>
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
   </div>
-</div>
+</section>
 
 {% endblock content %}

@@ -1,78 +1,68 @@
-{% extends "base.html" %}
-{% block title %} Cadastro de Vacinas {% endblock title %} 
-{% block extracss %} {% endblock extracss %}
-{% block extrajs %}
+{% extends "base.html" %} {% block title %} Cadastro de Vacinas {% endblock
+title %} {% block extracss %} {% endblock extracss %} {% block extrajs %}
 <script type="module" src="../static/JS/vaccine_script.js"></script>
-{% endblock extrajs %}
+{% endblock extrajs %} {% block content %}
+<div class="row">
+  <aside class="col-md-4 d-flex" id="aside-img">
+    <img src="../static/IMG/vaccine.svg" class="img-fluid align-self-center" />
+  </aside>
 
-{% block content %}
-<div class="container-fluid">
-  <div class="row">
-    <aside class="col-md-4 d-flex" id="aside-img">
-      <img
-        src="../static/IMG/user_img.png"
-        class="img-fluid align-self-center"
-      />
-    </aside>
+  <section class="col-sm-12 col-md-8 mb-5">
+    <div id="vaccine-register">
+      <header class="text-center">
+        <h1>Cadastro de Vacina</h1>
+      </header>
 
-    <section class="col-sm-12 col-md-8 mb-5">
-      <div id="vaccine-register">
-        <header class="text-center">
-          <h1>Cadastro de Vacina</h1>
-        </header>
-
-        <form class="d-flex flex-column align-items-center">
-          <div class="form-group col-md-9">
-            <label for="name" class="form-label">Nome</label>
-            <input
-              type="text"
-              name="name"
-              id="name"
-              class="form-control enable-input"
-            />
-            <span class="error"></span>
-          </div>
-          <div class="form-group col-md-9">
-            <label for="owner" class="form-label">Fabricante</label>
-            <input
-              type="text"
-              name="owner"
-              id="owner"
-              class="form-control enable-input"
-            />
-            <span class="error"></span>
-          </div>
-          <div class="form-group col-md-9">
-            <label for="fabrication" class="form-label"
-              >Fabricação</label
-            >
-            <input
-              type="date"
-              name="fabrication"
-              id="fabrication"
-              class="form-control enable-input"
-            />
-            <span class="error"></span>
-          </div>
-        </form>
-
-        <span
-          class="lead d-flex justify-content-center mb-4"
-          id="user-notification"
-        ></span>
-
-        <div class="button text-center">
-          <button
-            name="button"
-            id="register-vaccine"
-            type="submit"
-            class="btn w-50 py-2"
-          >
-            ENVIAR
-          </button>
+      <form class="d-flex flex-column align-items-center">
+        <div class="form-group col-md-9">
+          <label for="name" class="form-label">Nome</label>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            class="form-control enable-input"
+          />
+          <span class="error"></span>
         </div>
+        <div class="form-group col-md-9">
+          <label for="owner" class="form-label">Fabricante/Laboratório</label>
+          <input
+            type="text"
+            name="owner"
+            id="owner"
+            class="form-control enable-input"
+          />
+          <span class="error"></span>
+        </div>
+        <div class="form-group col-md-9">
+          <label for="fabrication" class="form-label">Fabricação</label>
+          <input
+            type="date"
+            name="fabrication"
+            id="fabrication"
+            class="form-control enable-input"
+          />
+          <span class="error"></span>
+        </div>
+      </form>
+
+      <span
+        class="lead d-flex justify-content-center mb-4"
+        id="user-notification"
+      ></span>
+
+      <div class="button text-center">
+        <button
+          name="button"
+          id="register-vaccine"
+          type="submit"
+          class="btn w-50 py-2"
+        >
+          ENVIAR
+        </button>
       </div>
-    </section>
-  </div>
+    </div>
+  </section>
 </div>
+
 {% endblock content %}
