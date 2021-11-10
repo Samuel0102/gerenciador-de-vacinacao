@@ -61,8 +61,7 @@ def vaccinations(cpf):
         vaccination_data["vaccine-name"] = vaccination.vaccine.name
         vaccination_data["vaccine-owner"] = vaccination.vaccine.owner
         vaccination_data["dose"] = vaccination.dose
-        vaccination_data["date"] = str(
-            vaccination_data.date.date()).replace("-", ".")
+        vaccination_data["date"] = str(vaccination.date.date()).replace("-", ".")
         vaccination_data["nurse-name"] = str(vaccination.nurse.name)
 
         if(str(vaccination.next_dose_date.date()) == "0001-01-01"):

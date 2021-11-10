@@ -255,7 +255,7 @@ function checkVaccine() {
   let vaccineInput = $("#vaccine-name");
 
   if ($("#vaccine-name").val() === "") {
-    showResult(false, vaccineInput, "Vacina não existe!");
+    showResult("input", false, vaccineInput, "Vacina não existe!");
   }
 
   let url = "/check-vaccine/" + $("#vaccine-name").val().toUpperCase();
