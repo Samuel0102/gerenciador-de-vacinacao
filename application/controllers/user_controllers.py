@@ -1,11 +1,10 @@
 from application import app
 from application.models.models import Nurse, Pacient, db
-from application.controllers.utilities_controllers import send_email
+from application.controllers.utilities import send_email
 from bcrypt import gensalt, hashpw
 from flask import render_template, request, jsonify, session, redirect
 from datetime import datetime
 from validate_email import validate_email
-
 
 @app.route("/user-register", methods=["POST", "GET"])
 def user_register():
@@ -40,7 +39,8 @@ def user_register():
             db.session.add(new_user)
             db.session.commit()
 
-            send_email("success_register", new_user.email)
+            send_email("success_register", new_user.email, user_name=new_user.name)
+
             return jsonify({"result": "USER REGISTERED"})
         except:
             return jsonify({"result": "CPF/COREN IN USE"})
@@ -60,6 +60,10 @@ def login():
             if user_data["type"] == "SUPER USER":
                 user = Nurse.query.filter_by(
                     coren=user_data["identifier"]).first()
+
+                if(not user.is_active):
+                    return jsonify({"result": "USER NOT REGISTERED"})
+                    
             else:
                 user = Pacient.query.filter_by(
                     CPF=user_data["identifier"]).first()
@@ -87,7 +91,7 @@ def login():
                 return jsonify({"result": "INCORRECT LOGIN"})
         except:
             # caso não haja usuário cadastrado com CPF/COREN retorna login incorreto
-            return jsonify({"result": "INCORRECT LOGIN"})
+            return jsonify({"result": "USER NOT REGISTERED"})
 
     return render_template("login.html")
 
@@ -108,8 +112,8 @@ def user_data(user_type, user_cpf):
         # troca o separador "-" por "." a fim do
         # formatador automático do JS não formatar de
         # forma errada a data
-        user_born = user_data["born"].date()
-        user_data["born"] = str(user_born).replace("-", ".")
+        data = user_data["born"].date()
+        user_data["born"] = str(data).replace("-", ".")
 
         return jsonify({"result": user_data})
     except:
@@ -129,16 +133,13 @@ def check_password():
     else:
         user = Nurse.query.get(user_data["id"])
 
-    # como está em hash é necessário hashear a senha a ser verifica e após
+    # como está em hash é necessário hashear a senha a ser verificada e após
     # comparar com o hash salvo no banco
     hash_test = hashpw(user_data["password"], user.password) == user.password
 
     # retorna um boolean indicando se a senha é a correspondente a guardada
     # no banco
-    if(hash_test):
-        return jsonify({"result": True})
-    else:
-        return jsonify({"result": False})
+    return jsonify({"result": hash_test})
 
 
 @app.route("/my-profile", methods=["GET", "PUT", "DELETE"])
@@ -156,9 +157,20 @@ def my_profile():
 
         # se o método for delete, apaga o usuário do banco
         if request.method == "DELETE":
-            if user_data["type"] == "NORMAL USER":
-                send_email("send_pdf", user.email, user.CPF)
+            # aqui é feito uma exclusão falsa do usuário enfermeiro
+            # ele é impedido de acessar o site e suas funcionalidades
+            # porém, seu registro ainda é permanente no banco
+            # a fim de garantir os dados de vacinação
+            if user_data["type"] == "SUPER USER":
+                user.is_active = False
+                session.clear()
+                return jsonify({"result":"USER DELETED"})
 
+            # envio do email com pdf de vacinações apenas ao
+            # usuário comum
+            send_email("send_pdf", user.email, user.CPF, user.name)
+
+            # exclusão e limpeza da sessão do back-end
             db.session.delete(user)
             db.session.commit()
             session.clear()
@@ -175,12 +187,9 @@ def my_profile():
                         user_data[field], '%Y-%m-%d').date()
                     user_data[field] = date
 
-                if field == "type" or field == "id":
-                    continue
                 # utiliza o nome da chave do dicionário para alterar o campo
                 # do banco, visto que seus nomes são propositalmente definidos
                 # iguais
-
                 setattr(user, field, user_data[field])
                 db.session.commit()
 
@@ -191,6 +200,8 @@ def my_profile():
 
 @app.route("/my-card")
 def my_card():
+    # barra a entrada de usuários enfermeiros, visto que não possuem
+    # dados de vacinação
     if(len(session) > 0 and session["user_type"] == "SUPER USER"):
         return redirect("/")
 
@@ -202,4 +213,3 @@ def logout():
     # apaga a sessão do back-end, igualmente ocorre no front-end
     session.clear()
     return redirect("/")
-

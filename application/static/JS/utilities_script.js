@@ -7,8 +7,6 @@ function validateCPF() {
   // Regex para verificar o formato do dado passado, se corresponde
   // ao exigido no placeholder
   const base = /^[0-9]{3}\.[0-9]{3}\.[0-9]{3}\-[0-9]{2}$/i;
-  const errorMSG = userCPF.next();
-
   let formatTest = new RegExp(base).test(userCPF.val());
 
   // Verifica se atende o formato exigido
@@ -59,17 +57,19 @@ function validateCPF() {
     // Verifica se o CPF não consiste de 11 números iguais
     // e se os dígitos são validos, caso sim retorna True
     if (validateDigits() && userCPF.split(userCPF[0]).length !== 12) {
-      $("input[name='CPF']").removeClass("border-danger");
-      $("input[name='CPF']").addClass("border-success");
-      errorMSG.text("");
+      showResult("input", true, $("input[name='CPF']"));
       return true;
     }
   }
 
   // Notifica ao usuário caso o formato esteja errado ou há problema
   // nos dígitos
-  $("input[name='CPF']").addClass("border-danger");
-  errorMSG.text("CPF Inválido, siga o formato xxx.xxx.xxx-xx");
+  showResult(
+    "input",
+    false,
+    $("input[name='CPF']"),
+    "CPF Inválido, siga o formato xxx.xxx.xxx-xx"
+  );
   return false;
 }
 
@@ -77,37 +77,33 @@ function validateCPF() {
 function validatePassword() {
   let userPassword = $("#password");
   let passwordConfirm = $("#confirmp");
-  let errorMSGPass = userPassword.next();
-  let errorMSGConfirm = passwordConfirm.next();
 
-  let userPasswordLength = "";
-
-  try {
-    userPasswordLength = userPassword.val().length;
-  } catch {
+  if (localStorage["userType"] !== undefined) {
     return true;
   }
 
+  let isUserPassValid = userPassword.val().length >= 12;
+  let isPassConfirmValid = userPassword.val() === passwordConfirm.val();
+
   // Verifica se a senha tem pelo menos 12 caracteres
-  if (userPasswordLength >= 12) {
-    userPassword.removeClass("border-danger");
-    userPassword.addClass("border-success");
-    errorMSGPass.text("");
+  if (isUserPassValid) {
+    showResult("input", true, userPassword);
   } else {
-    userPassword.addClass("border-danger");
-    errorMSGPass.text("Pelo menos 12 caracteres de senha!");
+    showResult(
+      "input",
+      false,
+      userPassword,
+      "Pelo menos 12 caracteres de senha!"
+    );
   }
 
-  if (userPassword.val() === passwordConfirm.val()) {
-    passwordConfirm.removeClass("border-danger");
-    passwordConfirm.addClass("border-success");
-    errorMSGConfirm.text("");
+  if (isPassConfirmValid) {
+    showResult("input", true, passwordConfirm);
   } else {
-    passwordConfirm.addClass("border-danger");
-    errorMSGConfirm.text("As senhas não são iguais!");
+    showResult("input", false, passwordConfirm, "As senhas não são iguais!");
   }
 
-  if (errorMSGConfirm.text() === "" && errorMSGPass.text() === "") {
+  if (isUserPassValid && isPassConfirmValid) {
     return true;
   }
 
@@ -120,7 +116,6 @@ function validateCoren() {
 
   // Regex para validar o formato do COREN
   const base = /^coren-[a-z]{2}\s[0-9]{3}-(enf$|te$|obst$|par$)/i;
-  const errorMSG = userCoren.next();
 
   let formatTest = new RegExp(base).test(userCoren.val());
 
@@ -158,25 +153,26 @@ function validateCoren() {
     "TO",
   ];
 
+  let isUFValid =
+    brasilStates.indexOf(userCoren.val().slice(6, 8).toUpperCase()) !== -1;
   // Verificação se o formato corresponde ao exigido
   if (formatTest) {
     // Verifica se o UF é válido e existe
-    if (
-      brasilStates.indexOf(userCoren.val().slice(6, 8).toUpperCase()) !== -1
-    ) {
-      userCoren.removeClass("border-danger");
-      userCoren.addClass("border-success");
-      errorMSG.text("");
+    if (isUFValid) {
+      showResult("input", true, userCoren);
       return true;
     } else {
-      userCoren.addClass("border-danger");
-      errorMSG.text("UF não encontrado!");
+      showResult("input", false, userCoren, "UF não encontrado!");
       return false;
     }
   }
 
-  userCoren.addClass("border-danger");
-  errorMSG.text("COREN Inválido, siga o formato coren-uf xxx-categoria");
+  showResult(
+    "input",
+    false,
+    userCoren,
+    "COREN Inválido, siga o formato coren-uf xxx-categoria"
+  );
   return false;
 }
 
@@ -184,85 +180,97 @@ function validateCoren() {
 function validateTel() {
   let userTel = $("input[name='tel']");
   // Regex para validar formato
-  const base = /([0-9][0-9])9+([0-9]{4})-([0-9]{4})/i;
-  const errorMSG = userTel.next();
+  const base = /^([0-9][0-9])\s9+([0-9]{4})-([0-9]{4}$)/i;
 
-  let formatTest = new RegExp(base).test(userTel.val().replace(" ", ""));
+  let formatTest = new RegExp(base).test(userTel.val());
 
   // Apenas verifica se o valor passado foi validado pelo Regex
   if (formatTest) {
-    userTel.removeClass("border-danger");
-    userTel.addClass("border-success");
-    errorMSG.text("");
+    showResult("input", true, userTel);
     return true;
   }
 
-  userTel.addClass("border-danger");
-  errorMSG.text("Formato de telefone inválido, siga o formato ddd 9xxxx-xxxx");
+  showResult(
+    "input",
+    false,
+    userTel,
+    "Telefone inválido, siga o formato ddd 9xxxx-xxxx"
+  );
   return false;
 }
 
-function checkPacientCpf() {
-  $("#pacient-name").text("---");
-  $("#pacient-age").text("---");
+/*  Função para notificar successo ou falha
+    na validação dos dados e nos processos */
+function showResult(type = "input", result, element, message = "") {
+  let className = "border";
 
+  if (type === "notification") {
+    className = "text";
+    element.text(message);
+  } else {
+    element.next().text(message);
+  }
+
+  if (result) {
+    element.addClass(`${className}-success`);
+    element.removeClass(`${className}-danger`);
+  } else {
+    element.addClass(`${className}-danger`);
+  }
+}
+
+/*  Função para verificar se paciente a cadastrar
+    na vacinação existe */
+function checkPacientCpf() {
   if (validateCPF()) {
     let url = "/user-data/NORMAL USER/" + $("#CPF").val();
 
     $.get(url, function (response) {
-      let test = response["result"] === "USER NOT FOUND";
-      if (test) {
-        $("#CPF").next().text("Paciente não existe!");
-        $("#CPF").addClass("border-danger");
+      if (response["result"] === "USER NOT FOUND") {
+        showResult("input", false, $("#CPF"), "Paciente não existe!");
         $("#pacient-vaccinations").prop("disabled", true);
       } else {
-        let pacientAge =
-          new Date().getFullYear() -
-          parseInt(response["result"]["born"].slice(0, 5));
-        $("#pacient-name").text(response["result"]["name"]);
-        $("#pacient-age").text(pacientAge + " Anos");
+        showPacientData(response["result"]);
         $("#pacient-vaccinations").prop("disabled", false);
       }
     });
   }
 }
 
+/*  Função para apresentar dados básicos do paciente
+    na vacinação */
+function showPacientData(data) {
+  $("#pacient-name").text("---");
+  $("#pacient-age").text("---");
+
+  let pacientAge =
+    new Date().getFullYear() - parseInt(data["born"].slice(0, 5));
+  $("#pacient-name").text(data["name"]);
+  $("#pacient-age").text(pacientAge + " Anos");
+}
+
+/*  Função para verificar se vacina a cadastrar
+    na vacinação existe */
 function checkVaccine() {
-  $("#vaccine-name").next().text("");
+  let vaccineInput = $("#vaccine-name");
 
   if ($("#vaccine-name").val() === "") {
-    $("#vaccine-name").next().text("Vacina não existe!");
-    $("#vaccine-name").addClass("border-danger");
-    return;
+    showResult(false, vaccineInput, "Vacina não existe!");
   }
 
   let url = "/check-vaccine/" + $("#vaccine-name").val().toUpperCase();
   $.get(url, function (response) {
-    let test = response["result"] !== "VACCINE NOT FOUND";
-    if (test) {
-      $("#vaccine-name").addClass("border-success");
-      $("#vaccine-name").removeClass("border-danger");
+    if (response["result"] !== "VACCINE NOT FOUND") {
+      showResult("input", true, vaccineInput);
     } else {
-      $("#vaccine-name").next().text("Vacina não existe!");
-      $("#vaccine-name").addClass("border-danger");
+      showResult("input", false, vaccineInput, "Vacina não existe!");
     }
   });
 }
 
 /*  Função para validar dados relativos a usuários passados em inputs */
 function getUserValidatedData() {
-  // Obtém todos os inputs, com base na classe .form-control do bootstrap,
-  // Define o Objeto dos dados e um contador para validação
-  let inputData = $(".enable-input");
-  let userData = {};
-  let isAllFill = verifyFormFields();
-
-  if (isAllFill) {
-    // Laço percorre todos os inputs
-    inputData.each(function (index, element) {
-      userData[$(element).attr("name")] = $(element).val().toUpperCase();
-    });
-  }
+  let userData = getNotEmptyFields();
 
   let dataTest = [
     validateCoren(),
@@ -273,7 +281,7 @@ function getUserValidatedData() {
 
   // Com base no contador de inputs preenchidos e na validação de cpf, coren
   // e password retorna o objeto para as funções que chamarem esta função
-  if (dataTest.every((teste) => teste) && isAllFill) {
+  if (dataTest.every((teste) => teste) && userData !== undefined) {
     return userData;
   }
 
@@ -287,20 +295,15 @@ function getLoginData() {
   let identifierInput = $("#user-identifier");
   let passwordInput = $("#user-password").val();
   let userType = "SUPER USER";
-  let testIdentifier = validateCoren();
+  let testIdentifier = "";
 
   // Verifica qual login o usuário escolheu para fazer,
   // definindo qual validador será usado(CPF/COREN)
-  if (identifierInput.attr("name") === "coren") {
-    if (testIdentifier) {
-      identifierInput = identifierInput.val();
-    }
-  } else {
+  if (identifierInput.attr("name") === "CPF") {
+    userType = "NORMAL USER";
     testIdentifier = validateCPF();
-    if (testIdentifier) {
-      identifierInput = identifierInput.val();
-      userType = "NORMAL USER";
-    }
+  } else {
+    testIdentifier = validateCoren();
   }
 
   // Verifica se o CPF/COREN passou no validador, para só
@@ -308,79 +311,79 @@ function getLoginData() {
   if (testIdentifier) {
     let loginData = {
       type: userType,
-      identifier: identifierInput.toUpperCase(),
+      identifier: identifierInput.val().toUpperCase(),
       password: passwordInput,
     };
 
     return loginData;
-  } else {
-    return;
   }
+
+  return;
 }
 
-function verifyFormFields() {
+/*  Função para retornar os dados se todos os inputs 
+    tiverem sido preenchidos */
+function getNotEmptyFields() {
+  // Obtém todos os inputs, com base na classe .enable-input
+  // Define o Objeto dos dados e um contador para validação
   let inputs = $(".enable-input");
+  let data = {};
   let validCounter = 0;
 
+  // laço que verifica vazio ou não seleção
   inputs.each(function (index, element) {
     if ($(element).val() === "" || $(element).val() === "selected") {
-      $(element).next().text("Campo obrigatório!");
-      $(element).addClass("border-danger");
+      showResult("input", false, $(element), "Campo obrigatório!");
     } else {
-      $(element).next().text("");
-      $(element).addClass("border-success");
-      $(element).removeClass("border-danger");
+      showResult("input", true, $(element));
+      data[$(element).attr("name")] = $(element).val().toUpperCase();
       validCounter++;
     }
   });
 
-  return validCounter === inputs.length;
+  // se forem preenchidos retorna o objeto contendo os valores dos inputs
+  if (validCounter === inputs.length) {
+    return data;
+  }
+
+  return;
 }
 
+/*  Função para retornar dados da vacina a ser cadastrada */
 function getVaccineValidatedData() {
-  let vaccineData = {};
-  const isAllFill = verifyFormFields();
+  let vaccineData = getNotEmptyFields();
 
-  if (isAllFill) {
-    $(".enable-input").each(function (index, element) {
-      vaccineData[$(element).attr("name")] = $(element).val().toUpperCase();
-    });
-  } else {
-    return;
+  if (vaccineData !== undefined) {
+    return vaccineData;
   }
 
-  return vaccineData;
+  return;
 }
 
+/*  Função para retornar dados da vacinação a ser cadastrada */
 function getVaccinationValidatedData() {
-  let vaccinationData = {};
-  const isAllFill = verifyFormFields();
+  let vaccinationData = getNotEmptyFields();
 
-  if (isAllFill) {
-    $(".enable-input").each(function (index, element) {
-      vaccinationData[$(element).attr("name")] = $(element).val().toUpperCase();
-    });
-  } else {
-    return;
-  }
-
-  checkPacientCpf();
   checkVaccine();
+  checkPacientCpf();
 
   let dataTest = [
-    $("#CPF").hasClass("border-success"),
-    $("#vaccine-name").hasClass("border-success"),
+    $("#vaccine-name").next().text() === "",
+    $("#CPF").next().text() === "",
   ];
 
-  if (dataTest.every((teste) => teste)) {
+  if (dataTest.every((teste) => teste) && vaccinationData !== undefined) {
     return vaccinationData;
   }
+
+  return;
 }
 
 export {
   validateCPF,
   checkPacientCpf,
   checkVaccine,
+  showResult,
   getUserValidatedData,
   getLoginData,
   getVaccineValidatedData,

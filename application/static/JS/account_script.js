@@ -1,19 +1,19 @@
 /*  Os Scripts de Conta são responsáveis por controlar os processos
     de alteração, exclusão e apresentação dos dados dos usuários logados */
 
-import { getUserValidatedData } from "./utilities_script.js";
-
-getUserAccountData();
-changeMyProfileForm();
+import { getUserValidatedData, showResult } from "./utilities_script.js";
 
 // "Event Listeners" para chamar as funções necessárias
+$(document).ready(getUserAccountData);
+
 $("#confirm-button").click(checkModalPassword);
 
 $("#alter-data").click(function () {
   changeModalStructure("update", "Confirmação de Atualização");
 });
 $("#del-data").click(function () {
-  let message = "*Seus dados de vacinação serão enviados por email, após exclusão!";
+  let message =
+    "*Seus dados de vacinação serão enviados por email, após exclusão!";
   changeModalStructure("delete", "Confirmação de Exclusão", message);
 });
 
@@ -34,13 +34,7 @@ function getUserAccountData() {
     url: url,
     dataType: "json",
     contentType: "application/json",
-    success: function (response) {
-      /*  Em algum caso raro de mesmo na sessão local
-            o id não for encontrado, ele leva o usuário para
-            a página home, além de impedir acesso de usuários
-            anônimos a página do perfil */
-      showUserAccountData(response["result"]);
-    },
+    success: (response) => showUserAccountData(response["result"]),
     error: function () {
       window.location.href = "/";
     },
@@ -58,17 +52,16 @@ function showUserAccountData(userData) {
 
   // Laço que percorre todos os campos do formulário, preenchendo-os
   // com os dados obtidos na função de busca
-  for (let i = 0; i < inputs.length; i++) {
-    let key = inputs.eq(i).attr("name");
-    inputs[i].value = userData[key];
+  inputs.each((index) => {
+    let key = inputs.eq(index).attr("name");
+    inputs.eq(index).val(userData[key]);
 
-    // Devido a auto-formatação da data vindo do back-end, fora necessário
-    // mudar o separador '-' por '.' no retorno de dado pelo back-end, então em js
-    // precisa-se inverter para formar uma data aceita pelo campo do tipo 'date'
+    // mudança no formato de data do backend, a fim de conseguir
+    // preencher o input do tipo date
     if (key === "born") {
-      inputs[i].value = userData["born"].replace(/[.]/gi, "-");
+      inputs.eq(index).val(userData["born"].replace(/[.]/gi, "-"));
     }
-  }
+  });
 
   // Apenas preenche o nome e idade do box
   $("#username").text(userData["name"]);
@@ -81,8 +74,9 @@ function deleteAccount() {
   // Obtém dados da sessão local
   let userId = localStorage["userId"];
   let userType = localStorage["userType"];
-  
-  if($(".modal-dialog").attr("id") === "modal-update"){
+
+  // confirmação de que o processo é de exclusão
+  if ($(".modal-dialog").attr("id") === "modal-update") {
     return;
   }
 
@@ -101,13 +95,10 @@ function deleteAccount() {
     dataType: "json",
     contentType: "application/json",
     success: function (response) {
-      switch(response["result"]){
-        case "USER DELETED":
-          localStorage.clear();
-          location.href = "/";
-          break;
+      if (response["result"] === "USER DELETED") {
+        localStorage.clear();
+        location.href = "/";
       }
-
     },
     error: function () {
       alert("Houve um erro no sistema, por favor recarregue a página!");
@@ -137,9 +128,7 @@ function updateAccountData() {
     data: JSON.stringify(formattedUserData),
     dataType: "json",
     contentType: "application/json",
-    success: function () {
-      location.reload();
-    },
+    success: () => location.reload(),
     error: function () {
       alert("Houve um erro no sistema, por favor recarregue a página!");
     },
@@ -170,35 +159,41 @@ function checkModalPassword() {
     contentType: "application/json",
     success: function (response) {
       if (response["result"]) {
-        // Esconde o modal e mostra o botão para mandar os dados
-        // atualizados para o servidor se o modal for do tipo update
-        if (modalType === "modal-update") {
-          $("#modal-account").modal("hide");
-          $("#update-button").show();
-          // Habilita a edição dos inputs bloqueados, com exceção do
-          // coren e cpf
-          $(".form-control").each(function (index, element) {
-            if (
-              $(element).prop("disabled") &&
-              $(element).attr("name") !== "CPF" &&
-              $(element).attr("name") !== "coren"
-            ) {
-              $(element).prop("disabled", false);
-            }
-          });
-        } else {
-          // se o modal for delete, chama a função deleteAccount()
-          let message = "*Se o e-mail não for encontrado, seu PDF será perdido!"
-          changeModalStructure("delete-confirm", "Aviso de Exclusão", message);
-          $("#confirm-button").click(deleteAccount);
+        switch (modalType) {
+          case "modal-update":
+            unlockInputs();
+            break;
+          case "modal-delete":
+            let message = `*Se o e-mail não for encontrado, seu PDF será <span class='text-danger'>PERDIDO!</span>`;
+            changeModalStructure(
+              "delete-confirm",
+              "Aviso de Exclusão",
+              message
+            );
+            $("#confirm-button").click(deleteAccount);
+            break;
         }
       } else {
         // se a senha não condizer avisa ao usuário
-        message.text("Senha incorreta!");
+        showResult("notification", false, message, "Senha incorreta!");
       }
     },
     error: function () {
       alert("Houve um erro no sistema, por favor recarregue a página!");
     },
+  });
+}
+
+/*  Função para liberar a edição dos inputs */
+function unlockInputs() {
+  $("#modal-account").modal("hide");
+  $("#update-button").show();
+
+  // Habilita a edição dos inputs bloqueados, com exceção do
+  // coren e cpf
+  $(".enable-input").each(function (index, element) {
+    if ($(element).prop("disabled")) {
+      $(element).prop("disabled", false);
+    }
   });
 }

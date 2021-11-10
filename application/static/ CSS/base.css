@@ -81,11 +81,11 @@ form {
   position: relative;
 }
 
-#register-login-buttons button:hover{
+#guest-user-options button:hover{
   transform: scale(1.1);
 }
 
-#register-login-buttons a{
+#guest-user-options a{
   text-decoration: none;
   border: none;
   color: white;
@@ -93,7 +93,7 @@ form {
   text-transform: uppercase;
 }
 
-#register-login-buttons a:hover{
+#guest-user-options a:hover{
   text-decoration: underline;
 }
 
@@ -151,7 +151,7 @@ form {
 
 /* MEDIAS */
 @media (max-width: 576px) {
-  #register-login-buttons{
+  #guest-user-options{
     margin-top: 20px;
   }
 

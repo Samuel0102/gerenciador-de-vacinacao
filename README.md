@@ -4,7 +4,7 @@ Projeto de um sistema CRUD em Flask, para controlar vacinas e vacinações de ci
 # Sobre o projeto
 
 ## Introdução
-O SUV surgiu como um projeto de construção de um ambiente em tese governamental que fosse responsável por manter remotamente as vacinações de diversos cidadãos. Como uma forma de impedir que os dados, até então físicos, percam-se tão facilmente. Com base nisso, além deste, o SUV será uma forma do cidadão ver seu histórico de vacinas.
+O SUV(Sistema Único de Vacinação) é inicialmente definido como um sistema base para gerenciamento de vacinas e vacinações. Em trabalho com processos de consulta de banco e definição de rotas de views, o projeto visa ser capaz de armazenardados de usuários a serem vacinados, usuários a vacinar, a própria vacinação e as vacinas utilizadas, como objeto de referência, no processo. A principal aposta do SUV é se compreender como um projeto que encontre base na necessidade atual da virtualização e digitalização de processos, até então, materialistas e arcaicos. O armazenamento de dados tão importantes, como os de vacinações, ainda sujeitam-se a perdas e obstruções quando guardados em documentos físicos, por exemplo. Tendo seu armazenamento em uma nuvem, a integridade desses dados teria mais chances de continuar intacta.
 
 ## Especificações
 *Autores*: Samuel Pacheco Ferreira, Maria Erbs Pereira e Thaís Letícia Junkes.      
@@ -30,6 +30,8 @@ O SUV surgiu como um projeto de construção de um ambiente em tese governamenta
 | Acesso dos usuários a seus dados pessoais | :heavy_check_mark: |
 | Logout dos usuários | :heavy_check_mark: |
 | Acesso dos usuários do tipo paciente a todas as vacinas já tomadas | :heavy_check_mark: |
+| Visualização das vacinas tomadas do usuário paciente pelo super usuário no ato de cadastro de nova vacinação | :heavy_check_mark: |
+| Envio de email de boas-vindas ao novo usuário cadastrado| :heavy_check_mark: |
 
 :clock130: - Em desenvolvimento   :heavy_check_mark: - Finalizado
 

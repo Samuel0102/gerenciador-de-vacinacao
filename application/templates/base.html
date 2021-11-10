@@ -64,17 +64,17 @@
         <li class="nav-item">
           <a class="nav-link px-4 text-white" href="/">HOME</a>
         </li>
-        <li class="nav-item dropdown" id="vaccine-item">
+        <li class="nav-item only-super-user">
           <a class="nav-link px-4 text-white" href="/vaccine-register"
           >VACINA</a
           >
         </li>
-        <li class="nav-item" id="vaccination-item">
+        <li class="nav-item only-super-user">
           <a class="nav-link px-4 text-white" href="/vaccination-register"
           >VACINAÇÃO</a
           >
         </li>
-        <li class="nav-item dropdown d-sm-none pl-3" id="user-options">
+        <li class="nav-item dropdown d-sm-none pl-3" id="logged-user-option">
           <a
           href="#"
           class="nav-link dropdown-toggle text-white"
@@ -92,7 +92,7 @@
         </div>
       </li>
       
-      <li class="nav-item ml-4" id="register-login-buttons">
+      <li class="nav-item ml-4" id="guest-user-options">
         <a href="/login">Login</a>
         <a href="/user-register">Cadastrar</a>
       </li>
@@ -100,7 +100,6 @@
     
     <div id="user-area">
       <i
-      class="fas fa-user-circle display-4 d-none d-sm-block"
       style="padding-left: 35px"
       id="header-user-icon"
       ></i>

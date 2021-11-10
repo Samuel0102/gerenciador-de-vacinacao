@@ -22,6 +22,7 @@ class Vaccine(db.Model):
         self.fabrication_date = fabrication_date
         self.owner = owner
 
+    # retorno facilitado dos dados dos usuarios
     def json(self):
         return {
             "id": self.id,
@@ -79,13 +80,13 @@ class Nurse(db.Model):
     email = db.Column(db.Text)
     sex = db.Column(db.Text)
     password = db.Column(db.Text)
+    is_active = db.Column(db.Boolean)
     
-
     def __repr__(self):
         return f"<Nurse {self.name}"
 
     def __init__(self, name:str, born:date,
-                CPF:str, coren:str, tel:str, email:str, sex:str, password:str):
+                CPF:str, coren:str, tel:str, email:str, sex:str, password:str, is_active=True):
         self.name = name
         self.born = born
         self.CPF = CPF
@@ -94,6 +95,7 @@ class Nurse(db.Model):
         self.email = email
         self.sex = sex
         self.password = password
+        self.is_active = is_active
 
     def json(self):
         return {
@@ -105,7 +107,8 @@ class Nurse(db.Model):
             "tel": self.tel,
             "email": self.email,
             "sex": self.sex,
-            "password": self.password
+            "password": self.password,
+            "is_active": self.is_active
         }
 
 class Vaccination(db.Model):
@@ -140,11 +143,11 @@ class Vaccination(db.Model):
             "date": self.date,
             "next_dose_date": self.next_dose_date,
             "dose": self.dose,
-            "id_vacina": self.id_vaccine,
+            "id_vaccine": self.id_vaccine,
             "vaccine": self.vaccine.json(),
-            "id_paciente": self.id_pacient,
+            "id_pacient": self.id_pacient,
             "pacient": self.pacient.json(),
-            "id_enfermeiro": self.id_nurse,
+            "id_nurse": self.id_nurse,
             "nurse": self.nurse.json()
         }
 

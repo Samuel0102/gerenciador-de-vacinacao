@@ -4,22 +4,21 @@
 // Chamada dos métodos validadores
 import {
   getUserValidatedData,
-  getLoginData
+  getLoginData,
+  showResult,
 } from "./utilities_script.js";
 
-$("#register-button").click(function () {
-  registerNewUser();
-});
+$("#register-button").click(registerNewUser);
 
 /*  Função para realizar a conexão e envio dos dados do novo usuário ao servidor */
 function registerNewUser() {
   let formattedUserData = getUserValidatedData();
 
   // Verifica se os dados estão certos e passaram na validação
-  if(formattedUserData === undefined){
+  if (formattedUserData === undefined) {
     return;
   }
-  
+
   const userNotification = $("#user-notification");
   $.ajax({
     type: "POST",
@@ -34,17 +33,24 @@ function registerNewUser() {
             se houve sucesso no cadastro, ou se aquele CPF/COREN 
             já estava registrado no banco */
         case "CPF/COREN IN USE":
-          userNotification.text("CPF/Coren já cadastrado!");
-          userNotification.addClass("text-danger");
+          showResult(
+            "notification",
+            false,
+            userNotification,
+            "CPF/COREN Já Cadastrado!"
+          );
           break;
         case "USER REGISTERED":
-          userNotification.text("Cadastro feito com sucesso!");
-          userNotification.addClass("text-success");
-          userNotification.removeClass("text-danger");
+          showResult(
+            "notification",
+            true,
+            userNotification,
+            "Cadastro feito com Sucesso!"
+          );
 
           setTimeout(function () {
             location.href = "/login";
-          }, 6000);
+          }, 4000);
           break;
       }
     },
@@ -54,9 +60,7 @@ function registerNewUser() {
   });
 }
 
-$("#login-button").click(function () {
-  loggeUser();
-});
+$("#login-button").click(loggeUser);
 
 /*  Função para realizar login por meio de conexão com back-end 
     envia o pequeno objeto json contendo dados do login e qual 
@@ -64,10 +68,10 @@ $("#login-button").click(function () {
 function loggeUser() {
   let loginData = getLoginData();
 
-  if(loginData === undefined){
+  if (loginData === undefined) {
     return;
   }
-  
+
   const userNotification = $("#user-notification");
   $.ajax({
     type: "POST",
@@ -84,25 +88,37 @@ function loggeUser() {
           localStorage.setItem("userType", loginData["type"]);
           localStorage.setItem("userId", response["user-id"]);
           localStorage.setItem("userCpf", response["user-cpf"]);
-          if(localStorage["userType"] === "SUPER USER"){
-            localStorage.setItem("userCoren", response["user-coren"])
+          if (localStorage["userType"] === "SUPER USER") {
+            localStorage.setItem("userCoren", response["user-coren"]);
           }
 
-          userNotification.text(
+          showResult(
+            "notification",
+            true,
+            userNotification,
             "Login realizado com sucesso, redirecionando..."
           );
-          userNotification.addClass("text-success");
-          userNotification.removeClass("text-danger");
 
           setTimeout(function () {
             location.href = "/";
           }, 4000);
           break;
 
+        case "USER NOT REGISTERED":
+          showResult(
+            "notification",
+            false,
+            userNotification,
+            "CPF/COREN não cadastrado no sistema!"
+          );
+          break;
         case "INCORRECT LOGIN":
-          userNotification.text("CPF/COREN ou senha incorretos!");
-          userNotification.addClass("text-danger");
-          userNotification.removeClass("text-success");
+          showResult(
+            "notification",
+            false,
+            userNotification,
+            "CPF/COREN ou senha incorretos!"
+          );
           break;
       }
     },
