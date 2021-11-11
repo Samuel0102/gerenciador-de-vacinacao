@@ -76,7 +76,10 @@ function deleteAccount() {
   let userType = localStorage["userType"];
 
   // confirmação de que o processo é de exclusão
-  if ($(".modal-dialog").attr("id") === "modal-update") {
+  if (
+    $(".modal-dialog").attr("id") === "modal-update" ||
+    $(".modal-dialog").attr("id") === "modal-delete"
+  ) {
     return;
   }
 
@@ -165,11 +168,20 @@ function checkModalPassword() {
             break;
           case "modal-delete":
             let message = `*Se o e-mail não for encontrado, seu PDF será <span class='text-danger'>PERDIDO!</span>`;
-            changeModalStructure(
-              "delete-confirm",
-              "Aviso de Exclusão",
-              message
-            );
+
+            if (localStorage["userType"] === "NORMAL USER") {
+              changeModalStructure(
+                "delete-confirm",
+                "Aviso de Exclusão",
+                message
+              );
+            } else {
+              changeModalStructure(
+                "super-user-alert",
+                "Aviso de Desativação",
+                ""
+              );
+            }
             $("#confirm-button").click(deleteAccount);
             break;
         }

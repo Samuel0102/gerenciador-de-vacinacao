@@ -27,7 +27,7 @@ def user_register():
         if("coren" in user_data):
             new_user = Nurse(user_data["name"], date,
                              user_data["CPF"], user_data["coren"], user_data["tel"],
-                             user_data["email"], user_data["sex"], hashed_password)
+                             user_data["email"], user_data["sex"], hashed_password, True)
         else:
             new_user = Pacient(user_data["name"], date,
                                user_data["CPF"], user_data["tel"], user_data["email"],
@@ -163,6 +163,7 @@ def my_profile():
             # a fim de garantir os dados de vacinação
             if user_data["type"] == "SUPER USER":
                 user.is_active = False
+                db.session.commit()
                 session.clear()
                 return jsonify({"result":"USER DELETED"})
 

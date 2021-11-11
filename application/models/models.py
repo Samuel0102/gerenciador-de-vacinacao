@@ -86,7 +86,7 @@ class Nurse(db.Model):
         return f"<Nurse {self.name}"
 
     def __init__(self, name:str, born:date,
-                CPF:str, coren:str, tel:str, email:str, sex:str, password:str, is_active=True):
+                CPF:str, coren:str, tel:str, email:str, sex:str, password:str, is_active:bool):
         self.name = name
         self.born = born
         self.CPF = CPF

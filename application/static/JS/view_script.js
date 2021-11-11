@@ -146,6 +146,13 @@ function changeModalStructure(action, title, message = "") {
     modalTextDefault = `Verifique se o email ${$("#user-email").val()} é
       válido. Se SIM, clique em Confirmar & Continuar*`;
     $("#modal-input").hide();
+
+  } else if (action === "super-user-alert") {
+    modalTextDefault = `Sua conta como enfermeiro não será deletado do nosso sistema. No entanto
+    ela será desativada e, portanto, você não poderá mais logar, cadastrar vacina, cadastrar
+    vacinação ou visualizar seu perfil. Além disso não poderá se cadastrar novamente com o seu coren.
+    Observando esses pontos,se deseja continuar, clique em Confirmar & Continuar`;
+    $("#modal-input").hide();
   }
 
   $("#modal-body-text").html(modalTextDefault);
