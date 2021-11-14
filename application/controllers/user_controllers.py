@@ -4,7 +4,6 @@ from application.controllers.utilities import send_email
 from bcrypt import gensalt, hashpw
 from flask import render_template, request, jsonify, session, redirect
 from datetime import datetime
-from validate_email import validate_email
 
 @app.route("/user-register", methods=["POST", "GET"])
 def user_register():
@@ -39,7 +38,7 @@ def user_register():
             db.session.add(new_user)
             db.session.commit()
 
-            send_email("success_register", new_user.email, user_name=new_user.name)
+            send_email(type="success_register", email=new_user.email, user_name=new_user.name)
 
             return jsonify({"result": "USER REGISTERED"})
         except:
@@ -169,7 +168,7 @@ def my_profile():
 
             # envio do email com pdf de vacinações apenas ao
             # usuário comum
-            send_email("send_pdf", user.email, user.CPF, user.name)
+            send_email("send_pdf", user.email, user.name, user.CPF)
 
             # exclusão e limpeza da sessão do back-end
             db.session.delete(user)
