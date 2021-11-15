@@ -18,10 +18,12 @@ class Production(ConfigBase):
 app_config = {
     "development": Development(),
     "testing": None,
-    "production": Production()
 }
 
 app_env = environ.get("FLASK_ENV")
 
 if app_env is None:
+    app_env = "development"
+else:
+    app_config["production"] = Production()
     app_env = "production"
