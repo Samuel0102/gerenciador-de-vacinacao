@@ -5,13 +5,12 @@ from os import remove
 from weasyprint import HTML, CSS
 import smtplib
 import requests
-import json
 
 # função para obter todos os dados de vacinação de um determinado paciente
 # através da api
 def get_vaccinations(user_cpf):
     response = requests.get(
-        "http://192.168.0.30:5000/list-vaccinations/" + user_cpf)
+        "http://localhost/list-vaccinations/" + user_cpf)
     vaccinations_data = response.json()
 
     return vaccinations_data
