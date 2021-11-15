@@ -13,17 +13,18 @@ class Development(ConfigBase):
 class Production(ConfigBase):
     Debug = False
     REQUEST_IP = "https://sistema-unico-vacinacao.herokuapp.com/"
-    SQLALCHEMY_DATABASE_URI = environ.get("DATABASE_URL").replace('postgres://', 'postgresql://')
+    if(environ.get("DATABASE_URL") != None):
+        SQLALCHEMY_DATABASE_URI = environ.get("DATABASE_URL").replace('postgres://', 'postgresql://')
 
 app_config = {
     "development": Development(),
     "testing": None,
+    "production": Production()
 }
 
 app_env = environ.get("FLASK_ENV")
 
-if app_env is None:
+if app_env == None:
     app_env = "development"
-else:
-    app_config["production"] = Production()
-    app_env = "production"
+    environ["FLASK_ENV"] = "development"
+
