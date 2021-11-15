@@ -13,7 +13,7 @@ class Development(ConfigBase):
 class Production(ConfigBase):
     Debug = False
     REQUEST_IP = "https://sistema-unico-vacinacao.herokuapp.com/"
-    SQLALCHEMY_DATABASE_URI = f'sqlite:////{path}/application/database/database.db'
+    SQLALCHEMY_DATABASE_URI = environ.get("DATABASE_URL")
 
 app_config = {
     "development": Development(),
