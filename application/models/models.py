@@ -119,7 +119,7 @@ class Vaccination(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.DateTime)
     next_dose_date = db.Column(db.DateTime)
-    dose = db.Column(db.Text)
+    dose = db.Column(db.String(50))
     id_vaccine = db.Column(db.Integer, db.ForeignKey(Vaccine.id), nullable=False)
     vaccine = db.relationship("Vaccine")
     id_pacient = db.Column(db.Integer, db.ForeignKey(Pacient.id), nullable=False)
