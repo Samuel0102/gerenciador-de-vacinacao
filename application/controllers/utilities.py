@@ -22,8 +22,8 @@ def generate_tbody_rows(vaccinations):
 
     for i in vaccinations:
         html = "<tr>"
-        for col in i.items():
-            html += "<td>"+ col +"</td>"
+        for col in i:
+            html += "<td>"+ i[col] +"</td>"
         html += "</tr>"
         
         final_html += html
