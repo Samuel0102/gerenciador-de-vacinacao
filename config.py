@@ -24,4 +24,4 @@ app_config = {
 app_env = environ.get("FLASK_ENV")
 
 if app_env is None:
-    app_env = "development"
+    app_env = "production"

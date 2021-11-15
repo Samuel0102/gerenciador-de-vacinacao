@@ -36,6 +36,7 @@ def vaccination_register():
             db.session.add(vaccination)
             db.session.commit()
             return jsonify({"result": "VACCINATION REGISTERED"})
+            
         except:
             return jsonify({"result": "VACCINATION NOT REGISTERED"})
 
