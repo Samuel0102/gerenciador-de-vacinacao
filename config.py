@@ -7,7 +7,7 @@ class ConfigBase:
 
 class Development(ConfigBase):
     DEBUG = True
-    REQUEST_IP = "192.168.0.30:5000"
+    REQUEST_IP = "http://192.168.0.30:5000/"
     SQLALCHEMY_DATABASE_URI = f'sqlite:////{path}/application/database/development.db'
 
 class Production(ConfigBase):

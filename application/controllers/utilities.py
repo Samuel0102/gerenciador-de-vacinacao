@@ -2,6 +2,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.application import MIMEApplication
 from email.mime.text import MIMEText
 from os import remove
+from application import config
 from weasyprint import HTML, CSS
 import smtplib
 import requests
@@ -10,7 +11,7 @@ import requests
 # através da api
 def get_vaccinations(user_cpf):
     response = requests.get(
-        "http://localhost/list-vaccinations/" + user_cpf)
+        f"{config.REQUEST_IP}/list-vaccinations/" + user_cpf)
     vaccinations_data = response.json()
 
     return vaccinations_data
