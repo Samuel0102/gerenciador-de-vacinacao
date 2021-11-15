@@ -8,7 +8,7 @@ class ConfigBase:
 class Development(ConfigBase):
     DEBUG = True
     REQUEST_IP = "http://127.0.0.1:5000/"
-    SQLALCHEMY_DATABASE_URI = f'sqlite:////{path}/application/database/development.db'
+    SQLALCHEMY_DATABASE_URI = "postgresql://samuel_pacheco:_samuel123@localhost/suv"
 
 class Production(ConfigBase):
     Debug = False

@@ -32,14 +32,11 @@ def vaccination_register():
         vaccination = Vaccination(
             vaccination_data["date"], next_date, vaccination_data["dose"], vaccine, pacient, nurse)
 
-        try:
-            db.session.add(vaccination)
-            db.session.commit()
-            return jsonify({"result": "VACCINATION REGISTERED"})
-            
-        except:
-            return jsonify({"result": "VACCINATION NOT REGISTERED"})
 
+        db.session.add(vaccination)
+        db.session.commit()
+        return jsonify({"result": "VACCINATION REGISTERED"})
+ 
     # barra entrada de usuários paciente na página
     if(len(session) > 0 and session["user_type"] == "SUPER USER"):
         return render_template("vaccination_register.html")

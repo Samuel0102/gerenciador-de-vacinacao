@@ -1,8 +1,10 @@
 from datetime import date
 from application import app
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
 class Vaccine(db.Model):
     #usado nas classes para definir name nas tabelas do banco
@@ -117,7 +119,7 @@ class Vaccination(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.DateTime)
     next_dose_date = db.Column(db.DateTime)
-    dose = db.Column(db.Integer)
+    dose = db.Column(db.Text)
     id_vaccine = db.Column(db.Integer, db.ForeignKey(Vaccine.id), nullable=False)
     vaccine = db.relationship("Vaccine")
     id_pacient = db.Column(db.Integer, db.ForeignKey(Pacient.id), nullable=False)
@@ -129,7 +131,7 @@ class Vaccination(db.Model):
         return "<Vaccination of {self.pacient.name}>"
 
     def __init__(self, date:date, next_dose_date:date,
-                 dose:int, vaccine:Vaccine, pacient:Pacient, nurse: Nurse):
+                 dose:str, vaccine:Vaccine, pacient:Pacient, nurse: Nurse):
         self.date = date
         self.next_dose_date = next_dose_date
         self.dose = dose
