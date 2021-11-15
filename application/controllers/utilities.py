@@ -70,7 +70,7 @@ def generate_pdf(user_cpf, user_name):
     stylesheet = generate_stylesheet()
 
     HTML(string=html_body).write_pdf(
-        f'application/database/{user_name}_vaccinations.pdf', stylesheets=[stylesheet])
+        f'{user_name}_vaccinations.pdf', stylesheets=[stylesheet])
 
 # função para gerar todo o aparato necessário para enviar o email
 # também chama a função para criar os dois tipos de mensagens
@@ -96,7 +96,7 @@ def send_email(type, email, user_name, user_cpf=""):
 
     # exclusão do arquivo de pdf do usuário
     if(type == "send_pdf"):
-        remove(f'application/database/{user_name}_vaccinations.pdf')
+        remove(f'{user_name}_vaccinations.pdf')
 
 # função para gerar o corpo do email, sendo esse ou pdf ou mensagem de boas
 # vinda
@@ -107,7 +107,7 @@ def make_msg(type, msg, user_cpf, user_name):
         # criação e abertura do pdf
         generate_pdf(user_cpf, user_name)
         pdf = MIMEApplication(
-            open(f"application/database/{user_name}_vaccinations.pdf", 'rb').read())
+            open(f"{user_name}_vaccinations.pdf", 'rb').read())
         # adição das informações a aparecerem sobre o pdf e anexagem ao
         # corpo do email
         pdf.add_header('Content-Disposition', 'attachment',
