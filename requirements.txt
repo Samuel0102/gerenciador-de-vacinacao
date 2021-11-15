@@ -18,7 +18,7 @@ itsdangerous==2.0.1
 Jinja2==3.0.1
 MarkupSafe==2.0.1
 Pillow==8.4.0
-psycopg2-binary==2.9.2
+psycopg2==2.9.2
 py-bcrypt==0.4
 py3dns==3.2.1
 pycodestyle==2.8.0
