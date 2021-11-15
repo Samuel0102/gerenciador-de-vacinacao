@@ -1,5 +1,5 @@
 from application import app
-from application.models.models import Nurse, Pacient, db
+from application.models.models import Nurse, Pacient, Vaccination, db
 from application.controllers.utilities import send_email
 from bcrypt import gensalt, hashpw
 from flask import render_template, request, jsonify, session, redirect
@@ -170,7 +170,14 @@ def my_profile():
             # usuário comum
             send_email("send_pdf", user.email, user.name, user.CPF)
 
-            # exclusão e limpeza da sessão do back-end
+            # registros de vacinação do usuário
+            vaccinations = Vaccination.query.filter(
+                Vaccination.pacient.has(CPF=user.CPF)).all()
+
+            # exclusão do usuário e de suas vacinações
+            for i in vaccinations:
+                db.session.delete(i)
+                
             db.session.delete(user)
             db.session.commit()
             session.clear()

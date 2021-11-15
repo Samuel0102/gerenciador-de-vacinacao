@@ -11,8 +11,8 @@ import json
 # através da api
 def get_vaccinations(user_cpf):
     response = requests.get(
-        "http://192.168.0.30:5000/list-vaccinations/" + user_cpf).content
-    vaccinations_data = json.loads(response)
+        "http://192.168.0.30:5000/list-vaccinations/" + user_cpf)
+    vaccinations_data = response.json()
 
     return vaccinations_data
 

@@ -1,4 +1,8 @@
 
+#second-section{
+  background-color: #D6FFF6;
+}
+
 /* Até pequeno */
 @media (max-width: 576px) {
   .col-work {
