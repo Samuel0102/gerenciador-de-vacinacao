@@ -102,7 +102,33 @@ def send_email(type, email, user_name, user_cpf=""):
 # função para gerar o corpo do email, sendo esse ou pdf ou mensagem de boas
 # vinda
 def make_msg(type, msg, user_cpf, user_name):
-    if(type == "send_pdf" or "success_delete"):
+    if(type == "success_register"):
+        msg['Subject'] = "Aviso de Cadastro"
+        # definição da mensagem e anexagem ao corpo do email
+        message = f"""
+            <h1>Aviso de Cadastro</h1>
+            <span style='display:block; margin-bottom:20px;'>Olá, {user_name}</span>
+            <img src='cid:img2' width=300 height=150>
+            <p>
+            O seu cadastro no SUV foi feito com sucesso!<br>
+            Agradecemos a participação no nosso sistema e esperamos que você consiga aproveitar
+            ao máximo do que ele pode oferecer.
+            </p>
+            <span>Atenciosamente, Equipe SUV - Sistema Único de Vacinação</span>
+        """
+        # abrir imagem
+        fp = open('application/static/IMG/bemvindo-15.gif', 'rb')
+        image = MIMEImage(fp.read())
+        fp.close()
+
+        # definir referência para imagem
+        image.add_header('Content-ID', '<img2>')
+
+        # anexagem
+        msg.attach(image)
+        msg.attach(MIMEText(message, "html"))
+
+    else:
         # definição do assunto
         msg['Subject'] = "Finalização da Conta"
         message = f"""
@@ -137,28 +163,3 @@ def make_msg(type, msg, user_cpf, user_name):
         msg.attach(image)
         msg.attach(MIMEText(message, "html"))
 
-    if(type == "success_register"):
-        msg['Subject'] = "Aviso de Cadastro"
-        # definição da mensagem e anexagem ao corpo do email
-        message = f"""
-            <h1>Aviso de Cadastro</h1>
-            <span style='display:block; margin-bottom:20px;'>Olá, {user_name}</span>
-            <img src='cid:img2' width=300 height=150>
-            <p>
-            O seu cadastro no SUV foi feito com sucesso!<br>
-            Agradecemos a participação no nosso sistema e esperamos que você consiga aproveitar
-            ao máximo do que ele pode oferecer.
-            </p>
-            <span>Atenciosamente, Equipe SUV - Sistema Único de Vacinação</span>
-        """
-        # abrir imagem
-        fp = open('application/static/IMG/bemvindo-15.gif', 'rb')
-        image = MIMEImage(fp.read())
-        fp.close()
-
-        # definir referência para imagem
-        image.add_header('Content-ID', '<img2>')
-
-        # anexagem
-        msg.attach(image)
-        msg.attach(MIMEText(message, "html"))
