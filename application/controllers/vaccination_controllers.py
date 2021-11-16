@@ -15,8 +15,7 @@ def vaccination_register():
         # instancia os 3 atores necessários na composição
         nurse = Nurse.query.filter_by(coren=vaccination_data["coren"]).first()
         pacient = Pacient.query.filter_by(CPF=vaccination_data["CPF"]).first()
-        vaccine = Vaccine.query.filter_by(
-            name=vaccination_data["vaccine-name"]).first()
+        vaccine = Vaccine.query.filter_by(name=vaccination_data["vaccine-name"]).first()
 
         vaccination_data["date"] = datetime.strptime(
             vaccination_data["date"], '%Y-%m-%d').date()

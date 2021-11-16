@@ -52,6 +52,14 @@ function registerNewUser() {
             location.href = "/login";
           }, 4000);
           break;
+          case "INVALID EMAIL":
+            showResult(
+              "notification",
+              false,
+              userNotification,
+              "O email não foi encontrado, digite um email válido!"
+              )
+            break;
       }
     },
     error: function () {

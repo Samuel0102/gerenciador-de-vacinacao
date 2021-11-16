@@ -32,17 +32,21 @@ def user_register():
                                user_data["CPF"], user_data["tel"], user_data["email"],
                                user_data["sex"], hashed_password)
 
-        # se o CPF/COREN fornecido não estiver registrado no banco,
-        # realiza o cadastro, caso esteja barra o cadastro
-        try:
-            db.session.add(new_user)
-            db.session.commit()
+        # verifica se o email foi encontrado além de verificar se
+        # o cpf/coren já existe no banco
 
+        try:
             send_email(type="success_register", email=new_user.email, user_name=new_user.name)
 
+            try:
+                db.session.add(new_user)
+                db.session.commit()
+            except:
+                return jsonify({"result": "CPF/COREN IN USE"})
+                
             return jsonify({"result": "USER REGISTERED"})
         except:
-            return jsonify({"result": "CPF/COREN IN USE"})
+            return jsonify({"result": "INVALID EMAIL"})
 
     return render_template("user_register.html")
 
@@ -161,6 +165,7 @@ def my_profile():
             # porém, seu registro ainda é permanente no banco
             # a fim de garantir os dados de vacinação
             if user_data["type"] == "SUPER USER":
+                send_email("success_delete", user.email, user.name)
                 user.is_active = False
                 db.session.commit()
                 session.clear()
