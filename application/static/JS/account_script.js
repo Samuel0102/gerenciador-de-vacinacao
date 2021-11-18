@@ -100,7 +100,8 @@ function deleteAccount() {
     success: function (response) {
       if (response["result"] === "USER DELETED") {
         localStorage.clear();
-        location.href = "/";
+        changeModalStructure("success-delete", "Exclusão Realizada");
+        $("#confirm-button").click(() => location.href = "/");
       }
     },
     error: function () {
@@ -171,7 +172,7 @@ function checkModalPassword() {
 
             if (localStorage["userType"] === "NORMAL USER") {
               changeModalStructure(
-                "delete-confirm",
+                "normal-user-alert",
                 "Aviso de Exclusão",
                 message
               );

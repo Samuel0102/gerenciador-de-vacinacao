@@ -12,12 +12,11 @@ def vaccine_register():
 
         # verifica se a vacina ja existe no sistema, com base no nome
         if(Vaccine.query.filter_by(name=vaccine_data["name"]).first() == None):
-            data = vaccine_data["fabrication"]
-            fabrication_date = datetime.strptime(data, '%Y-%m-%d').date()
-
             # instancia de vacina
             vaccine = Vaccine(
-                vaccine_data["name"], fabrication_date, vaccine_data["owner"])
+                vaccine_data["name"],
+                vaccine_data["fabrication"],
+                vaccine_data["owner"])
 
             # adição ao banco
             db.session.add(vaccine)

@@ -2,54 +2,37 @@ from application import app
 from application.models.models import Nurse, Pacient, Vaccination, db
 from application.controllers.utilities import send_email
 from bcrypt import gensalt, hashpw
-from flask import render_template, request, jsonify, session, redirect
+from flask import json, render_template, request, jsonify, session, redirect
 from datetime import datetime
+
 
 @app.route("/user-register", methods=["POST", "GET"])
 def user_register():
     if request.method == "POST":
         # obtem o JSON de dados do novo usuário fornecido pelo front-end
         user_data = request.get_json()
-
-        # converte a data do tipo str para o tipo datetime, exigido pelo domînio
-        # do campo 'born' das tabelas de paciente e enfermeiros
-        data = user_data["born"]
-        date = datetime.strptime(data, '%Y-%m-%d').date()
-
-        # transforma a senha de plain str para um hash adicionado de salt,
-        # garantindo mais segurança no armazenamento
-        plain_password = user_data["password"]
-        hashed_password = hashpw(plain_password, gensalt())
-
-        # verifica qual tipo de usuário será cadastrado conforme atributo type
-        # do JSON obtido, após instancia ou Nurse ou Pacient
+        # verifica qual tipo de usuário será cadastrado
         if("coren" in user_data):
-            new_user = Nurse(user_data["name"], date,
+            new_user = Nurse(user_data["name"], user_data["born"],
                              user_data["CPF"], user_data["coren"], user_data["tel"],
-                             user_data["email"], user_data["sex"], hashed_password, True)
+                             user_data["email"], user_data["sex"], user_data["password"], True)
         else:
-            new_user = Pacient(user_data["name"], date,
+            new_user = Pacient(user_data["name"], ["user-born"],
                                user_data["CPF"], user_data["tel"], user_data["email"],
-                               user_data["sex"], hashed_password)
+                               user_data["sex"], user_data["password"])
 
-        # verifica se o email foi encontrado além de verificar se
-        # o cpf/coren já existe no banco
 
+        # verificação se cpf/coren já consta no banco
         try:
-            send_email(type="success_register", email=new_user.email, user_name=new_user.name)
+            db.session.add(new_user)
+            db.session.commit()
 
-            try:
-                db.session.add(new_user)
-                db.session.commit()
-            except:
-                return jsonify({"result": "CPF/COREN IN USE"})
-                
-            return jsonify({"result": "USER REGISTERED"})
+            send_email(type="success_register",
+                    email=new_user.email, user_name=new_user.name)
         except:
-            return jsonify({"result": "INVALID EMAIL"})
+            return jsonify({"result": "CPF/COREN IN USE"})
 
     return render_template("user_register.html")
-
 
 @app.route("/login", methods=["POST", "GET"])
 def login():
@@ -57,28 +40,17 @@ def login():
         # obtém o JSON de 3 atributos fornecido pelo front-end
         user_data = request.get_json()
 
-        # captação de possíveis erros do login
-        try:
-            # verifica o tipo de usuário, para saber em qual tabela procurar
-            if user_data["type"] == "SUPER USER":
-                user = Nurse.query.filter_by(
-                    coren=user_data["identifier"]).first()
+        if user_data["type"] == "SUPER USER":
+            user = Nurse.query.filter_by(coren=user_data["identifier"]).first()
 
-                if(not user.is_active):
-                    return jsonify({"result": "USER NOT REGISTERED"})
-                    
-            else:
-                user = Pacient.query.filter_by(
-                    CPF=user_data["identifier"]).first()
+            if(user != None and not user.is_active):
+                return jsonify({"result": "USER NOT REGISTERED"})
+        else:
+            user = Pacient.query.filter_by(CPF=user_data["identifier"]).first()
 
-            # testa se a senha é igual a do banco, através de conversão em hash e após
-            # comparação gerando um boolean
-            hash_test = hashpw(
-                user_data["password"], user.password) == user.password
-
-            # verifica se as senhas são iguais, se sim, cria uma sessão no back-end,
-            # que age junto com a do front-end
-            if(hash_test):
+        # se não houver usuário com cpf/coren a query retorna none
+        if(user != None):
+            if(user.equals_password(user_data["password"])):
                 session["user_type"] = user_data["type"]
                 session["user_id"] = user.id
 
@@ -92,37 +64,30 @@ def login():
             else:
                 # caso a senha não corresponda, retorna login incorreto
                 return jsonify({"result": "INCORRECT LOGIN"})
-        except:
-            # caso não haja usuário cadastrado com CPF/COREN retorna login incorreto
-            return jsonify({"result": "USER NOT REGISTERED"})
-
+        else:
+            return jsonify({"result":"USER NOT REGISTERED"})
+        
     return render_template("login.html")
 
 
 @app.route("/user-data/<user_type>/<user_cpf>")
 def user_data(user_type, user_cpf):
-    # route sem template, para obter dados do banco
-    try:
-        # verifica o tipo de usuário, especificado na url
-        # e busca pelo registro com base no id passado
-        if(user_type == "SUPER USER"):
-            user = Nurse.query.filter_by(CPF=user_cpf).first()
-        else:
-            user = Pacient.query.filter_by(CPF=user_cpf).first()
+    # query pelo banco com base em tipo de usuario e seu id
+    if(user_type == "SUPER USER"):
+        user = Nurse.query.filter_by(CPF=user_cpf).first()
+    else:
+        user = Pacient.query.filter_by(CPF=user_cpf).first()
 
+    if(user != None):
         user_data = user.json()
 
-        # troca o separador "-" por "." a fim do
-        # formatador automático do JS não formatar de
-        # forma errada a data
+        # formatacao para não ser interpretado como data do tipo JS
         data = user_data["born"].date()
         user_data["born"] = str(data).replace("-", ".")
 
         return jsonify({"result": user_data})
-    except:
-        # se o id não obtiver sucesso, em raros casos, impede o fornecimento
-        # dos dados
-        return jsonify({"result": "USER NOT FOUND"})
+
+    return jsonify({"result": "USER NOT FOUND"})
 
 
 @app.route("/check-password", methods=["POST"])
@@ -136,13 +101,8 @@ def check_password():
     else:
         user = Nurse.query.get(user_data["id"])
 
-    # como está em hash é necessário hashear a senha a ser verificada e após
-    # comparar com o hash salvo no banco
-    hash_test = hashpw(user_data["password"], user.password) == user.password
-
-    # retorna um boolean indicando se a senha é a correspondente a guardada
-    # no banco
-    return jsonify({"result": hash_test})
+    # retorna boolean relativo a igualdade das senhas
+    return jsonify({"result": user.equals_password(user_data["password"])})
 
 
 @app.route("/my-profile", methods=["GET", "PUT", "DELETE"])
@@ -169,7 +129,7 @@ def my_profile():
                 user.is_active = False
                 db.session.commit()
                 session.clear()
-                return jsonify({"result":"USER DELETED"})
+                return jsonify({"result": "USER DELETED"})
 
             # envio do email com pdf de vacinações apenas ao
             # usuário comum
@@ -182,7 +142,7 @@ def my_profile():
             # exclusão do usuário e de suas vacinações
             for i in vaccinations:
                 db.session.delete(i)
-                
+
             db.session.delete(user)
             db.session.commit()
             session.clear()
@@ -198,10 +158,8 @@ def my_profile():
                     date = datetime.strptime(
                         user_data[field], '%Y-%m-%d').date()
                     user_data[field] = date
-
-                # utiliza o nome da chave do dicionário para alterar o campo
-                # do banco, visto que seus nomes são propositalmente definidos
-                # iguais
+                
+                # alteração dos atributos
                 setattr(user, field, user_data[field])
                 db.session.commit()
 

@@ -45,21 +45,13 @@ function registerNewUser() {
             "notification",
             true,
             userNotification,
-            "Cadastro feito com Sucesso!"
+            "Cadastro feito com Sucesso! Um E-mail foi enviado a você."
           );
-
           setTimeout(function () {
             location.href = "/login";
-          }, 4000);
+          }, 2000);
           break;
-          case "INVALID EMAIL":
-            showResult(
-              "notification",
-              false,
-              userNotification,
-              "O email não foi encontrado, digite um email válido!"
-              )
-            break;
+
       }
     },
     error: function () {
@@ -76,10 +68,7 @@ $("#login-button").click(loggeUser);
 function loggeUser() {
   let loginData = getLoginData();
 
-  if (loginData === undefined) {
-    return;
-  }
-
+  if (loginData === undefined) return;
   const userNotification = $("#user-notification");
   $.ajax({
     type: "POST",
@@ -88,47 +77,32 @@ function loggeUser() {
     dataType: "json",
     contentType: "application/json",
     success: function (response) {
-      switch (response["result"]) {
-        /* Verifica se as informaçóes condizem com registro do banco,
-            se sim cria uma sessão local, guardando o tipo de usuário e
-            seu identificador na base de dados, além de notificar o usuário */
-        case "SUCCESS LOGIN":
-          localStorage.setItem("userType", loginData["type"]);
-          localStorage.setItem("userId", response["user-id"]);
-          localStorage.setItem("userCpf", response["user-cpf"]);
-          if (localStorage["userType"] === "SUPER USER") {
-            localStorage.setItem("userCoren", response["user-coren"]);
-          }
-
-          showResult(
-            "notification",
-            true,
-            userNotification,
-            "Login realizado com sucesso, redirecionando..."
-          );
-
-          setTimeout(function () {
-            location.href = "/";
-          }, 4000);
-          break;
-
-        case "USER NOT REGISTERED":
-          showResult(
-            "notification",
-            false,
-            userNotification,
-            "CPF/COREN não cadastrado no sistema!"
-          );
-          break;
-        case "INCORRECT LOGIN":
-          showResult(
-            "notification",
-            false,
-            userNotification,
-            "CPF/COREN ou senha incorretos!"
-          );
-          break;
+      if(response["result"] === "SUCCESS LOGIN"){
+        localStorage.setItem("userType", loginData["type"]);
+        localStorage.setItem("userId", response["user-id"]);
+        localStorage.setItem("userCpf", response["user-cpf"]);
+        
+        if (localStorage["userType"] === "SUPER USER") {
+          localStorage.setItem("userCoren", response["user-coren"]);
+        }
+        location.href = "/";
+        return;
       }
+      let errorMsg = "";
+
+      if(response["result"] === "USER NOT REGISTERED"){
+        errorMsg = "CPF/COREN não cadastrado no sistema!";
+      }else{
+        errorMsg = "CPF/COREN ou senha incorretos!";
+      }
+
+      showResult(
+        "notification",
+        false,
+        userNotification,
+        errorMsg
+      );
+
     },
     error: function () {
       alert("Houve um erro no sistema, por favor recarregue a página!");

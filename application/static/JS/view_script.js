@@ -142,16 +142,19 @@ function changeModalStructure(action, title, message = "") {
   modalMessage.html(message);
   modal.attr("id", `modal-${action}`);
 
-  if (action === "delete-confirm") {
+  if (action === "normal-user-alert") {
     modalTextDefault = `Verifique se o email ${$("#user-email").val()} é
       válido. Se SIM, clique em Confirmar & Continuar*`;
     $("#modal-input").hide();
-
   } else if (action === "super-user-alert") {
     modalTextDefault = `Sua conta como enfermeiro não será deletado do nosso sistema. No entanto
     ela será desativada e, portanto, você não poderá mais logar, cadastrar vacina, cadastrar
     vacinação ou visualizar seu perfil. Além disso não poderá se cadastrar novamente com o seu coren.
     Observando esses pontos,se deseja continuar, clique em Confirmar & Continuar`;
+    $("#modal-input").hide();
+  } else if (action === "success-delete") {
+    modalTextDefault =
+      "Sua conta foi removida com sucesso! Um email de despedida foi enviado, até mais!";
     $("#modal-input").hide();
   }
 

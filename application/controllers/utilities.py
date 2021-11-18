@@ -108,7 +108,7 @@ def make_msg(type, msg, user_cpf, user_name):
         message = f"""
             <h1>Aviso de Cadastro</h1>
             <span style='display:block; margin-bottom:20px;'>Olá, {user_name}</span>
-            <img src='cid:img2' width=300 height=150>
+            <img src='cid:img' width=300 height=150>
             <p>
             O seu cadastro no SUV foi feito com sucesso!<br>
             Agradecemos a participação no nosso sistema e esperamos que você consiga aproveitar
@@ -120,21 +120,13 @@ def make_msg(type, msg, user_cpf, user_name):
         fp = open('application/static/IMG/bemvindo-15.gif', 'rb')
         image = MIMEImage(fp.read())
         fp.close()
-
-        # definir referência para imagem
-        image.add_header('Content-ID', '<img2>')
-
-        # anexagem
-        msg.attach(image)
-        msg.attach(MIMEText(message, "html"))
-
     else:
         # definição do assunto
         msg['Subject'] = "Finalização da Conta"
         message = f"""
             <h1>Despedida</h1>
             <span style='display:block; margin-bottom:20px;'>Olá, {user_name}</span>
-            <img src='cid:img1' width=300 height=150>
+            <img src='cid:img' width=300 height=150>
             <p>
             Agradecemos a sua participação no nosso sistema e esperamos que tenha
             sido útil para você, até mais!
@@ -156,10 +148,9 @@ def make_msg(type, msg, user_cpf, user_name):
         image = MIMEImage(fp.read())
         fp.close()
 
-        # definir referência para imagem
-        image.add_header('Content-ID', '<img1>')
+    # definir referência para imagem
+    image.add_header('Content-ID', '<img>')
 
-        # anexagem
-        msg.attach(image)
-        msg.attach(MIMEText(message, "html"))
-
+    # anexagem
+    msg.attach(image)
+    msg.attach(MIMEText(message, "html"))
