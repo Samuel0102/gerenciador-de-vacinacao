@@ -32,6 +32,8 @@ def user_register():
         except:
             return jsonify({"result": "CPF/COREN IN USE"})
 
+        return jsonify({"result":"USER REGISTERED"})
+
     return render_template("user_register.html")
 
 @app.route("/login", methods=["POST", "GET"])

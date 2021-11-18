@@ -312,7 +312,7 @@ function getLoginData() {
     let loginData = {
       type: userType,
       identifier: identifierInput.val().toUpperCase(),
-      password: passwordInput,
+      password: passwordInput.toUpperCase(),
     };
 
     return loginData;
