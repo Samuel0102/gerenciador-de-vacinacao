@@ -151,7 +151,7 @@ function checkModalPassword() {
   let userData = {
     type: localStorage["userType"],
     id: localStorage["userId"],
-    password: modalPassword,
+    password: modalPassword.toUpperCase(),
   };
 
   // Envia para a rota de verificação, que retorna um Boolean
