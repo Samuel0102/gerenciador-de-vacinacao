@@ -17,7 +17,7 @@ def user_register():
                              user_data["CPF"], user_data["coren"], user_data["tel"],
                              user_data["email"], user_data["sex"], user_data["password"], True)
         else:
-            new_user = Pacient(user_data["name"], ["user-born"],
+            new_user = Pacient(user_data["name"], user_data["born"],
                                user_data["CPF"], user_data["tel"], user_data["email"],
                                user_data["sex"], user_data["password"])
 
@@ -126,6 +126,7 @@ def my_profile():
             # ele é impedido de acessar o site e suas funcionalidades
             # porém, seu registro ainda é permanente no banco
             # a fim de garantir os dados de vacinação
+            print(user_data)
             if user_data["type"] == "SUPER USER":
                 send_email("success_delete", user.email, user.name)
                 user.is_active = False

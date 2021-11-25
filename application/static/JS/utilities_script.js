@@ -199,6 +199,38 @@ function validateTel() {
   return false;
 }
 
+function validateBorn(){
+  const born = $("input[name='born']");
+  const base = /^([0-9]{4})-([0-9][0-9])-([0-9][0-9])$/i;
+
+  let formatTest = new RegExp(base).test(born.val());
+  let year = new Date().getFullYear();
+
+  if(formatTest){
+    const age = year - parseInt(born.val().slice(0,4));
+
+    if($("#coren").prop("disabled")){
+      if(age < 1){
+        showResult("input", false, born, "Idade mínima de 1 Ano");
+        return false;
+      }
+    }else{
+      if(age < 18){
+        showResult("input", false, born, "Idade mínima de 18 Anos");
+        return false;
+      }
+    }
+
+    showResult("input", true, born);
+    return true;
+
+  }
+
+  showResult("input", false, born, "Data Inválida!");
+  return false;
+  
+}
+
 /*  Função para notificar successo ou falha
     na validação dos dados e nos processos */
 function showResult(type = "input", result, element, message = "") {
@@ -268,6 +300,7 @@ function checkVaccine() {
   });
 }
 
+
 /*  Função para validar dados relativos a usuários passados em inputs */
 function getUserValidatedData() {
   let userData = getNotEmptyFields();
@@ -277,6 +310,7 @@ function getUserValidatedData() {
     validateCPF(),
     validatePassword(),
     validateTel(),
+    validateBorn()
   ];
 
   // Com base no contador de inputs preenchidos e na validação de cpf, coren

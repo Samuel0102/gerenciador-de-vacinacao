@@ -7,7 +7,14 @@ from bcrypt import hashpw, gensalt
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
-class Vaccine(db.Model):
+# classe contendo métodos genéricos e de utilidade
+class Mixin:
+    def format_data(self, data:date):
+        date = datetime.strptime(
+        data, '%Y-%m-%d').date()
+
+        return date
+class Vaccine(db.Model, Mixin):
     #usado nas classes para definir name nas tabelas do banco
     __tablename__ = "vaccines"
 
@@ -22,14 +29,8 @@ class Vaccine(db.Model):
     #usado para não necessitar especificação do atributo na instanciação
     def __init__(self, name:str, fabrication_date:date, owner:str):
         self.name = name
-        self.fabrication_date = self.format_fabrication_date(fabrication_date)
+        self.fabrication_date = super().format_data(fabrication_date)
         self.owner = owner
-
-    def format_fabrication_date(self, fabrication_date:date):
-        data = fabrication_date
-        fabrication_date = datetime.strptime(data, '%Y-%m-%d').date()
-
-        return fabrication_date
 
     # retorno facilitado dos dados dos usuarios
     def json(self):
@@ -40,7 +41,7 @@ class Vaccine(db.Model):
             "owner": self.owner
         }
 
-class Pacient(db.Model):
+class Pacient(db.Model, Mixin):
     __tablename__ = "pacients"
 
     id = db.Column(db.Integer, primary_key=True)
@@ -58,7 +59,7 @@ class Pacient(db.Model):
     def __init__(self, name:str, born:date,
                 CPF:str, tel:str, email:str, sex:str, password:str):
         self.name = name
-        self.born = self.format_born_date(born)
+        self.born = super().format_data(born)
         self.CPF = CPF
         self.tel = tel
         self.email = email
@@ -72,14 +73,6 @@ class Pacient(db.Model):
         hashed_password = hashpw(plain_password, gensalt())
 
         return hashed_password
-
-    def format_born_date(self, born:date):
-        # converte a data do tipo str para o tipo datetime, exigido pelo domînio
-        # do campo 'born' das tabelas de paciente e enfermeiros
-        data = born
-        date = datetime.strptime(data, '%Y-%m-%d').date()
-
-        return date
 
     def equals_password(self, password:str):
          # testa se a senha é igual a do banco, através de conversão em hash e após
@@ -100,7 +93,7 @@ class Pacient(db.Model):
             "password": self. password
         }
 
-class Nurse(db.Model):
+class Nurse(db.Model, Mixin):
     __tablename__ = "nurses"
 
     id = db.Column(db.Integer, primary_key=True)
@@ -120,7 +113,7 @@ class Nurse(db.Model):
     def __init__(self, name:str, born:date,
                 CPF:str, coren:str, tel:str, email:str, sex:str, password:str, is_active:bool):
         self.name = name
-        self.born = self.format_born_date(born)
+        self.born = super().format_data(born)
         self.CPF = CPF
         self.coren = coren
         self.tel = tel
@@ -136,14 +129,6 @@ class Nurse(db.Model):
         hashed_password = hashpw(plain_password, gensalt())
 
         return hashed_password
-
-    def format_born_date(self, born:date):
-        # converte a data do tipo str para o tipo datetime, exigido pelo domînio
-        # do campo 'born' das tabelas de paciente e enfermeiros
-        data = born
-        date = datetime.strptime(data, '%Y-%m-%d').date()
-
-        return date
 
     def equals_password(self, password:str):
         hash_test = hashpw(password, self.password) == self.password
@@ -164,7 +149,7 @@ class Nurse(db.Model):
             "is_active": self.is_active
         }
 
-class Vaccination(db.Model):
+class Vaccination(db.Model, Mixin):
     __tablename__ = "vaccinations"
 
     id = db.Column(db.Integer, primary_key=True)
@@ -183,18 +168,12 @@ class Vaccination(db.Model):
 
     def __init__(self, date:date, next_dose_date:date,
                  dose:str, vaccine:Vaccine, pacient:Pacient, nurse: Nurse):
-        self.date = self.format_vaccination_date(date)
-        self.next_dose_date = self.format_vaccination_date(next_dose_date)
+        self.date = super().format_data(date)
+        self.next_dose_date = super().format_data(next_dose_date)
         self.dose = dose
         self.vaccine = vaccine
         self.pacient = pacient
         self.nurse = nurse
-
-    def format_vaccination_date(self, vaccination_date:date):
-        vaccination_date = datetime.strptime(
-        vaccination_date, '%Y-%m-%d').date()
-
-        return vaccination_date
 
     def json(self):
         return {
@@ -209,5 +188,4 @@ class Vaccination(db.Model):
             "id_nurse": self.id_nurse,
             "nurse": self.nurse.json()
         }
-
 

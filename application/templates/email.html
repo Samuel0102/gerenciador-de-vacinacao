@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Boas Vindas!</title>
+  </head>
+  <body>
+    {% if data[0] == "register" %}
+        <h1>Aviso de Cadastro</h1>
+        <span style="display: block; margin-bottom: 20px">Olá, {{data[1]}}</span>
+        <img src="https://i.ibb.co/w4KS1DS/bemvindo-15.gif" width="300" height="150" />
+        <p>
+        O seu cadastro no SUV foi feito com sucesso!<br />
+        Agradecemos a participação no nosso sistema e esperamos que você consiga
+        aproveitar ao máximo do que ele pode oferecer.
+        </p>
+    {% else %}
+        <h1>Despedida</h1>
+        <span style='display:block; margin-bottom:20px;'>Olá, {{data[1]}}</span>
+        <img src='https://i.ibb.co/rkCwRKL/adios-despedida.gif' width=300 height=150>
+        <p>
+        Agradecemos a sua participação no nosso sistema e esperamos que tenha
+        sido útil para você, até mais!
+        </p>
+    {% endif %}
+
+    <span>Atenciosamente, Equipe SUV - Sistema Único de Vacinação</span>
+  </body>
+</html>
