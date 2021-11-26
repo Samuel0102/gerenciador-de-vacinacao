@@ -1,8 +1,9 @@
 import { getVaccineValidatedData, showResult } from "./utilities_script.js";
 
-$("#register-vaccine").click(function () {
-  registerNewVaccine();
-});
+$("#register-vaccine").click(registerNewVaccine);
+$("#fabrication").on("keypress", (e) => {
+  if(e.key === "Enter") registerNewVaccine;
+})
 
 /*  Função para cadastrar nova vacina */
 function registerNewVaccine() {

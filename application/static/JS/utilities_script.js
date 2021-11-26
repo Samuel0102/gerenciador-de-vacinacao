@@ -68,7 +68,7 @@ function validateCPF() {
     "input",
     false,
     $("input[name='CPF']"),
-    "CPF Inválido, siga o formato xxx.xxx.xxx-xx"
+    "CPF Inválido, siga o formato ou digite um CPF válido!"
   );
   return false;
 }
@@ -171,7 +171,7 @@ function validateCoren() {
     "input",
     false,
     userCoren,
-    "COREN Inválido, siga o formato coren-uf xxx-categoria"
+    "COREN Inválido, siga o formato COREN-UF xxx-CATEGORIA"
   );
   return false;
 }
@@ -180,7 +180,7 @@ function validateCoren() {
 function validateTel() {
   let userTel = $("input[name='tel']");
   // Regex para validar formato
-  const base = /^([0-9][0-9])\s9+([0-9]{4})-([0-9]{4}$)/i;
+  const base = /^(\([0-9][0-9])\)\s9+([0-9]{4})-([0-9]{4}$)/i;
 
   let formatTest = new RegExp(base).test(userTel.val());
 
@@ -199,6 +199,7 @@ function validateTel() {
   return false;
 }
 
+/* Validação da idade */
 function validateBorn(){
   const born = $("input[name='born']");
   const base = /^([0-9]{4})-([0-9][0-9])-([0-9][0-9])$/i;

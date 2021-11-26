@@ -1,75 +1,73 @@
 from application import app
 from application.models.models import Nurse, Pacient, Vaccination, db
 from application.controllers.utilities import send_email
-from bcrypt import gensalt, hashpw
 from flask import json, render_template, request, jsonify, session, redirect
 from datetime import datetime
 
 
 @app.route("/user-register", methods=["POST", "GET"])
 def user_register():
-    if request.method == "POST":
-        # obtem o JSON de dados do novo usuário fornecido pelo front-end
-        user_data = request.get_json()
-        # verifica qual tipo de usuário será cadastrado
-        if("coren" in user_data):
-            new_user = Nurse(user_data["name"], user_data["born"],
-                             user_data["CPF"], user_data["coren"], user_data["tel"],
-                             user_data["email"], user_data["sex"], user_data["password"], True)
-        else:
-            new_user = Pacient(user_data["name"], user_data["born"],
-                               user_data["CPF"], user_data["tel"], user_data["email"],
-                               user_data["sex"], user_data["password"])
+    if request.method != "POST":
+        return render_template("user_register.html")
+    # obtem o JSON de dados do novo usuário fornecido pelo front-end
+    user_data = request.get_json()
+    # verifica qual tipo de usuário será cadastrado
+    if("coren" in user_data):
+        new_user = Nurse(user_data["name"], user_data["born"],
+                         user_data["CPF"], user_data["coren"], user_data["tel"],
+                         user_data["email"], user_data["sex"], user_data["password"], True)
+    else:
+        new_user = Pacient(user_data["name"], user_data["born"],
+                           user_data["CPF"], user_data["tel"], user_data["email"],
+                           user_data["sex"], user_data["password"])
 
 
-        # verificação se cpf/coren já consta no banco
-        try:
-            db.session.add(new_user)
-            db.session.commit()
+    # verificação se cpf/coren já consta no banco
+    try:
+        db.session.add(new_user)
+        db.session.commit()
 
-            send_email(type="success_register",
-                    email=new_user.email, user_name=new_user.name)
-        except:
-            return jsonify({"result": "CPF/COREN IN USE"})
+        send_email(type="success_register",
+                email=new_user.email, user_name=new_user.name)
+    except:
+        return jsonify({"result": "CPF/COREN IN USE"})
 
-        return jsonify({"result":"USER REGISTERED"})
-
-    return render_template("user_register.html")
+    return jsonify({"result":"USER REGISTERED"})
 
 @app.route("/login", methods=["POST", "GET"])
 def login():
-    if request.method == "POST":
-        # obtém o JSON de 3 atributos fornecido pelo front-end
-        user_data = request.get_json()
+    if request.method != "POST":
+        return render_template("login.html")
 
-        if user_data["type"] == "SUPER USER":
-            user = Nurse.query.filter_by(coren=user_data["identifier"]).first()
+    # obtém o JSON de 3 atributos fornecido pelo front-end
+    user_data = request.get_json()
 
-            if(user != None and not user.is_active):
-                return jsonify({"result": "USER NOT REGISTERED"})
-        else:
-            user = Pacient.query.filter_by(CPF=user_data["identifier"]).first()
+    if user_data["type"] == "SUPER USER":
+        user = Nurse.query.filter_by(coren=user_data["identifier"]).first()
 
-        # se não houver usuário com cpf/coren a query retorna none
-        if(user != None):
-            if(user.equals_password(user_data["password"])):
-                session["user_type"] = user_data["type"]
-                session["user_id"] = user.id
+        if(user != None and not user.is_active):
+            return jsonify({"result": "USER NOT REGISTERED"})
+    else:
+        user = Pacient.query.filter_by(CPF=user_data["identifier"]).first()
 
-                response = {"result": "SUCCESS LOGIN",
-                            "user-id": user.id, "user-cpf": user.CPF}
+    # se não houver usuário com cpf/coren a query retorna none
+    if user is None:
+        return jsonify({"result":"USER NOT REGISTERED"})
 
-                if user_data["type"] == "SUPER USER":
-                    response["user-coren"] = user.coren
-
-                return jsonify(response)
-            else:
-                # caso a senha não corresponda, retorna login incorreto
-                return jsonify({"result": "INCORRECT LOGIN"})
-        else:
-            return jsonify({"result":"USER NOT REGISTERED"})
+    if not (user.equals_password(user_data["password"])):
+        # caso a senha não corresponda, retorna login incorreto
+        return jsonify({"result": "INCORRECT LOGIN"})
         
-    return render_template("login.html")
+    session["user_type"] = user_data["type"]
+    session["user_id"] = user.id
+
+    response = {"result": "SUCCESS LOGIN",
+                "user-id": user.id, "user-cpf": user.CPF}
+
+    if user_data["type"] == "SUPER USER":
+        response["user-coren"] = user.coren
+
+    return jsonify(response)
 
 
 @app.route("/user-data/<user_type>/<user_cpf>")

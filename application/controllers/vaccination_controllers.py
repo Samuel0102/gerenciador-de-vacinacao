@@ -48,15 +48,14 @@ def vaccinations(cpf):
 
     # loop pela query de vacinações
     for vaccination in vaccinations_query:
-        vaccination_data = {}
+        vaccination_data = {
+            'vaccine-name': vaccination.vaccine.name,
+            'vaccine-owner': vaccination.vaccine.owner,
+            'dose': vaccination.dose,
+            'date': str(vaccination.date.date()).replace("-", "."),
+            'nurse-name': vaccination.nurse.name
+        }
 
-        # gera um dicionário com todos os dados necessários
-        vaccination_data["vaccine-name"] = vaccination.vaccine.name
-        vaccination_data["vaccine-owner"] = vaccination.vaccine.owner
-        vaccination_data["dose"] = vaccination.dose
-        vaccination_data["date"] = str(
-            vaccination.date.date()).replace("-", ".")
-        vaccination_data["nurse-name"] = str(vaccination.nurse.name)
         vaccination_data["next-dose-date"] = str(
             vaccination.next_dose_date.date()).replace("-", ".")
 

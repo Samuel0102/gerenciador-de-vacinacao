@@ -9,6 +9,9 @@ import {
 } from "./utilities_script.js";
 
 $("#register-button").click(registerNewUser);
+$("#confirmp").on("keypress", (e) => {
+  if(e.key === "Enter") registerNewUser();
+});
 
 /*  Função para realizar a conexão e envio dos dados do novo usuário ao servidor */
 function registerNewUser() {
@@ -61,6 +64,9 @@ function registerNewUser() {
 }
 
 $("#login-button").click(loggeUser);
+$("#user-password").on("keypress", (e) => {
+  if(e.key === "Enter") loggeUser();
+});
 
 /*  Função para realizar login por meio de conexão com back-end 
     envia o pequeno objeto json contendo dados do login e qual 

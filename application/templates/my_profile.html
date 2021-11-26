@@ -3,6 +3,7 @@ block extracss %}
 <link rel="stylesheet" href="../static/ CSS/my_profile.css" />
 {% endblock extracss %} {% block extrajs %}
 <script type="module" src="../static/JS/account_script.js"></script>
+<script type="module" src="../static/JS/input_formatting.js"></script>
 {% endblock extrajs %} {% block content %}
 
 <section class="row text-center">
@@ -77,6 +78,7 @@ block extracss %}
               id="modal-confirmp"
               name="modal-confirmp"
               class="d-block"
+              autocomplete="off"
             />
           </div>
           <small id="message"></small>

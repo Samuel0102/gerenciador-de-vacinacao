@@ -6,7 +6,7 @@ import {
 } from "./utilities_script.js";
 
 // Obter coren fixo na vacinacao
-$(document).ready(function () {
+$(document).ready(() => {
   $("#coren").val(localStorage["userCoren"]);
 });
 

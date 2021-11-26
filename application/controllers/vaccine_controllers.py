@@ -11,7 +11,7 @@ def vaccine_register():
         vaccine_data = request.get_json()
 
         # verifica se a vacina ja existe no sistema, com base no nome
-        if(Vaccine.query.filter_by(name=vaccine_data["name"]).first() == None):
+        if Vaccine.query.filter_by(name=vaccine_data["name"]).first() is None:
             # instancia de vacina
             vaccine = Vaccine(
                 vaccine_data["name"],

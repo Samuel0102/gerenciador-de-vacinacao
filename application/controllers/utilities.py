@@ -2,7 +2,6 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.application import MIMEApplication
 from email.mime.text import MIMEText
 from os import remove, path
-from posixpath import abspath
 from jinja2 import Environment, FileSystemLoader
 from application import config
 from weasyprint import HTML, CSS
@@ -14,9 +13,7 @@ import requests
 def get_vaccinations(user_cpf):
     response = requests.get(
         f"{config.REQUEST_IP}/list-vaccinations/" + user_cpf)
-    vaccinations_data = response.json()
-
-    return vaccinations_data
+    return response.json()
 
 # função para gerar as linhas de vacinações da tabela
 def generate_tbody_rows(vaccinations):
@@ -34,7 +31,7 @@ def generate_tbody_rows(vaccinations):
 
 # função para gerar o corpo do hmtl, contendo a tabela
 def generate_html_body(tbody_rows):
-    html_structure = f"""
+    return f"""
     <h1>Minhas Vacinações</h1>
     <table>
         <thead>
@@ -50,18 +47,17 @@ def generate_html_body(tbody_rows):
         <tbody id="vaccinations-table-body">{tbody_rows}</tbody>
     </table>
     """
-    return html_structure
 
 # função para gerar a folha de estilo de estilização da tabela e da página
 def generate_stylesheet():
-    style = CSS(string="""
+    return CSS(
+        string="""
     th, td{border: 1px solid black; font-size: 14px; text-align: center; padding: 5px;}
     tbody tr:nth-child(odd){background-color: lightgrey;}
     table{border-collapse: collapse; width: 100%;}
     h1{border: 1px solid black; font-size: 18px; text-align: center; padding: 10px 0;}
-    """)
-
-    return style
+    """
+    )
 
 # função para gerar o pdf em si, preenchendo a tabela com
 # dados de vacinação da função get_vaccinations
