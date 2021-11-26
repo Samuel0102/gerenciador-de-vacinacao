@@ -9,8 +9,6 @@ function cpfFormatter() {
   let cpf = $("#CPF");
   const len = cpf.val().length + 1;
 
-  cpf.val(cpf.val().replace(/\D/g, ""));
-
   if (len > 15) cpf.val(cpf.val().substring(0, 13));
   if (len === 12) cpf.val(cpf.val() + "-");
   if ((len % 4 === 0) & (len < 12)) cpf.val(cpf.val() + ".");
