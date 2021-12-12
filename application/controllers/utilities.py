@@ -83,7 +83,7 @@ def send_email(type, email, user_name, user_cpf=""):
     # start do server responsável pelo envio
     server = smtplib.SMTP('smtp.gmail.com', 587)
     server.starttls()
-    server.login("sistema.unico.vacinacao@gmail.com", "_suvpassword123")
+    server.login("sistema.unico.vacinacao@gmail.com", "_password_suv_123_senha_dosuv")
 
     # criação do corpo do email
     make_msg(type, msg, user_cpf, user_name)
