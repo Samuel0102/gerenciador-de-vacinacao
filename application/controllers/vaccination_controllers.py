@@ -18,7 +18,7 @@ def vaccination_register():
 
         # verifica se há data de próxima dose
         if len(vaccination_data) == 5:
-            vaccination_data["next-date"] = datetime.min
+            vaccination_data["next-date"] = "0001-01-01"
 
         # instancia da vacinacao
         vaccination = Vaccination(
