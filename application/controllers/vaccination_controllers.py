@@ -2,7 +2,6 @@ from flask.json import jsonify
 from application import app
 from application.models.models import Vaccine, Vaccination, Pacient, Nurse, db
 from flask import render_template, session, redirect, request
-from datetime import datetime
 
 
 @app.route("/vaccination-register", methods=["POST", "GET"])

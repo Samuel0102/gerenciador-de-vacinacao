@@ -1,7 +1,7 @@
 from email.mime.multipart import MIMEMultipart
 from email.mime.application import MIMEApplication
 from email.mime.text import MIMEText
-from os import remove, path
+from os import remove, path, environ
 from jinja2 import Environment, FileSystemLoader
 from application import config
 from weasyprint import HTML, CSS
@@ -83,7 +83,7 @@ def send_email(type, email, user_name, user_cpf=""):
     # start do server responsável pelo envio
     server = smtplib.SMTP('smtp.gmail.com', 587)
     server.starttls()
-    server.login("sistema.unico.vacinacao@gmail.com", "_password_suv_123_senha_dosuv")
+    server.login("sistema.unico.vacinacao@gmail.com", environ.get("EMAIL_PASSWORD"))
 
     # criação do corpo do email
     make_msg(type, msg, user_cpf, user_name)
